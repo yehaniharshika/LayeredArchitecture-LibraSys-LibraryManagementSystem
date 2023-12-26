@@ -11,9 +11,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookDAOImpl {
+public class BookDAOImpl  implements BookDAO {
 
-    public static String getBookCount() throws SQLException {
+    @Override
+    public String getBookCount() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT COUNT(ISBN) FROM  book");
 
@@ -24,6 +25,8 @@ public class BookDAOImpl {
         }
         return count;
     }
+
+    @Override
     public  String generateNextBookISBN(String ISBN) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
@@ -56,6 +59,7 @@ public class BookDAOImpl {
         return "B001";
     }
 
+    @Override
     public  boolean saveBook(BookDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("INSERT INTO book VALUES (?,?,?,?,?,?)");
@@ -70,6 +74,7 @@ public class BookDAOImpl {
         return isSaved;
     }
 
+    @Override
     public boolean updateBook(BookDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("UPDATE book SET bookName=?, category =?,qtyOnHand=?, rackCode=?,authorId=? WHERE ISBN=?");
@@ -84,6 +89,7 @@ public class BookDAOImpl {
         return isUpdated;
     }
 
+    @Override
     public boolean deleteBook(String ISBN) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("DELETE  FROM  book WHERE ISBN=?");
@@ -93,6 +99,7 @@ public class BookDAOImpl {
         return isDeleted;
     }
 
+    @Override
     public BookDto searchBook(String ISBN) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM book WHERE ISBN=?");
@@ -115,6 +122,7 @@ public class BookDAOImpl {
         return dto;
     }
 
+    @Override
     public List<BookDto> getAllBooks() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT  * FROM  book");
@@ -137,6 +145,7 @@ public class BookDAOImpl {
     }
 
     //transaction ekata
+    @Override
     public  boolean updateBooks(List<SupplierCartTm> supplierCartTmList) throws SQLException {
         for (SupplierCartTm Tm : supplierCartTmList){
             System.out.println("Book : "+ Tm);
@@ -147,6 +156,8 @@ public class BookDAOImpl {
         }
         return true;
     }
+
+    @Override
     public  boolean updateQty(String ISBN , int  qtyOnHand) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         String sql ="UPDATE book SET qtyOnHand = qtyOnHand + ? WHERE ISBN = ?";

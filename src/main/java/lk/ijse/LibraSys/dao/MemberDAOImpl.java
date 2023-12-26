@@ -10,10 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MemberDAOImpl {
+public class MemberDAOImpl implements MemberDAO{
     private MembershipFeeDAOImpl membershipFeeModel =new MembershipFeeDAOImpl();
 
-
+    @Override
     public  String generateNextMemberId(String mid) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT mid FROM member ORDER BY  mid DESC LIMIT 1");
@@ -27,7 +27,8 @@ public class MemberDAOImpl {
 
 
    //for dashboard update
-    public static  String getMemberCount() throws SQLException {
+    @Override
+    public   String getMemberCount() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT COUNT(mid) FROM  member");
         ResultSet resultSet = pstm.executeQuery();
@@ -38,6 +39,8 @@ public class MemberDAOImpl {
         }
         return count;
     }
+
+
     private String splitMemberId(String currentMemberId) {
         if(currentMemberId != null) {
             String[] strings = currentMemberId.split("M0");
@@ -58,6 +61,7 @@ public class MemberDAOImpl {
         return "M001";
     }
 
+    @Override
     public boolean saveMember(MemberDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         String sql = "INSERT INTO member VALUES(?, ?, ?, ?, ?, ? ,?,?,?)";
@@ -79,6 +83,7 @@ public class MemberDAOImpl {
         return isSaved;
     }
 
+    @Override
     public  boolean updateMember(MemberDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("UPDATE member SET name=?, address=?, gender=? ,tel =? ,EmailAddress =?,IDNumber=?, feeId=?,sNumber=? WHERE  mid=?");
@@ -99,6 +104,7 @@ public class MemberDAOImpl {
         return isUpdated;
     }
 
+    @Override
     public boolean deleteMember(String mid) throws SQLException {
         Connection connection =DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("DELETE  FROM  member WHERE mid=?");
@@ -109,6 +115,7 @@ public class MemberDAOImpl {
         return isDeleted;
     }
 
+    @Override
     public MemberDto searchMember(String mid) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT  * FROM  member WHERE mid=?");
@@ -134,6 +141,7 @@ public class MemberDAOImpl {
         return dto;
     }
 
+    @Override
     public List<MemberDto> getAllMember() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM member");

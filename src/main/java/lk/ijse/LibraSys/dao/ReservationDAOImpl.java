@@ -10,9 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReservationDAOImpl {
+public class ReservationDAOImpl implements ReservationDAO{
 
-    public static String getBookBorrowCount() throws SQLException {
+    @Override
+    public  String getBookBorrowCount() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT COUNT(reservationId) FROM  reservation");
 
@@ -24,6 +25,7 @@ public class ReservationDAOImpl {
         return count;
     }
 
+    @Override
     public  boolean addReservation(ReservationDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("INSERT INTO reservation VALUES (?,?,?,?,?,?,?,?)");
@@ -40,6 +42,7 @@ public class ReservationDAOImpl {
         return isAdd;
     }
 
+    @Override
     public boolean updateReservation(ReservationDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("UPDATE  reservation SET borrowedDate=?,dueDate=?,bookReturnDate=?,fineStatus=?,fineAmount=?,mid=?,ISBN=? WHERE reservationId=?");
@@ -57,6 +60,7 @@ public class ReservationDAOImpl {
         return isUpdated;
     }
 
+    @Override
     public  boolean deleteReservation(String reservationId) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("DELETE FROM reservation WHERE reservationId=?");
@@ -68,6 +72,7 @@ public class ReservationDAOImpl {
         return isDeleted;
     }
 
+    @Override
     public ReservationDto searchReservation(String reservationId) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM reservation WHERE reservationId=?");
@@ -90,6 +95,8 @@ public class ReservationDAOImpl {
         }
         return dto;
     }
+
+    @Override
     public  String generateNextReservationId(String reservationId) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
@@ -114,6 +121,7 @@ public class ReservationDAOImpl {
         }
     }
 
+    @Override
     public List<ReservationDto> getAllReservation() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM  reservation");

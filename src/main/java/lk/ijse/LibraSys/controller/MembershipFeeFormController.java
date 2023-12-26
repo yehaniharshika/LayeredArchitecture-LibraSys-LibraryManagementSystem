@@ -141,7 +141,7 @@ public class MembershipFeeFormController {
     //generate next membership fee Id
     private void generateNextMembershipFeeId() {
         try {
-            String id = membershipFeeModel.generateNaxtMembershipFeeId(txtId.getText());
+            String id = membershipFeeModel.generateNextMembershipFeeId(txtId.getText());
             txtId.setText(id);
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();

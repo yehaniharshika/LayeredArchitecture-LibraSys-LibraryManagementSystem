@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MembershipFeeDAOImpl {
 
-    public String generateNaxtMembershipFeeId(String id) throws SQLException {
+    public String generateNextMembershipFeeId(String id) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT fee_id FROM membershipFee ORDER BY fee_id DESC LIMIT 1");
 

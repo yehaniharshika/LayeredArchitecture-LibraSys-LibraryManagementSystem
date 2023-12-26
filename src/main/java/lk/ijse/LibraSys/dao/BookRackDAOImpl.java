@@ -10,8 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookRackDAOImpl {
+public class BookRackDAOImpl implements BookRackDAO{
 
+    @Override
     public String generateNextRackCode(String rackCode) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT  rackCode FROM bookRack ORDER BY rackCode DESC LIMIT 1");
@@ -42,6 +43,7 @@ public class BookRackDAOImpl {
         return "R001";
     }
 
+    @Override
     public boolean saveBookRack(BookRackDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("INSERT INTO  bookRack VALUES (?,?,?,?)");
@@ -54,6 +56,7 @@ public class BookRackDAOImpl {
         return isSaved;
     }
 
+    @Override
     public  boolean updateBookRack(BookRackDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("UPDATE bookRack SET qtyBooks=?,nameOfBooks =? ,categoryOfBooks=? WHERE rackCode =?");
@@ -66,6 +69,7 @@ public class BookRackDAOImpl {
         return isUpdated;
     }
 
+    @Override
     public boolean deleteBookRack(String rackCode) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("DELETE FROM bookRack WHERE rackCode=?");
@@ -75,6 +79,7 @@ public class BookRackDAOImpl {
         return isDeleted;
     }
 
+    @Override
     public BookRackDto searchBookRack(String rackCode) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM bookRack WHERE rackCode=?");
@@ -95,6 +100,7 @@ public class BookRackDAOImpl {
         return dto;
     }
 
+    @Override
     public List<BookRackDto> getAllBookRack() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM bookRack");
@@ -124,6 +130,8 @@ public class BookRackDAOImpl {
         }
         return true;
     }*/
+
+     @Override
      public boolean updateQtyBooks(String rackCode,int qtyBooks) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm= connection.prepareStatement("UPDATE bookRack SET qtyBooks = qtyBooks+? WHERE rackCode =?");
@@ -136,6 +144,7 @@ public class BookRackDAOImpl {
          return isqtyUpdated;
      }
 
+     @Override
      public boolean updatenameOfBooks(String rackCode,String nameOfBooks) throws SQLException {
          Connection connection = DbConnection.getInstance().getConnection();
          PreparedStatement pstm = connection.prepareStatement("UPDATE bookrack SET nameOfBooks= nameOfBooks +? WHERE rackCode=?");

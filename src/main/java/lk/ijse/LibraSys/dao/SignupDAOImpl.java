@@ -7,7 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class SignupDAOImpl {
+public class SignupDAOImpl implements SignupDAO{
+
+    @Override
     public  boolean registerLibrarian(SignupDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("INSERT INTO librarian VALUES(?,?,?,?,?,?,?)");

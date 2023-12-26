@@ -10,8 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SupplierDAOImpl {
+public class SupplierDAOImpl implements  SupplierDAO{
 
+    @Override
     public String generateNextSupplierId(String supplierId) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT supplierId FROM supplier ORDER BY supplierId DESC LIMIT 1");
@@ -46,7 +47,7 @@ public class SupplierDAOImpl {
         }
 
 
-
+    @Override
     public String getSupplierCount() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT COUNT(supplierId) FROM supplier");
@@ -60,6 +61,7 @@ public class SupplierDAOImpl {
 
     }
 
+    @Override
     public boolean saveSupplier(String supplierId,String supName,String contactNumber,String email) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("INSERT INTO supplier VALUES (?,?,?,?)");
@@ -72,8 +74,7 @@ public class SupplierDAOImpl {
         return pstm.executeUpdate() > 0;
     }
 
-
-
+    @Override
     public boolean updateSupplier(SupplierDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("UPDATE supplier SET supplierName=?,contactNumber=?,email=? WHERE supplierId=?");
@@ -87,6 +88,7 @@ public class SupplierDAOImpl {
         return  isUpdated;
     }
 
+    @Override
     public boolean deleteSupplier(String supplierId) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("DELETE  FROM  supplier WHERE  supplierId=?");
@@ -96,6 +98,7 @@ public class SupplierDAOImpl {
         return  isDeleted;
     }
 
+    @Override
     public SupplierDto searchSupplier(String supplierId) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT  * FROM supplier WHERE supplierId=?");
@@ -114,7 +117,7 @@ public class SupplierDAOImpl {
         return dto;
     }
 
-
+    @Override
     public List<SupplierDto> getAllSupplier() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM supplier");

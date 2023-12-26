@@ -10,8 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuthorDAOImpl {
+public class AuthorDAOImpl implements AuthorDAO{
 
+    @Override
     public String getAuthorCount() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT COUNT(authorId) FROM author");
@@ -24,6 +25,7 @@ public class AuthorDAOImpl {
         return  Count;
     }
 
+    @Override
     public String generateNextAuthorId(String authorId) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
@@ -34,6 +36,7 @@ public class AuthorDAOImpl {
         }
         return splitAuthorId(null);
     }
+
 
     private String splitAuthorId(String currentAuthorId) {
         if(currentAuthorId != null) {
@@ -55,6 +58,7 @@ public class AuthorDAOImpl {
         return "A001";
     }
 
+    @Override
     public boolean saveAuthor(AuthorDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("INSERT INTO author VALUES (?,?,?,?,?)");
@@ -70,6 +74,7 @@ public class AuthorDAOImpl {
         return isSaved;
     }
 
+    @Override
     public  boolean updateAuthor(AuthorDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("UPDATE author SET authorName=?,text=?,nationality=?,currentlyBooksWrittenQty=? WHERE authorId=?");
@@ -84,6 +89,7 @@ public class AuthorDAOImpl {
         return isUpdated;
     }
 
+    @Override
     public boolean deleteAuthor(String authorId) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("DELETE  FROM  author WHERE authorId =?");
@@ -94,6 +100,7 @@ public class AuthorDAOImpl {
         return isDeleted;
     }
 
+    @Override
     public AuthorDto searchAuthor(String authorId) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM  author WHERE authorId=?");
@@ -114,6 +121,7 @@ public class AuthorDAOImpl {
         return dto;
     }
 
+    @Override
     public List<AuthorDto> getAllAuthors() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM author");

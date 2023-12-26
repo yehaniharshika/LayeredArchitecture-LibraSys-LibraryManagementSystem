@@ -1,32 +1,17 @@
 package lk.ijse.LibraSys.controller;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.MembershipFeeDto;
-import lk.ijse.LibraSys.dto.tm.MemberTm;
 import lk.ijse.LibraSys.dto.tm.MembershipFeeTm;
-import lk.ijse.LibraSys.model.MembershipFeeModel;
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.view.JasperViewer;
+import lk.ijse.LibraSys.dao.MembershipFeeDAOImpl;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -95,7 +80,7 @@ public class MembershipFeeFormController {
     @FXML
     private TextField txtStatus;
 
-    private MembershipFeeModel  membershipFeeModel = new MembershipFeeModel();
+    private MembershipFeeDAOImpl membershipFeeModel = new MembershipFeeDAOImpl();
 
     public  void initialize() {
         setDate();
@@ -175,7 +160,7 @@ public class MembershipFeeFormController {
 
     //load all membership Fee
     private void loadAllMembershipFee() {
-        var model = new  MembershipFeeModel();
+        var model = new MembershipFeeDAOImpl();
 
         ObservableList<MembershipFeeTm> obList = FXCollections.observableArrayList();
 

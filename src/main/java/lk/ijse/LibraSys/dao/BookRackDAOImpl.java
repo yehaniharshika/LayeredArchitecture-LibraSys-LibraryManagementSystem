@@ -1,10 +1,7 @@
-package lk.ijse.LibraSys.model;
+package lk.ijse.LibraSys.dao;
 
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.BookRackDto;
-import lk.ijse.LibraSys.dto.tm.BookRackTm;
-import lk.ijse.LibraSys.dto.tm.BookTm;
-import lk.ijse.LibraSys.dto.tm.SupplierCartTm;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookRackModel {
+public class BookRackDAOImpl {
 
     public String generateNextRackCode(String rackCode) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();

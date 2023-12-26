@@ -13,7 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.LibraSys.db.DbConnection;
-import lk.ijse.LibraSys.model.*;
+import lk.ijse.LibraSys.dao.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -60,14 +60,14 @@ public class DashboardFormController {
     @FXML
     private Label lblSupplierCount;
 
-    private MemberModel memberModel = new MemberModel();
+    private MemberDAOImpl memberModel = new MemberDAOImpl();
     private MemberFormController memberFormController = new MemberFormController();
 
-    private ReservationModel reservationModel = new ReservationModel();
-    private BookModel bookModel = new BookModel();
-    private AuthorModel authorModel = new AuthorModel();
+    private ReservationDAOImpl reservationModel = new ReservationDAOImpl();
+    private BookDAOImpl bookModel = new BookDAOImpl();
+    private AuthorDAOImpl authorModel = new AuthorDAOImpl();
     
-    private SupplierModel supplierModel = new SupplierModel();
+    private SupplierDAOImpl supplierModel = new SupplierDAOImpl();
 
     public void initialize(){
         updateTime();

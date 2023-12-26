@@ -1,4 +1,4 @@
-package lk.ijse.LibraSys.model;
+package lk.ijse.LibraSys.dao;
 
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.SupplierDto;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SupplierModel {
+public class SupplierDAOImpl {
 
     public String generateNextSupplierId(String supplierId) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();

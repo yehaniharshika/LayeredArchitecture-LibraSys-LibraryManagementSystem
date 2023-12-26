@@ -1,4 +1,4 @@
-package lk.ijse.LibraSys.model;
+package lk.ijse.LibraSys.dao;
 
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.ReservationDto;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReservationModel {
+public class ReservationDAOImpl {
 
     public static String getBookBorrowCount() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();

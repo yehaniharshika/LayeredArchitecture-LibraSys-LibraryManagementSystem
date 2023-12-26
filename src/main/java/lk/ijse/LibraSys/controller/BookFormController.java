@@ -5,21 +5,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import lk.ijse.LibraSys.dto.AuthorDto;
 import lk.ijse.LibraSys.dto.BookDto;
 import lk.ijse.LibraSys.dto.BookRackDto;
 import lk.ijse.LibraSys.dto.tm.BookTm;
-import lk.ijse.LibraSys.model.AuthorModel;
-import lk.ijse.LibraSys.model.BookModel;
-import lk.ijse.LibraSys.model.BookRackModel;
+import lk.ijse.LibraSys.dao.AuthorDAOImpl;
+import lk.ijse.LibraSys.dao.BookDAOImpl;
+import lk.ijse.LibraSys.dao.BookRackDAOImpl;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -72,10 +68,10 @@ public class BookFormController {
 
     @FXML
     private AnchorPane Root;
-    private BookRackModel bookRackModel = new BookRackModel();
-    private BookModel bookModel = new BookModel();
+    private BookRackDAOImpl bookRackModel = new BookRackDAOImpl();
+    private BookDAOImpl bookModel = new BookDAOImpl();
 
-    private AuthorModel authorModel = new AuthorModel();
+    private AuthorDAOImpl authorModel = new AuthorDAOImpl();
 
 
     public void initialize(){

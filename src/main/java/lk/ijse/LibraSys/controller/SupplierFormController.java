@@ -18,9 +18,9 @@ import lk.ijse.LibraSys.dto.BookDto;
 import lk.ijse.LibraSys.dto.PlaceBooksSupplierOrderDto;
 import lk.ijse.LibraSys.dto.SupplierDto;
 import lk.ijse.LibraSys.dto.tm.SupplierCartTm;
-import lk.ijse.LibraSys.model.BookModel;
-import lk.ijse.LibraSys.model.PlacebookSupplierModel;
-import lk.ijse.LibraSys.model.SupplierModel;
+import lk.ijse.LibraSys.dao.BookDAOImpl;
+import lk.ijse.LibraSys.dao.PlacebookSupplierDAOImpl;
+import lk.ijse.LibraSys.dao.SupplierDAOImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -86,10 +86,10 @@ public class SupplierFormController {
     @FXML
     private TextField txtSupplyQuantity;
 
-    private BookModel bookModel = new BookModel();
-    private SupplierModel supplierModel = new SupplierModel();
+    private BookDAOImpl bookModel = new BookDAOImpl();
+    private SupplierDAOImpl supplierModel = new SupplierDAOImpl();
     private ObservableList<SupplierCartTm> obList = FXCollections.observableArrayList();
-    private PlacebookSupplierModel placebookSupplierModel = new PlacebookSupplierModel();
+    private PlacebookSupplierDAOImpl placebookSupplierModel = new PlacebookSupplierDAOImpl();
 
 
 

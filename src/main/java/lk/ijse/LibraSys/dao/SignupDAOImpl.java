@@ -1,4 +1,4 @@
-package lk.ijse.LibraSys.model;
+package lk.ijse.LibraSys.dao;
 
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.SignupDto;
@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class SignupModel {
+public class SignupDAOImpl {
     public  boolean registerLibrarian(SignupDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("INSERT INTO librarian VALUES(?,?,?,?,?,?,?)");

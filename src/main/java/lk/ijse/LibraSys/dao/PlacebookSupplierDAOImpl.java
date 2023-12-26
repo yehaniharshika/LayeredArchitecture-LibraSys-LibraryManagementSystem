@@ -1,18 +1,16 @@
-package lk.ijse.LibraSys.model;
+package lk.ijse.LibraSys.dao;
 
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.BookSupplierDetailDto;
 import lk.ijse.LibraSys.dto.PlaceBooksSupplierOrderDto;
-import lk.ijse.LibraSys.dto.SupplierDto;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
-public class PlacebookSupplierModel {
-    private SupplierModel supplierModel = new SupplierModel();
-    private BookModel bookModel = new BookModel();
-    private BooksSupplierDetailModel booksSupplierDetailModel = new BooksSupplierDetailModel();
+public class PlacebookSupplierDAOImpl {
+    private SupplierDAOImpl supplierModel = new SupplierDAOImpl();
+    private BookDAOImpl bookModel = new BookDAOImpl();
+    private BooksSupplierDetailsDAOImpl booksSupplierDetailModel = new BooksSupplierDetailsDAOImpl();
     private BookSupplierDetailDto bookSupplierDetailDto = new BookSupplierDetailDto();
 
     public  boolean placeBooksOrder(PlaceBooksSupplierOrderDto palceBooksSupplierOrderDto) throws SQLException {

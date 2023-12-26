@@ -1,4 +1,4 @@
-package lk.ijse.LibraSys.model;
+package lk.ijse.LibraSys.dao;
 
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.MemberDto;
@@ -10,8 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MemberModel {
-    private MembershipFeeModel membershipFeeModel =new MembershipFeeModel();
+public class MemberDAOImpl {
+    private MembershipFeeDAOImpl membershipFeeModel =new MembershipFeeDAOImpl();
 
 
     public  String generateNextMemberId(String mid) throws SQLException {

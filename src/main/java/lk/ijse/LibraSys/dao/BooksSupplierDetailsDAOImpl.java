@@ -1,17 +1,15 @@
-package lk.ijse.LibraSys.model;
+package lk.ijse.LibraSys.dao;
 
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.tm.SupplierCartTm;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
-public class BooksSupplierDetailModel {
+public class BooksSupplierDetailsDAOImpl {
 
     public  boolean saveBooksSupplierDetail(String supplierId,LocalDate supplierDate, List<SupplierCartTm> supplierCartTmList) throws SQLException {
         for (SupplierCartTm tm : supplierCartTmList){

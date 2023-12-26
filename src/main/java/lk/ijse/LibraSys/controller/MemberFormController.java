@@ -17,9 +17,8 @@ import lk.ijse.LibraSys.dto.MemberDto;
 import lk.ijse.LibraSys.dto.MembershipFeeDto;
 //import lk.ijse.LibraSys.dto.SignupDto;
 import lk.ijse.LibraSys.dto.tm.MemberTm;
-import lk.ijse.LibraSys.model.MemberModel;
-import lk.ijse.LibraSys.model.MembershipFeeModel;
-import lk.ijse.LibraSys.model.SignupModel;
+import lk.ijse.LibraSys.dao.MemberDAOImpl;
+import lk.ijse.LibraSys.dao.MembershipFeeDAOImpl;
 
 
 import java.io.IOException;
@@ -94,9 +93,9 @@ public class MemberFormController {
 
     @FXML
     private TextField txtTel;
-    private MembershipFeeModel membershipFeeModel = new MembershipFeeModel();
+    private MembershipFeeDAOImpl membershipFeeModel = new MembershipFeeDAOImpl();
     //private ObservableList<MemberTm> obList = FXCollections.observableArrayList();
-    private MemberModel memberModel = new MemberModel();
+    private MemberDAOImpl memberModel = new MemberDAOImpl();
 
 
     public  void initialize(){

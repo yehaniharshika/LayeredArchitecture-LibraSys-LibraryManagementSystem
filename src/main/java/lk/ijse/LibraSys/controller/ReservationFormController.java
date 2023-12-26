@@ -12,21 +12,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.BookDto;
 import lk.ijse.LibraSys.dto.MemberDto;
 import lk.ijse.LibraSys.dto.ReservationDto;
 import lk.ijse.LibraSys.dto.tm.ReservationTm;
-import lk.ijse.LibraSys.model.BookModel;
-import lk.ijse.LibraSys.model.MemberModel;
-import lk.ijse.LibraSys.model.ReservationModel;
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.view.JasperViewer;
+import lk.ijse.LibraSys.dao.BookDAOImpl;
+import lk.ijse.LibraSys.dao.MemberDAOImpl;
+import lk.ijse.LibraSys.dao.ReservationDAOImpl;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -97,9 +91,9 @@ public class ReservationFormController {
 
     @FXML
     private TextField txtReturnDate;
-    private BookModel bookModel = new BookModel();
-    private MemberModel memberModel = new MemberModel();
-    private ReservationModel reservationModel = new ReservationModel();
+    private BookDAOImpl bookModel = new BookDAOImpl();
+    private MemberDAOImpl memberModel = new MemberDAOImpl();
+    private ReservationDAOImpl reservationModel = new ReservationDAOImpl();
 
     public void initialize(){
         generateNextReservationId();

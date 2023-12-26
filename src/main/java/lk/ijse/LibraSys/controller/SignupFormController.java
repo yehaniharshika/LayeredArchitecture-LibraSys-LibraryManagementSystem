@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.LibraSys.dto.SignupDto;
-import lk.ijse.LibraSys.model.SignupModel;
+import lk.ijse.LibraSys.dao.SignupDAOImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -41,7 +41,7 @@ public class SignupFormController {
     @FXML
     private TextField txtUserName;
 
-    private SignupModel signupModel = new SignupModel();
+    private SignupDAOImpl signupModel = new SignupDAOImpl();
     @FXML
     void btnCreateAccountOnAction(ActionEvent event) {
         String sNumber = txtServiceNumber.getText();

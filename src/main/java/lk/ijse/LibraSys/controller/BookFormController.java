@@ -111,7 +111,7 @@ public class BookFormController {
 
     private void generateNextBookISBN() {
         try {
-            String ISBN = bookDAO.generateNextBookISBN(txtISBN.getText());
+            String ISBN = bookDAO.generateNextBookISBN();
             txtISBN.setText(ISBN);
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();

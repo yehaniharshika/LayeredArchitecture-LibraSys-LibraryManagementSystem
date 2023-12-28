@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface BookRackDAO {
-    String generateNextRackCode(String rackCode) throws SQLException;
+    String generateNextRackCode() throws SQLException;
 
     boolean saveBookRack(BookRackDto dto) throws SQLException;
 

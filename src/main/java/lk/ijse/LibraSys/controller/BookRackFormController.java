@@ -61,7 +61,7 @@ public class BookRackFormController {
 
     private void generateNextRackCode() {
         try {
-            String rackCode =bookRackDAO.generateNextRackCode(txtCode.getText());
+            String rackCode =bookRackDAO.generateNextRackCode();
             txtCode.setText(rackCode);
         } catch (SQLException e) {
            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -150,6 +150,7 @@ public class BookRackFormController {
                 new Alert(Alert.AlertType.INFORMATION,"Deleting Successfully!!!").show();
                 loadAllBookRacks();
                 clearFields();
+                generateNextRackCode();
             }else{
                 new Alert(Alert.AlertType.ERROR,"not deleted!!!").show();
             }

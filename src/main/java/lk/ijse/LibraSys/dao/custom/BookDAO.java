@@ -14,7 +14,7 @@ import java.util.List;
 public interface BookDAO {
     String getBookCount() throws SQLException;
 
-    String generateNextBookISBN(String ISBN) throws SQLException;
+    String generateNextBookISBN() throws SQLException;
 
     boolean saveBook(BookDto dto) throws SQLException;
 

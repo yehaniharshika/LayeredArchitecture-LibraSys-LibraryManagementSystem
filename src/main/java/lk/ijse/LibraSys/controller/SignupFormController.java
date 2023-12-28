@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.LibraSys.dto.SignupDto;
-import lk.ijse.LibraSys.dao.SignupDAOImpl;
+import lk.ijse.LibraSys.dao.custom.Impl.SignupDAOImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;

@@ -1,5 +1,6 @@
-package lk.ijse.LibraSys.dao;
+package lk.ijse.LibraSys.dao.custom.Impl;
 
+import lk.ijse.LibraSys.dao.custom.SupplierDAO;
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.SupplierDto;
 
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SupplierDAOImpl implements  SupplierDAO{
+public class SupplierDAOImpl implements SupplierDAO {
 
     @Override
     public String generateNextSupplierId(String supplierId) throws SQLException {

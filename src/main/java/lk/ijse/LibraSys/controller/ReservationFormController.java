@@ -12,13 +12,16 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.LibraSys.dao.custom.BookDAO;
+import lk.ijse.LibraSys.dao.custom.Impl.BookDAOImpl;
+import lk.ijse.LibraSys.dao.custom.Impl.MemberDAOImpl;
+import lk.ijse.LibraSys.dao.custom.Impl.ReservationDAOImpl;
+import lk.ijse.LibraSys.dao.custom.MemberDAO;
+import lk.ijse.LibraSys.dao.custom.ReservationDAO;
 import lk.ijse.LibraSys.dto.BookDto;
 import lk.ijse.LibraSys.dto.MemberDto;
 import lk.ijse.LibraSys.dto.ReservationDto;
 import lk.ijse.LibraSys.dto.tm.ReservationTm;
-import lk.ijse.LibraSys.dao.BookDAOImpl;
-import lk.ijse.LibraSys.dao.MemberDAOImpl;
-import lk.ijse.LibraSys.dao.ReservationDAOImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -91,9 +94,9 @@ public class ReservationFormController {
 
     @FXML
     private TextField txtReturnDate;
-    private BookDAOImpl bookModel = new BookDAOImpl();
-    private MemberDAOImpl memberModel = new MemberDAOImpl();
-    private ReservationDAOImpl reservationModel = new ReservationDAOImpl();
+    BookDAO bookDAO = new BookDAOImpl();
+    MemberDAO memberDAO= new MemberDAOImpl();
+    ReservationDAO reservationDAO= new ReservationDAOImpl();
 
     public void initialize(){
         generateNextReservationId();
@@ -114,14 +117,16 @@ public class ReservationFormController {
     }
 
     private void setData(ReservationTm row) {
-        txtReservationId.setText(row.getReservationId());
-        txtBorrowedDate.setText(row.getBorrowedDate());
-        txtDueDate.setValue(LocalDate.parse(row.getDueDate()));
-        txtReturnDate.setText(row.getBookReturnDate());
-        txtFineStatus.setText(row.getFineStatus());
-        txtFineAmount.setText(String.valueOf(row.getFineAmount()));
-        cmbMemberId.setValue(row.getMid());
-        cmbISBN.setValue(row.getISBN());
+        if (row != null){
+            txtReservationId.setText(row.getReservationId());
+            txtBorrowedDate.setText(row.getBorrowedDate());
+            txtDueDate.setValue(LocalDate.parse(row.getDueDate()));
+            txtReturnDate.setText(row.getBookReturnDate());
+            txtFineStatus.setText(row.getFineStatus());
+            txtFineAmount.setText(String.valueOf(row.getFineAmount()));
+            cmbMemberId.setValue(row.getMid());
+            cmbISBN.setValue(row.getISBN());
+        }
     }
 
 
@@ -140,7 +145,7 @@ public class ReservationFormController {
         ObservableList<ReservationTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<ReservationDto> reservationList = reservationModel.getAllReservation();
+            List<ReservationDto> reservationList = reservationDAO.getAllReservation();
 
             for(ReservationDto dto: reservationList){
                 obList.add(new ReservationTm(
@@ -167,7 +172,7 @@ public class ReservationFormController {
 
     private void generateNextReservationId() {
         try {
-            String reservationId = reservationModel.generateNextReservationId(txtReservationId.getText());
+            String reservationId = reservationDAO.generateNextReservationId(txtReservationId.getText());
             txtReservationId.setText(reservationId);
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -179,7 +184,7 @@ public class ReservationFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<BookDto> ISBNlist = bookModel.getAllBooks();
+            List<BookDto> ISBNlist = bookDAO.getAllBooks();
 
             for (BookDto dto : ISBNlist){
                 obList.add(dto.getISBN());
@@ -194,7 +199,7 @@ public class ReservationFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<MemberDto> mIdList = memberModel.getAllMember();
+            List<MemberDto> mIdList = memberDAO.getAllMember();
 
             for(MemberDto dto : mIdList){
                 obList.add(dto.getMid());
@@ -223,7 +228,7 @@ public class ReservationFormController {
             var dto = new ReservationDto(reservationId,borrowedDate,dueDate,bookReturnDate,fineStatus,fineAmount,mid,ISBN);
 
             try {
-                boolean isAdd = reservationModel.addReservation(dto);
+                boolean isAdd = reservationDAO.addReservation(dto);
                 if(isAdd){
                     new Alert(Alert.AlertType.CONFIRMATION,"Adding reservation successfully!!!").show();
                     clearFields();
@@ -265,7 +270,7 @@ public class ReservationFormController {
         String  reservationId = txtReservationId.getText();
 
         try {
-            boolean isDeleted = reservationModel.deleteReservation(reservationId);
+            boolean isDeleted = reservationDAO.deleteReservation(reservationId);
             if (isDeleted){
 
                 new Alert(Alert.AlertType.INFORMATION,"reservation deleted successfully!!").showAndWait();
@@ -282,7 +287,7 @@ public class ReservationFormController {
         String  reservationId = txtReservationId.getText();
 
         try {
-            ReservationDto dto =reservationModel.searchReservation(reservationId);
+            ReservationDto dto = reservationDAO.searchReservation(reservationId);
 
             if (dto != null){
                 txtReservationId.setText(dto.getReservationId());
@@ -362,10 +367,12 @@ public class ReservationFormController {
         var dto = new ReservationDto(reservationId,borrowedDate,dueDate,bookReturnDate,fineStatus,fineAmount,mid,ISBN);
 
         try {
-            boolean isUpdated = reservationModel.updateReservation(dto);
+            boolean isUpdated = reservationDAO.updateReservation(dto);
             if(isUpdated){
                 new Alert(Alert.AlertType.INFORMATION,"Reservation updated successfully!!!").show();
                 loadAllReservation();
+                clearFields();
+                generateNextReservationId();
             }else {
                 new Alert(Alert.AlertType.ERROR,"updated not found!!!").show();
             }
@@ -381,7 +388,7 @@ public class ReservationFormController {
         String ISBN = cmbISBN.getValue();
         if(ISBN!=null){
             try {
-                BookDto dto = bookModel.searchBook(ISBN);
+                BookDto dto = bookDAO.searchBook(ISBN);
                 if(dto!=null){
                     //System.out.println("dto : "+dto);
                     lblBookName.setText(dto.getBookName());
@@ -397,8 +404,10 @@ public class ReservationFormController {
     void cmbMemberOnAction(ActionEvent event) {
         String mid = String.valueOf(cmbMemberId.getValue());
         try {
-            MemberDto dto = memberModel.searchMember(mid);
-            if(dto!=null)           lblMemberName.setText(dto.getName());
+            MemberDto dto = memberDAO.searchMember(mid);
+            if(dto!=null) {
+                lblMemberName.setText(dto.getName());
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

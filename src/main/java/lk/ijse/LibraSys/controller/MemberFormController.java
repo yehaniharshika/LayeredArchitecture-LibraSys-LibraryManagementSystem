@@ -13,12 +13,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 //import lk.ijse.LibraSys.db.DbConnection;
+import lk.ijse.LibraSys.dao.custom.MemberDAO;
+import lk.ijse.LibraSys.dao.custom.MembershipFeeDAO;
 import lk.ijse.LibraSys.dto.MemberDto;
 import lk.ijse.LibraSys.dto.MembershipFeeDto;
 //import lk.ijse.LibraSys.dto.SignupDto;
 import lk.ijse.LibraSys.dto.tm.MemberTm;
-import lk.ijse.LibraSys.dao.MemberDAOImpl;
-import lk.ijse.LibraSys.dao.MembershipFeeDAOImpl;
+import lk.ijse.LibraSys.dao.custom.Impl.MemberDAOImpl;
+import lk.ijse.LibraSys.dao.custom.Impl.MembershipFeeDAOImpl;
 
 
 import java.io.IOException;
@@ -93,9 +95,9 @@ public class MemberFormController {
 
     @FXML
     private TextField txtTel;
-    private MembershipFeeDAOImpl membershipFeeModel = new MembershipFeeDAOImpl();
+    MembershipFeeDAO membershipFeeDAO = new MembershipFeeDAOImpl();
     //private ObservableList<MemberTm> obList = FXCollections.observableArrayList();
-    private MemberDAOImpl memberModel = new MemberDAOImpl();
+    MemberDAO memberDAO = new MemberDAOImpl();
 
 
     public  void initialize(){
@@ -115,21 +117,23 @@ public class MemberFormController {
     }
 
     private void setData(MemberTm row) {
-        txtMid.setText(row.getMid());
-        txtName.setText(row.getName());
-        txtAddress.setText(row.getAddress());
-        txtGender.setText(row.getGender());
-        txtTel.setText(row.getTel());
-        txtEmailAddress.setText(row.getEmailAddress());
-        txtIDNumber.setText(row.getIDNumber());
-        cmbmembershipFeeId.setValue(row.getFeeId());
-        txtSnumber.setText(row.getSNumber());
+        if (row != null){
+            txtMid.setText(row.getMid());
+            txtName.setText(row.getName());
+            txtAddress.setText(row.getAddress());
+            txtGender.setText(row.getGender());
+            txtTel.setText(row.getTel());
+            txtEmailAddress.setText(row.getEmailAddress());
+            txtIDNumber.setText(row.getIDNumber());
+            cmbmembershipFeeId.setValue(row.getFeeId());
+            txtSnumber.setText(row.getSNumber());
+        }
 
     }
 
     private void generateNextMemberId() {
         try {
-            String mid = memberModel.generateNextMemberId(txtMid.getText());
+            String mid = memberDAO.generateNextMemberId(txtMid.getText());
             txtMid.setText(mid);
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -153,7 +157,7 @@ public class MemberFormController {
         ObservableList<MemberTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<MemberDto> memberList = memberModel.getAllMember();
+            List<MemberDto> memberList = memberDAO.getAllMember();
 
             for (MemberDto dto : memberList){
                 obList.add(new MemberTm(
@@ -181,7 +185,7 @@ public class MemberFormController {
     private void loadFeeIds() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<MembershipFeeDto> idList = membershipFeeModel.getAllMemberShipFee();
+            List<MembershipFeeDto> idList = membershipFeeDAO.getAllMemberShipFee();
 
             for (MembershipFeeDto dto : idList ) {
                 obList.add(dto.getId());
@@ -216,7 +220,7 @@ public class MemberFormController {
         String mid = txtMid.getText();
 
         try {
-            MemberDto dto = memberModel.searchMember(mid);
+            MemberDto dto = memberDAO.searchMember(mid);
             if (dto != null){
                 txtMid.setText(dto.getMid());
                 txtName.setText(dto.getName());
@@ -240,10 +244,11 @@ public class MemberFormController {
         String mid  = txtMid.getText();
 
         try {
-            boolean isDeleted = memberModel.deleteMember(mid);
+            boolean isDeleted = memberDAO.deleteMember(mid);
             if(isDeleted){
                 new Alert(Alert.AlertType.INFORMATION,"member deleted successfully!!!").show();
                 loadAllMember();
+                clearFields();
             }
         } catch (SQLException e) {
            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -281,7 +286,7 @@ public class MemberFormController {
             var dto = new MemberDto(mid,name,address,gender,tel,EmailAddress,IDNumber,feeId,sNumber);
 
             try {
-                boolean isSaved = memberModel.saveMember(dto);
+                boolean isSaved = memberDAO.saveMember(dto);
 
                 if(isSaved){
                     new Alert(Alert.AlertType.CONFIRMATION,"member registered successfully!!!!!!").show();
@@ -372,7 +377,7 @@ public class MemberFormController {
         var dto = new MemberDto(mid,name,address,gender,tel,EmailAddress,IDNumber,feeId,sNumber);
 
         try {
-            boolean isUpdated = memberModel.updateMember(dto);
+            boolean isUpdated = memberDAO.updateMember(dto);
             if (isUpdated){
                 new Alert(Alert.AlertType.INFORMATION,"member updated successfully!!!").show();
                 clearFields();
@@ -390,7 +395,7 @@ public class MemberFormController {
     void cmbMembershipFeeOnAction(ActionEvent event) {
         String id = String.valueOf(cmbmembershipFeeId.getValue());
         try {
-            MembershipFeeDto membershipFeeDto = membershipFeeModel.searchMembershipFee(id);
+            MembershipFeeDto membershipFeeDto =membershipFeeDAO.searchMembershipFee(id);
             if (membershipFeeDto != null){
                 lblPaidDate.setText(String.valueOf(membershipFeeDto.getDate()));
                 txtName.setText(membershipFeeDto.getName());

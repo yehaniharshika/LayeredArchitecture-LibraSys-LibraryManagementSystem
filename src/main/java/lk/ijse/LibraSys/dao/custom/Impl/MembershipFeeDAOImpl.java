@@ -1,5 +1,6 @@
-package lk.ijse.LibraSys.dao;
+package lk.ijse.LibraSys.dao.custom.Impl;
 
+import lk.ijse.LibraSys.dao.custom.MembershipFeeDAO;
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.MembershipFeeDto;
 
@@ -11,8 +12,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MembershipFeeDAOImpl {
+public class MembershipFeeDAOImpl implements MembershipFeeDAO {
 
+    @Override
     public String generateNextMembershipFeeId(String id) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT fee_id FROM membershipFee ORDER BY fee_id DESC LIMIT 1");
@@ -43,7 +45,9 @@ public class MembershipFeeDAOImpl {
         }
         return "F001";
     }
-    public static String getTotalAmount() throws SQLException {
+
+    @Override
+    public String getTotalAmount() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT SUM(amount)  FROM membershipFee");
         ResultSet resultSet = pstm.executeQuery();
@@ -55,6 +59,7 @@ public class MembershipFeeDAOImpl {
         return amount;
     }
 
+    @Override
     public boolean saveMembersipFee(MembershipFeeDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
@@ -74,7 +79,7 @@ public class MembershipFeeDAOImpl {
         return isSaved;
     }
 
-
+    @Override
     public boolean updateMembershipfee(MembershipFeeDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
@@ -91,6 +96,7 @@ public class MembershipFeeDAOImpl {
 
     }
 
+    @Override
     public MembershipFeeDto searchMembershipFee(String id) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         String sql ="SELECT * FROM membershipFee WHERE fee_id = ?";
@@ -116,6 +122,7 @@ public class MembershipFeeDAOImpl {
 
     }
 
+    @Override
     public boolean deleteMembershipFee(String id) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
@@ -127,6 +134,7 @@ public class MembershipFeeDAOImpl {
         return pstm.executeUpdate() > 0 ;
     }
 
+    @Override
     public List<MembershipFeeDto> getAllMemberShipFee() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         String sql = "SELECT * FROM membershipFee";

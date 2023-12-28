@@ -1,5 +1,6 @@
-package lk.ijse.LibraSys.dao;
+package lk.ijse.LibraSys.dao.custom.Impl;
 
+import lk.ijse.LibraSys.dao.custom.BookRackDAO;
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.BookRackDto;
 
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookRackDAOImpl implements BookRackDAO{
+public class BookRackDAOImpl implements BookRackDAO {
 
     @Override
     public String generateNextRackCode(String rackCode) throws SQLException {

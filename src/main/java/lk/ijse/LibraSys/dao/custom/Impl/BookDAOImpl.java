@@ -1,5 +1,6 @@
-package lk.ijse.LibraSys.dao;
+package lk.ijse.LibraSys.dao.custom.Impl;
 
+import lk.ijse.LibraSys.dao.custom.BookDAO;
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.BookDto;
 import lk.ijse.LibraSys.dto.tm.SupplierCartTm;

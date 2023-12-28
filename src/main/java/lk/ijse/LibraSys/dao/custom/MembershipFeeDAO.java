@@ -1,4 +1,4 @@
-package lk.ijse.LibraSys.dao;
+package lk.ijse.LibraSys.dao.custom;
 
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.MembershipFeeDto;

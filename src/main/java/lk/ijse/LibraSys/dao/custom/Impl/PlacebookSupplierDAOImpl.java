@@ -1,5 +1,6 @@
-package lk.ijse.LibraSys.dao;
+package lk.ijse.LibraSys.dao.custom.Impl;
 
+import lk.ijse.LibraSys.dao.custom.PlaceBookSupplierDAO;
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.BookSupplierDetailDto;
 import lk.ijse.LibraSys.dto.PlaceBooksSupplierOrderDto;
@@ -7,12 +8,13 @@ import lk.ijse.LibraSys.dto.PlaceBooksSupplierOrderDto;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class PlacebookSupplierDAOImpl {
+public class PlacebookSupplierDAOImpl implements PlaceBookSupplierDAO {
     private SupplierDAOImpl supplierModel = new SupplierDAOImpl();
     private BookDAOImpl bookModel = new BookDAOImpl();
     private BooksSupplierDetailsDAOImpl booksSupplierDetailModel = new BooksSupplierDetailsDAOImpl();
     private BookSupplierDetailDto bookSupplierDetailDto = new BookSupplierDetailDto();
 
+    @Override
     public  boolean placeBooksOrder(PlaceBooksSupplierOrderDto palceBooksSupplierOrderDto) throws SQLException {
         String supplierId = palceBooksSupplierOrderDto.getSupplierId();
         String supName = palceBooksSupplierOrderDto.getSupName();

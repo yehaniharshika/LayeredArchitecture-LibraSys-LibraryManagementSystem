@@ -1,4 +1,4 @@
-package lk.ijse.LibraSys.dao;
+package lk.ijse.LibraSys.dao.custom;
 
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.AuthorDto;
@@ -14,7 +14,7 @@ public interface AuthorDAO {
 
      String getAuthorCount() throws SQLException;
 
-     String generateNextAuthorId(String authorId) throws SQLException;
+     String generateNextAuthorId() throws SQLException;
 
      boolean saveAuthor(AuthorDto dto) throws SQLException;
 

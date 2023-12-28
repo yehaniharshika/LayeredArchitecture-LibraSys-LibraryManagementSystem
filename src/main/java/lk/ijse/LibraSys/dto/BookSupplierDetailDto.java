@@ -13,7 +13,8 @@ public class BookSupplierDetailDto {
     private String supplierId;
     private String ISBN;
     private  String bookName;
-    private String qty;
+    private int qty;
+    private LocalDate supplierDate;
 
 
 }

@@ -1,5 +1,6 @@
 package lk.ijse.LibraSys.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,9 +11,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.LibraSys.dao.custom.AuthorDAO;
 import lk.ijse.LibraSys.dto.AuthorDto;
 import lk.ijse.LibraSys.dto.tm.AuthorTm;
-import lk.ijse.LibraSys.dao.AuthorDAOImpl;
+import lk.ijse.LibraSys.dao.custom.Impl.AuthorDAOImpl;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -40,6 +42,16 @@ public class AuthorFormController {
     private TableColumn<?, ?> colText;
 
     @FXML
+    private JFXButton btnDelete;
+
+    @FXML
+    private JFXButton btnSave;
+
+    @FXML
+    private JFXButton btnUpdate;
+
+
+    @FXML
     private TableView<AuthorTm> tblAuthor;
 
     @FXML
@@ -57,7 +69,7 @@ public class AuthorFormController {
     @FXML
     private TextField txtText;
 
-    private AuthorDAOImpl authorModel = new AuthorDAOImpl();
+    AuthorDAO authorDAO = new AuthorDAOImpl(); //property Injection
 
 
     public void initialize(){
@@ -65,6 +77,7 @@ public class AuthorFormController {
         setCellValueFactory();
         generateNextAuthorId();
         tableListener();
+
     }
 
     private void tableListener() {
@@ -75,21 +88,26 @@ public class AuthorFormController {
     }
 
     private void setData(AuthorTm row) {
-        txtAuthorId.setText(row.getAuthorId());
-        txtAuthorName.setText(row.getAuthorName());
-        txtText.setText(row.getText());
-        txtNationality.setText(row.getNationality());
-        txtCurrentlyBooksWrittenQty.setText(String.valueOf(row.getCurrentlyBooksWrittenQty()));
-
+        if (row != null){
+            txtAuthorId.setText(row.getAuthorId());
+//            System.out.println(row.getAuthorId());
+//            System.out.println(txtAuthorId.getText());
+            txtAuthorName.setText(row.getAuthorName());
+            txtText.setText(row.getText());
+            txtNationality.setText(row.getNationality());
+            txtCurrentlyBooksWrittenQty.setText(String.valueOf(row.getCurrentlyBooksWrittenQty()));
+        }
     }
-    private void generateNextAuthorId() {
+
+    private String generateNextAuthorId() {
         try {
-            String authorId = authorModel.generateNextAuthorId(txtAuthorId.getText());
+            String authorId = authorDAO.generateNextAuthorId();
+            System.out.println(authorId);
             txtAuthorId.setText(authorId);
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            e.printStackTrace();
         }
-
+        return "A001";
     }
 
     private void setCellValueFactory() {
@@ -101,10 +119,11 @@ public class AuthorFormController {
     }
 
     private void loadAllAuthors() {
+        //tblAuthor.getItems().clear();
         ObservableList<AuthorTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<AuthorDto> authorList = authorModel.getAllAuthors();
+            List<AuthorDto> authorList = authorDAO.getAllAuthors();
 
             for (AuthorDto dto : authorList){
                 obList.add(new AuthorTm(
@@ -142,7 +161,7 @@ public class AuthorFormController {
         String authorId = txtAuthorId.getText();
 
         try {
-            boolean isDeleted = authorModel.deleteAuthor(authorId);
+            boolean isDeleted = authorDAO.deleteAuthor(authorId);
             if(isDeleted){
                 new Alert(Alert.AlertType.INFORMATION,"Author deleted successfully!!!").show();
                 loadAllAuthors();
@@ -165,11 +184,11 @@ public class AuthorFormController {
             var dto = new AuthorDto(authorId,authorName,text,nationality,currentlyBooksWrittenQty);
 
             try {
-                boolean isSaved = authorModel.saveAuthor(dto);
+                boolean isSaved = authorDAO.saveAuthor(dto);
                 if (isSaved){
                     new Alert(Alert.AlertType.CONFIRMATION,"Author adding successfully!!!").show();
                     loadAllAuthors();
-                    setCellValueFactory();
+                    //setCellValueFactory();
                     clearFields();
                     generateNextAuthorId();
                 }else {
@@ -226,7 +245,7 @@ public class AuthorFormController {
         var dto = new AuthorDto(authorId,authorName,text,nationality,currentlyBooksWrittenQty);
 
         try {
-            boolean isUpdated = authorModel.updateAuthor(dto);
+            boolean isUpdated = authorDAO.updateAuthor(dto);
             if(isUpdated){
                 new Alert(Alert.AlertType.INFORMATION,"Author updated successfully!!!").show();
                 loadAllAuthors();
@@ -243,7 +262,7 @@ public class AuthorFormController {
         String authorId = txtAuthorId.getText();
 
         try {
-            AuthorDto dto = authorModel.searchAuthor(authorId);
+            AuthorDto dto = authorDAO.searchAuthor(authorId);
 
             if (dto != null){
                 txtAuthorId.setText(dto.getAuthorId());

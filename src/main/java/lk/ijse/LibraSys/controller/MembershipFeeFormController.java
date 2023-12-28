@@ -8,9 +8,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.LibraSys.dao.custom.MembershipFeeDAO;
 import lk.ijse.LibraSys.dto.MembershipFeeDto;
 import lk.ijse.LibraSys.dto.tm.MembershipFeeTm;
-import lk.ijse.LibraSys.dao.MembershipFeeDAOImpl;
+import lk.ijse.LibraSys.dao.custom.Impl.MembershipFeeDAOImpl;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -80,7 +81,7 @@ public class MembershipFeeFormController {
     @FXML
     private TextField txtStatus;
 
-    private MembershipFeeDAOImpl membershipFeeModel = new MembershipFeeDAOImpl();
+    private MembershipFeeDAO membershipFeeDAO = new MembershipFeeDAOImpl();
 
     public  void initialize() {
         setDate();
@@ -94,7 +95,7 @@ public class MembershipFeeFormController {
 
     private void setTotalAmount() {
         try {
-            lblTotalAmount.setText(membershipFeeModel.getTotalAmount());
+            lblTotalAmount.setText(membershipFeeDAO.getTotalAmount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -108,12 +109,13 @@ public class MembershipFeeFormController {
     }
 
     private void setData(MembershipFeeTm row) {
-        txtId.setText(row.getId());
-        txtName.setText(row.getName());
-        txtAmount.setText(String.valueOf(row.getAmount()));
-        lblPaidDate.setText(String.valueOf(row.getDate()));
-        txtStatus.setText(row.getStatus());
-
+        if (row != null){
+            txtId.setText(row.getId());
+            txtName.setText(row.getName());
+            txtAmount.setText(String.valueOf(row.getAmount()));
+            lblPaidDate.setText(String.valueOf(row.getDate()));
+            txtStatus.setText(row.getStatus());
+        }
     }
     //get total amount
     @FXML
@@ -141,7 +143,7 @@ public class MembershipFeeFormController {
     //generate next membership fee Id
     private void generateNextMembershipFeeId() {
         try {
-            String id = membershipFeeModel.generateNextMembershipFeeId(txtId.getText());
+            String id = membershipFeeDAO.generateNextMembershipFeeId(txtId.getText());
             txtId.setText(id);
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -201,6 +203,7 @@ public class MembershipFeeFormController {
         txtAmount.setText("");
         lblPaidDate.setText("");
         txtStatus.setText("");
+
     }
 
     @FXML
@@ -208,7 +211,8 @@ public class MembershipFeeFormController {
         String id =txtId.getText();
 
        try {
-           boolean isDeleted = membershipFeeModel.deleteMembershipFee(id);
+           //MembershipFeeDAO membershipFeeDAO = new MembershipFeeDAOImpl();
+           boolean isDeleted = membershipFeeDAO.deleteMembershipFee(id);
 
            if(isDeleted){
               new Alert(Alert.AlertType.CONFIRMATION,"Deleted successfully!!").show();
@@ -235,7 +239,7 @@ public class MembershipFeeFormController {
             var dto = new MembershipFeeDto(id,name,amount,date,status);
 
             try {
-                boolean isSaved = membershipFeeModel.saveMembersipFee(dto);
+                boolean isSaved = membershipFeeDAO.saveMembersipFee(dto);
 
                 if(isSaved){
                     new Alert(Alert.AlertType.CONFIRMATION,"success!!").show();
@@ -295,7 +299,7 @@ public class MembershipFeeFormController {
 
         var dto = new MembershipFeeDto(id,name,amount,date,status);
         try {
-            boolean isUpdated = membershipFeeModel.updateMembershipfee(dto);
+            boolean isUpdated = membershipFeeDAO.updateMembershipfee(dto);
 
             if(isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"successfully updated!").show();
@@ -315,7 +319,7 @@ public class MembershipFeeFormController {
         String id = txtId.getText();
 
         try {
-            MembershipFeeDto membershipFeeDto = membershipFeeModel.searchMembershipFee(id);
+            MembershipFeeDto membershipFeeDto = membershipFeeDAO.searchMembershipFee(id);
             if(membershipFeeDto != null){
                 txtId.setText(membershipFeeDto.getId());
                 txtName.setText(membershipFeeDto.getName());

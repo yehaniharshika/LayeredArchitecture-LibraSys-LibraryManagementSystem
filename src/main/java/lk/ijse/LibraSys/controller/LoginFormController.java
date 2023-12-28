@@ -9,7 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.LibraSys.dao.LoginDAOImpl;
+import lk.ijse.LibraSys.dao.custom.Impl.LoginDAOImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;

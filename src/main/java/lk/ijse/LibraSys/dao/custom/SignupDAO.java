@@ -1,4 +1,4 @@
-package lk.ijse.LibraSys.dao;
+package lk.ijse.LibraSys.dao.custom;
 
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.SignupDto;
@@ -8,5 +8,5 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public interface SignupDAO {
-    public  boolean registerLibrarian(SignupDto dto) throws SQLException;
+    boolean registerLibrarian(SignupDto dto) throws SQLException;
 }

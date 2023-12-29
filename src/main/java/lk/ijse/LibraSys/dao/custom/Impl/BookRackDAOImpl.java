@@ -15,7 +15,12 @@ import java.util.List;
 public class BookRackDAOImpl implements BookRackDAO {
 
     @Override
-    public String generateNextRackCode() throws SQLException {
+    public String getCount() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public String generateNextId() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT  rackCode FROM bookRack ORDER BY rackCode DESC LIMIT 1");
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT  rackCode FROM bookRack ORDER BY rackCode DESC LIMIT 1");
@@ -47,7 +52,7 @@ public class BookRackDAOImpl implements BookRackDAO {
     }
 
     @Override
-    public boolean saveBookRack(BookRackDto dto) throws SQLException {
+    public boolean save(BookRackDto dto) throws SQLException {
         return SQLUtil.execute("INSERT INTO  bookRack VALUES (?,?,?,?)",
                 dto.getRackCode(),
                 dto.getQtyBooks(),
@@ -66,7 +71,7 @@ public class BookRackDAOImpl implements BookRackDAO {
     }
 
     @Override
-    public  boolean updateBookRack(BookRackDto dto) throws SQLException {
+    public  boolean update(BookRackDto dto) throws SQLException {
         return SQLUtil.execute("UPDATE bookRack SET qtyBooks=?,nameOfBooks =? ,categoryOfBooks=? WHERE rackCode =?",
                 dto.getQtyBooks(),
                 dto.getNameOfBooks(),
@@ -85,7 +90,7 @@ public class BookRackDAOImpl implements BookRackDAO {
     }
 
     @Override
-    public boolean deleteBookRack(String rackCode) throws SQLException {
+    public boolean delete(String rackCode) throws SQLException {
         return SQLUtil.execute("DELETE FROM bookRack WHERE rackCode=?",rackCode);
         /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("DELETE FROM bookRack WHERE rackCode=?");
@@ -96,7 +101,7 @@ public class BookRackDAOImpl implements BookRackDAO {
     }
 
     @Override
-    public BookRackDto searchBookRack(String rackCode) throws SQLException {
+    public BookRackDto search(String rackCode) throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM bookRack WHERE rackCode=?",rackCode);
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM bookRack WHERE rackCode=?");
@@ -118,7 +123,7 @@ public class BookRackDAOImpl implements BookRackDAO {
     }
 
     @Override
-    public List<BookRackDto> getAllBookRack() throws SQLException {
+    public List<BookRackDto> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM bookRack");
      /*   Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM bookRack");*/

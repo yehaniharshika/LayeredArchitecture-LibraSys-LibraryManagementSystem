@@ -2,12 +2,9 @@ package lk.ijse.LibraSys.dao.custom.Impl;
 
 import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.BookDAO;
-import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.BookDto;
 import lk.ijse.LibraSys.dto.tm.SupplierCartTm;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,7 +13,7 @@ import java.util.List;
 public class BookDAOImpl  implements BookDAO {
 
     @Override
-    public String getBookCount() throws SQLException {
+    public String getCount() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT COUNT(ISBN) FROM  book");
 //        Connection connection = DbConnection.getInstance().getConnection();
 //        PreparedStatement pstm = connection.prepareStatement("SELECT COUNT(ISBN) FROM  book");
@@ -30,7 +27,7 @@ public class BookDAOImpl  implements BookDAO {
     }
 
     @Override
-    public  String generateNextBookISBN() throws SQLException {
+    public  String generateNextId() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT ISBN FROM book ORDER BY ISBN DESC LIMIT 1");
        /* Connection connection = DbConnection.getInstance().getConnection();
 
@@ -64,7 +61,7 @@ public class BookDAOImpl  implements BookDAO {
     }
 
     @Override
-    public  boolean saveBook(BookDto dto) throws SQLException {
+    public  boolean save(BookDto dto) throws SQLException {
         return SQLUtil.execute("INSERT INTO book VALUES (?,?,?,?,?,?)",
                 dto.getISBN(),
                 dto.getBookName(),
@@ -87,7 +84,7 @@ public class BookDAOImpl  implements BookDAO {
     }
 
     @Override
-    public boolean updateBook(BookDto dto) throws SQLException {
+    public boolean update(BookDto dto) throws SQLException {
         return SQLUtil.execute("UPDATE book SET bookName=?, category =?,qtyOnHand=?, rackCode=?,authorId=? WHERE ISBN=?",
                 dto.getBookName(),
                 dto.getCategory(),
@@ -110,7 +107,7 @@ public class BookDAOImpl  implements BookDAO {
     }
 
     @Override
-    public boolean deleteBook(String ISBN) throws SQLException {
+    public boolean delete(String ISBN) throws SQLException {
         return SQLUtil.execute("DELETE  FROM  book WHERE ISBN=?",ISBN);
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("DELETE  FROM  book WHERE ISBN=?");
@@ -121,7 +118,7 @@ public class BookDAOImpl  implements BookDAO {
     }
 
     @Override
-    public BookDto searchBook(String ISBN) throws SQLException {
+    public BookDto search(String ISBN) throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM book WHERE ISBN=?",
                 ISBN
         );
@@ -147,7 +144,7 @@ public class BookDAOImpl  implements BookDAO {
     }
 
     @Override
-    public List<BookDto> getAllBooks() throws SQLException {
+    public List<BookDto> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT  * FROM  book");
 //        Connection connection = DbConnection.getInstance().getConnection();
 //        PreparedStatement pstm = connection.prepareStatement("SELECT  * FROM  book");

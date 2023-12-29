@@ -1,5 +1,6 @@
 package lk.ijse.LibraSys.dao.custom;
 
+import lk.ijse.LibraSys.dao.CrudDAO;
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.AuthorDto;
 
@@ -10,9 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface AuthorDAO {
+public interface AuthorDAO  extends CrudDAO<AuthorDto> {
 
-     String getAuthorCount() throws SQLException;
+     /*String getAuthorCount() throws SQLException;
 
      String generateNextAuthorId() throws SQLException;
 
@@ -24,6 +25,6 @@ public interface AuthorDAO {
 
      AuthorDto searchAuthor(String authorId) throws SQLException;
 
-     List<AuthorDto> getAllAuthors() throws SQLException;
+     List<AuthorDto> getAllAuthors() throws SQLException;*/
 
 }

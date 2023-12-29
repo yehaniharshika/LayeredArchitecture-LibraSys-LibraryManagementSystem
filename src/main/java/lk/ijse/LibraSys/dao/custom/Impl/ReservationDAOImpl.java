@@ -1,5 +1,6 @@
 package lk.ijse.LibraSys.dao.custom.Impl;
 
+import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.ReservationDAO;
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.ReservationDto;
@@ -28,7 +29,17 @@ public class ReservationDAOImpl implements ReservationDAO {
 
     @Override
     public  boolean addReservation(ReservationDto dto) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+        return SQLUtil.execute("INSERT INTO reservation VALUES (?,?,?,?,?,?,?,?)",
+                dto.getReservationId(),
+                dto.getBorrowedDate(),
+                dto.getDueDate(),
+                dto.getBookReturnDate(),
+                dto.getFineStatus(),
+                dto.getFineAmount(),
+                dto.getMid(),
+                dto.getISBN()
+        );
+      /*  Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("INSERT INTO reservation VALUES (?,?,?,?,?,?,?,?)");
         pstm.setString(1, dto.getReservationId());
         pstm.setString(2,dto.getBorrowedDate());
@@ -40,12 +51,22 @@ public class ReservationDAOImpl implements ReservationDAO {
         pstm.setString(8,dto.getISBN());
 
         boolean isAdd = pstm.executeUpdate() > 0;
-        return isAdd;
+        return isAdd;*/
     }
 
     @Override
     public boolean updateReservation(ReservationDto dto) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+        return SQLUtil.execute("UPDATE  reservation SET borrowedDate=?,dueDate=?,bookReturnDate=?,fineStatus=?,fineAmount=?,mid=?,ISBN=? WHERE reservationId=?",
+                dto.getBorrowedDate(),
+                dto.getDueDate(),
+                dto.getBookReturnDate(),
+                dto.getFineStatus(),
+                dto.getFineAmount(),
+                dto.getMid(),
+                dto.getISBN(),
+                dto.getReservationId()
+        );
+        /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("UPDATE  reservation SET borrowedDate=?,dueDate=?,bookReturnDate=?,fineStatus=?,fineAmount=?,mid=?,ISBN=? WHERE reservationId=?");
         pstm.setString(1, dto.getBorrowedDate());
         pstm.setString(2,dto.getDueDate());
@@ -58,29 +79,31 @@ public class ReservationDAOImpl implements ReservationDAO {
 
         boolean isUpdated = pstm.executeUpdate() > 0;
 
-        return isUpdated;
+        return isUpdated;*/
     }
 
     @Override
     public  boolean deleteReservation(String reservationId) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+        return SQLUtil.execute("DELETE FROM reservation WHERE reservationId=?",reservationId);
+        /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("DELETE FROM reservation WHERE reservationId=?");
 
         pstm.setString(1,reservationId);
 
         boolean isDeleted = pstm.executeUpdate() > 0;
 
-        return isDeleted;
+        return isDeleted;*/
     }
 
     @Override
     public ReservationDto searchReservation(String reservationId) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+        ResultSet resultSet = SQLUtil.execute("SELECT * FROM reservation WHERE reservationId=?",reservationId);
+       /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM reservation WHERE reservationId=?");
         pstm.setString(1,reservationId);
 
         ResultSet resultSet = pstm.executeQuery();
-
+*/
         ReservationDto dto= null;
         if(resultSet.next()){
             dto = new ReservationDto(
@@ -98,12 +121,12 @@ public class ReservationDAOImpl implements ReservationDAO {
     }
 
     @Override
-    public  String generateNextReservationId(String reservationId) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
-
+    public  String generateNextReservationId() throws SQLException {
+        ResultSet resultSet = SQLUtil.execute("SELECT reservationId FROM reservation ORDER BY reservationId DESC LIMIT 1");
+        /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT reservationId FROM reservation ORDER BY reservationId DESC LIMIT 1");
+        ResultSet resultSet = pstm.executeQuery();*/
 
-        ResultSet resultSet = pstm.executeQuery();
         if(resultSet.next()){
             return  splitReservationId(resultSet.getString(1));
         }
@@ -124,11 +147,12 @@ public class ReservationDAOImpl implements ReservationDAO {
 
     @Override
     public List<ReservationDto> getAllReservation() throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+        ResultSet resultSet = SQLUtil.execute("SELECT * FROM  reservation");
+       /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM  reservation");
-
+*/
         List<ReservationDto> reservationList = new ArrayList<>();
-        ResultSet resultSet = pstm.executeQuery();
+//        ResultSet resultSet = pstm.executeQuery();
         while (resultSet.next()){
             reservationList.add(new ReservationDto(
                  resultSet.getString(1),

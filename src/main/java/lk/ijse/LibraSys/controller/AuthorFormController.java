@@ -90,8 +90,6 @@ public class AuthorFormController {
     private void setData(AuthorTm row) {
         if (row != null){
             txtAuthorId.setText(row.getAuthorId());
-//            System.out.println(row.getAuthorId());
-//            System.out.println(txtAuthorId.getText());
             txtAuthorName.setText(row.getAuthorName());
             txtText.setText(row.getText());
             txtNationality.setText(row.getNationality());
@@ -101,7 +99,7 @@ public class AuthorFormController {
 
     private String generateNextAuthorId() {
         try {
-            String authorId = authorDAO.generateNextAuthorId();
+            String authorId = authorDAO.generateNextId();
             System.out.println(authorId);
             txtAuthorId.setText(authorId);
         } catch (SQLException e) {
@@ -123,7 +121,7 @@ public class AuthorFormController {
         ObservableList<AuthorTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<AuthorDto> authorList = authorDAO.getAllAuthors();
+            List<AuthorDto> authorList = authorDAO.getAll();
 
             for (AuthorDto dto : authorList){
                 obList.add(new AuthorTm(
@@ -161,7 +159,7 @@ public class AuthorFormController {
         String authorId = txtAuthorId.getText();
 
         try {
-            boolean isDeleted = authorDAO.deleteAuthor(authorId);
+            boolean isDeleted = authorDAO.delete(authorId);
             if(isDeleted){
                 new Alert(Alert.AlertType.INFORMATION,"Author deleted successfully!!!").show();
                 loadAllAuthors();
@@ -184,7 +182,7 @@ public class AuthorFormController {
             var dto = new AuthorDto(authorId,authorName,text,nationality,currentlyBooksWrittenQty);
 
             try {
-                boolean isSaved = authorDAO.saveAuthor(dto);
+                boolean isSaved = authorDAO.save(dto);
                 if (isSaved){
                     new Alert(Alert.AlertType.CONFIRMATION,"Author adding successfully!!!").show();
                     loadAllAuthors();
@@ -245,7 +243,7 @@ public class AuthorFormController {
         var dto = new AuthorDto(authorId,authorName,text,nationality,currentlyBooksWrittenQty);
 
         try {
-            boolean isUpdated = authorDAO.updateAuthor(dto);
+            boolean isUpdated = authorDAO.update(dto);
             if(isUpdated){
                 new Alert(Alert.AlertType.INFORMATION,"Author updated successfully!!!").show();
                 loadAllAuthors();
@@ -262,7 +260,7 @@ public class AuthorFormController {
         String authorId = txtAuthorId.getText();
 
         try {
-            AuthorDto dto = authorDAO.searchAuthor(authorId);
+            AuthorDto dto = authorDAO.search(authorId);
 
             if (dto != null){
                 txtAuthorId.setText(dto.getAuthorId());

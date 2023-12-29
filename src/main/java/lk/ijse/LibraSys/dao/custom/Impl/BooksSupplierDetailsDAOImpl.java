@@ -1,5 +1,6 @@
 package lk.ijse.LibraSys.dao.custom.Impl;
 
+import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.BookSupplierDetailDto;
 import lk.ijse.LibraSys.dto.tm.SupplierCartTm;
@@ -23,8 +24,14 @@ public class BooksSupplierDetailsDAOImpl {
     }
 
     public boolean saveBooksSupplierDetail(String supplierId,LocalDate supplierDate,SupplierCartTm tm) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
-        //PreparedStatement pstm = connection.prepareStatement("INSERT INTO booksSupplier_details VALUES(?,?,?,?) ");
+        return SQLUtil.execute("INSERT INTO booksSupplier_detail VALUES(?,?,?,?,?)",
+                supplierId,
+                tm.getISBN(),
+                tm.getBookName(),
+                tm.getQty(),
+                supplierDate
+        );
+      /*  Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("INSERT INTO booksSupplier_detail VALUES(?,?,?,?,?)");
         pstm.setString(1,supplierId);
         pstm.setString(2,tm.getISBN());
@@ -32,7 +39,7 @@ public class BooksSupplierDetailsDAOImpl {
         pstm.setInt(4,tm.getQty());
         pstm.setString(5, String.valueOf(supplierDate));
 
-        return pstm.executeUpdate() > 0;
+        return pstm.executeUpdate() > 0;*/
     }
 
    /* public boolean saveBooksSupplierDetail(BookSupplierDetailDto dto) throws SQLException {

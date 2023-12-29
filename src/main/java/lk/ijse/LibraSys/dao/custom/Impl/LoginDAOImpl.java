@@ -1,5 +1,6 @@
 package lk.ijse.LibraSys.dao.custom.Impl;
 
+import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.LoginDAO;
 import lk.ijse.LibraSys.db.DbConnection;
 
@@ -12,12 +13,13 @@ import java.sql.SQLException;
 public class LoginDAOImpl implements LoginDAO {
     @Override
     public  boolean checkCredentials(String sNumber,String  username,String pw) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+        ResultSet resultSet = SQLUtil.execute("SELECT * FROM librarian WHERE sNumber =?  and username=?  and pw=?",sNumber,username,pw);
+        /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM librarian WHERE sNumber =?  and username=?  and pw=?");
         pstm.setString(1,sNumber);
         pstm.setString(2,username);
         pstm.setString(3,pw);
-        ResultSet resultSet =pstm.executeQuery();
+        ResultSet resultSet =pstm.executeQuery();*/
 
         String ServiceNumber = null;
         String UserName = null;

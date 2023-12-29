@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface MembershipFeeDAO {
-    String generateNextMembershipFeeId(String id) throws SQLException;
+    String generateNextMembershipFeeId() throws SQLException;
 
 
    /* public static String getTotalAmount() throws SQLException {
@@ -28,7 +28,7 @@ public interface MembershipFeeDAO {
     }*/
     String getTotalAmount() throws SQLException;
 
-    boolean saveMembersipFee(MembershipFeeDto dto) throws SQLException;
+    boolean saveMembershipFee(MembershipFeeDto dto) throws SQLException;
 
     boolean updateMembershipfee(MembershipFeeDto dto) throws SQLException;
 

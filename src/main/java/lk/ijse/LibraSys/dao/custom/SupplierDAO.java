@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface SupplierDAO {
-    String generateNextSupplierId(String supplierId) throws SQLException;
+    String generateNextSupplierId() throws SQLException;
 
     String getSupplierCount() throws SQLException;
 

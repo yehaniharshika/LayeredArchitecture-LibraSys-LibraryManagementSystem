@@ -61,7 +61,7 @@ public class BookRackFormController {
 
     private void generateNextRackCode() {
         try {
-            String rackCode =bookRackDAO.generateNextRackCode();
+            String rackCode =bookRackDAO.generateNextId();
             txtCode.setText(rackCode);
         } catch (SQLException e) {
            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -112,7 +112,7 @@ public class BookRackFormController {
         ObservableList<BookRackTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<BookRackDto> rackList = bookRackDAO.getAllBookRack();
+            List<BookRackDto> rackList = bookRackDAO.getAll();
 
             for(BookRackDto dto : rackList){
                 obList.add(
@@ -144,7 +144,7 @@ public class BookRackFormController {
         String rackCode = txtCode.getText();
 
         try {
-            boolean isDeleted = bookRackDAO.deleteBookRack(rackCode);
+            boolean isDeleted = bookRackDAO.delete(rackCode);
 
             if(isDeleted){
                 new Alert(Alert.AlertType.INFORMATION,"Deleting Successfully!!!").show();
@@ -171,7 +171,7 @@ public class BookRackFormController {
             var dto = new BookRackDto(rackCode,qtyBooks,categoryOfBooks,nameOfBooks);
 
             try {
-                boolean isSaved = bookRackDAO.saveBookRack(dto);
+                boolean isSaved = bookRackDAO.save(dto);
                 if(isSaved){
                     new Alert(Alert.AlertType.CONFIRMATION,"Book Rack Adding Successfully!!!").show();
                     clearFields();
@@ -225,7 +225,7 @@ public class BookRackFormController {
         var dto = new BookRackDto(rackCode,qtyBooks,categoryOfBooks,nameOfBooks);
 
         try {
-            boolean isUpdated = bookRackDAO.updateBookRack(dto);
+            boolean isUpdated = bookRackDAO.update(dto);
             if(isUpdated){
                 new Alert(Alert.AlertType.INFORMATION,"Updated successfully!!!").show();
                 clearFields();
@@ -244,7 +244,7 @@ public class BookRackFormController {
         String rackCode = txtCode.getText();
 
         try {
-            BookRackDto dto = bookRackDAO.searchBookRack(rackCode);
+            BookRackDto dto = bookRackDAO.search(rackCode);
 
             if (dto != null){
                 txtCode.setText(dto.getRackCode());

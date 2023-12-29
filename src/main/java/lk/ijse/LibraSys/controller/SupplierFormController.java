@@ -106,7 +106,7 @@ public class SupplierFormController {
 
     private void generateNextSupplierId() {
         try {
-            String supplierId = supplierDAO.generateNextSupplierId(txtSupplierId.getText());
+            String supplierId = supplierDAO.generateNextSupplierId();
             txtSupplierId.setText(supplierId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -152,7 +152,7 @@ public class SupplierFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<BookDto> ISBNList= bookDAO.getAllBooks();
+            List<BookDto> ISBNList= bookDAO.getAll();
 
             for(BookDto dto : ISBNList){
                 obList.add(dto.getISBN());
@@ -355,7 +355,7 @@ public class SupplierFormController {
 
         txtSupplyQuantity.requestFocus();
         try {
-            BookDto dto = bookDAO.searchBook(ISBN);
+            BookDto dto = bookDAO.search(ISBN);
             if (dto != null){
                 lblBookName.setText(dto.getBookName());
                 lblQtyOnHand.setText(dto.getQtyOnHand());

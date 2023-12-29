@@ -1,5 +1,6 @@
 package lk.ijse.LibraSys.dao.custom.Impl;
 
+import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.SupplierDAO;
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.SupplierDto;
@@ -14,11 +15,12 @@ import java.util.List;
 public class SupplierDAOImpl implements SupplierDAO {
 
     @Override
-    public String generateNextSupplierId(String supplierId) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+    public String generateNextSupplierId() throws SQLException {
+        ResultSet resultSet = SQLUtil.execute("SELECT supplierId FROM supplier ORDER BY supplierId DESC LIMIT 1");
+        /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT supplierId FROM supplier ORDER BY supplierId DESC LIMIT 1");
 
-        ResultSet resultSet = pstm.executeQuery();
+        ResultSet resultSet = pstm.executeQuery();*/
         if (resultSet.next()){
             return splitSupplierId(resultSet.getString(1));
 
@@ -50,11 +52,12 @@ public class SupplierDAOImpl implements SupplierDAO {
 
     @Override
     public String getSupplierCount() throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+        ResultSet resultSet = SQLUtil.execute("SELECT COUNT(supplierId) FROM supplier");
+       /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT COUNT(supplierId) FROM supplier");
-
+*/
         String count = null;
-        ResultSet resultSet = pstm.executeQuery();
+//        ResultSet resultSet = pstm.executeQuery();
         if (resultSet.next()){
             count = resultSet.getString(1);
         }
@@ -64,7 +67,13 @@ public class SupplierDAOImpl implements SupplierDAO {
 
     @Override
     public boolean saveSupplier(String supplierId,String supName,String contactNumber,String email) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+        return SQLUtil.execute("INSERT INTO supplier VALUES (?,?,?,?)",
+                supplierId,
+                supName,
+                contactNumber,
+                email
+        );
+        /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("INSERT INTO supplier VALUES (?,?,?,?)");
 
         pstm.setString(1,supplierId);
@@ -72,12 +81,13 @@ public class SupplierDAOImpl implements SupplierDAO {
         pstm.setString(3,contactNumber);
         pstm.setString(4,email);
 
-        return pstm.executeUpdate() > 0;
+        return pstm.executeUpdate() > 0;*/
     }
 
     @Override
     public boolean updateSupplier(SupplierDto dto) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+        return SQLUtil.execute("UPDATE supplier SET supplierName=?,contactNumber=?,email=? WHERE supplierId=?",dto.getSupplierName(),dto.getContactNumber(),dto.getEmail(),dto.getSupplierId());
+       /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("UPDATE supplier SET supplierName=?,contactNumber=?,email=? WHERE supplierId=?");
 
         pstm.setString(1, dto.getSupplierName());
@@ -86,26 +96,28 @@ public class SupplierDAOImpl implements SupplierDAO {
         pstm.setString(4, dto.getSupplierId());
 
         boolean isUpdated = pstm.executeUpdate()>0;
-        return  isUpdated;
+        return  isUpdated;*/
     }
 
     @Override
     public boolean deleteSupplier(String supplierId) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+        return SQLUtil.execute("DELETE  FROM  supplier WHERE  supplierId=?",supplierId);
+       /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("DELETE  FROM  supplier WHERE  supplierId=?");
         pstm.setString(1,supplierId);
 
         boolean isDeleted = pstm.executeUpdate()>0;
-        return  isDeleted;
+        return  isDeleted;*/
     }
 
     @Override
     public SupplierDto searchSupplier(String supplierId) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+        ResultSet resultSet = SQLUtil.execute("SELECT  * FROM supplier WHERE supplierId=?",supplierId);
+        /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT  * FROM supplier WHERE supplierId=?");
         pstm.setString(1,supplierId);
 
-        ResultSet resultSet = pstm.executeQuery();
+        ResultSet resultSet = pstm.executeQuery();*/
         SupplierDto dto = null;
         if (resultSet.next()){
             dto = new SupplierDto(
@@ -120,11 +132,12 @@ public class SupplierDAOImpl implements SupplierDAO {
 
     @Override
     public List<SupplierDto> getAllSupplier() throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+        ResultSet resultSet = SQLUtil.execute("SELECT * FROM supplier");
+       /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM supplier");
-
+*/
         List<SupplierDto> supplierList = new ArrayList<>();
-        ResultSet resultSet = pstm.executeQuery();
+//        ResultSet resultSet = pstm.executeQuery();
         while (resultSet.next()){
             supplierList.add(new SupplierDto(
                  resultSet.getString(1),

@@ -90,7 +90,7 @@ public class DashboardFormController {
 
     private void setAuthorCount() {
         try {
-            lblAuthorCount.setText(authorModel.getAuthorCount());
+            lblAuthorCount.setText(authorModel.getCount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -98,7 +98,7 @@ public class DashboardFormController {
 
     private void setNewBookCount() {
         try {
-            lblBookCount.setText(bookModel.getBookCount());
+            lblBookCount.setText(bookModel.getCount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

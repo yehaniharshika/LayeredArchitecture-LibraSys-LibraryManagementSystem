@@ -13,11 +13,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 //import lk.ijse.LibraSys.db.DbConnection;
+import lk.ijse.LibraSys.dao.custom.Impl.LoginDAOImpl;
+import lk.ijse.LibraSys.dao.custom.Impl.SignupDAOImpl;
+import lk.ijse.LibraSys.dao.custom.LoginDAO;
 import lk.ijse.LibraSys.dao.custom.MemberDAO;
 import lk.ijse.LibraSys.dao.custom.MembershipFeeDAO;
+import lk.ijse.LibraSys.dao.custom.SignupDAO;
 import lk.ijse.LibraSys.dto.MemberDto;
 import lk.ijse.LibraSys.dto.MembershipFeeDto;
 //import lk.ijse.LibraSys.dto.SignupDto;
+import lk.ijse.LibraSys.dto.SignupDto;
 import lk.ijse.LibraSys.dto.tm.MemberTm;
 import lk.ijse.LibraSys.dao.custom.Impl.MemberDAOImpl;
 import lk.ijse.LibraSys.dao.custom.Impl.MembershipFeeDAOImpl;
@@ -98,6 +103,7 @@ public class MemberFormController {
     MembershipFeeDAO membershipFeeDAO = new MembershipFeeDAOImpl();
     //private ObservableList<MemberTm> obList = FXCollections.observableArrayList();
     MemberDAO memberDAO = new MemberDAOImpl();
+    LoginDAO loginDAO = new LoginDAOImpl();
 
 
     public  void initialize(){
@@ -106,8 +112,24 @@ public class MemberFormController {
         loadAllMember();
         setCellValueFactory();
         tableListener();
+        //setServiceNumber();
 
     }
+
+    /*private void setServiceNumber() {
+        try {
+            MemberDto memberDto= new MemberDto();
+            SignupDto signupDto = new SignupDto();
+            String sNumber = signupDto.getSNumber();
+            String userName = s
+            String serviceNumber = loginDAO.checkCredentials(sNumber,String userName,pw);
+            memberDto.setSNumber(serviceNumber);
+            txtSnumber.setText(serviceNumber);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }*/
 
     private void tableListener() {
         tblMember.getSelectionModel().selectedItemProperty().addListener((observable, oldValued, newValue) -> {
@@ -133,7 +155,7 @@ public class MemberFormController {
 
     private void generateNextMemberId() {
         try {
-            String mid = memberDAO.generateNextMemberId(txtMid.getText());
+            String mid = memberDAO.generateNextMemberId();
             txtMid.setText(mid);
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();

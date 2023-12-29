@@ -1,5 +1,6 @@
 package lk.ijse.LibraSys.dao.custom.Impl;
 
+import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.SignupDAO;
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.SignupDto;
@@ -12,7 +13,17 @@ public class SignupDAOImpl implements SignupDAO {
 
     @Override
     public  boolean registerLibrarian(SignupDto dto) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+        return SQLUtil.execute("INSERT INTO librarian VALUES(?,?,?,?,?,?,?)",
+                dto.getSNumber(),
+                dto.getFirstName(),
+                dto.getLastName(),
+                dto.getNic(),
+                dto.getEAddress(),
+                dto.getUsername(),
+                dto.getPw()
+        );
+
+   /*   Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("INSERT INTO librarian VALUES(?,?,?,?,?,?,?)");
         pstm.setString(1, dto.getSNumber());
         pstm.setString(2, dto.getFirstName());
@@ -24,6 +35,6 @@ public class SignupDAOImpl implements SignupDAO {
 
         boolean isRegistered = pstm.executeUpdate() > 0;
 
-        return isRegistered;
+        return isRegistered;*/
     }
 }

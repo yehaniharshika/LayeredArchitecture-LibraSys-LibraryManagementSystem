@@ -143,7 +143,7 @@ public class MembershipFeeFormController {
     //generate next membership fee Id
     private void generateNextMembershipFeeId() {
         try {
-            String id = membershipFeeDAO.generateNextMembershipFeeId(txtId.getText());
+            String id = membershipFeeDAO.generateNextMembershipFeeId();
             txtId.setText(id);
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -239,7 +239,7 @@ public class MembershipFeeFormController {
             var dto = new MembershipFeeDto(id,name,amount,date,status);
 
             try {
-                boolean isSaved = membershipFeeDAO.saveMembersipFee(dto);
+                boolean isSaved = membershipFeeDAO.saveMembershipFee(dto);
 
                 if(isSaved){
                     new Alert(Alert.AlertType.CONFIRMATION,"success!!").show();

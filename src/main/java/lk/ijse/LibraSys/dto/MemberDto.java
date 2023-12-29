@@ -22,7 +22,7 @@ public class MemberDto {
 
 
 
-    MemberDto(){
+    public MemberDto(){
 
     }
 

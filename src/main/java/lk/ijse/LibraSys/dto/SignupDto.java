@@ -31,4 +31,5 @@ public class SignupDto {
         this.pw = pw;
 
     }
+
 }

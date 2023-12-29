@@ -27,6 +27,7 @@ public class PlacebookSupplierDAOImpl implements PlaceBookSupplierDAO {
             connection.setAutoCommit(false);
 
 
+
             //man methana wenas kara
             boolean isSupplierSaved = supplierModel.saveSupplier(supplierId,supName,contactNumber,email);
 

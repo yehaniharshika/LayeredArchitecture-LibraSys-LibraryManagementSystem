@@ -172,7 +172,7 @@ public class ReservationFormController {
 
     private void generateNextReservationId() {
         try {
-            String reservationId = reservationDAO.generateNextReservationId(txtReservationId.getText());
+            String reservationId = reservationDAO.generateNextReservationId();
             txtReservationId.setText(reservationId);
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -184,7 +184,7 @@ public class ReservationFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<BookDto> ISBNlist = bookDAO.getAllBooks();
+            List<BookDto> ISBNlist = bookDAO.getAll();
 
             for (BookDto dto : ISBNlist){
                 obList.add(dto.getISBN());
@@ -388,7 +388,7 @@ public class ReservationFormController {
         String ISBN = cmbISBN.getValue();
         if(ISBN!=null){
             try {
-                BookDto dto = bookDAO.searchBook(ISBN);
+                BookDto dto = bookDAO.search(ISBN);
                 if(dto!=null){
                     //System.out.println("dto : "+dto);
                     lblBookName.setText(dto.getBookName());

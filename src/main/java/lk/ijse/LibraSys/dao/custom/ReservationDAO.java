@@ -21,7 +21,7 @@ public interface ReservationDAO {
 
     ReservationDto searchReservation(String reservationId) throws SQLException;
 
-    String generateNextReservationId(String reservationId) throws SQLException;
+    String generateNextReservationId() throws SQLException;
 
     List<ReservationDto> getAllReservation() throws SQLException;
 }

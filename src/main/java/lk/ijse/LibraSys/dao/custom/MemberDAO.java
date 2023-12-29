@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface MemberDAO {
-    String generateNextMemberId(String mid) throws SQLException;
+    String generateNextMemberId() throws SQLException;
 
     //for dashboard update
     String getMemberCount() throws SQLException;

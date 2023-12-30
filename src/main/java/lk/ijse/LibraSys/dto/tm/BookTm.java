@@ -11,7 +11,8 @@ public class BookTm {
     private String ISBN;
     private String bookName;
     private String category;
-    private String qtyOnHand;
+    private int qtyOnHand;
     private String authorId;
+    private String rackCode;
 
 }

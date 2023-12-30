@@ -11,7 +11,7 @@ public class BookDto {
     private String ISBN;
     private String bookName;
     private String category;
-    private String qtyOnHand;
+    private int qtyOnHand;
     private String rackCode;
     private String authorId;
 

@@ -143,7 +143,7 @@ public class MembershipFeeFormController {
     //generate next membership fee Id
     private void generateNextMembershipFeeId() {
         try {
-            String id = membershipFeeDAO.generateNextMembershipFeeId();
+            String id = membershipFeeDAO.generateNextId();
             txtId.setText(id);
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -167,7 +167,7 @@ public class MembershipFeeFormController {
         ObservableList<MembershipFeeTm> obList = FXCollections.observableArrayList();
 
         try{
-            List<MembershipFeeDto> feeList = model.getAllMemberShipFee();
+            List<MembershipFeeDto> feeList = model.getAll();
             for(MembershipFeeDto dto : feeList){
                 obList.add(
                         new MembershipFeeTm(
@@ -212,7 +212,7 @@ public class MembershipFeeFormController {
 
        try {
            //MembershipFeeDAO membershipFeeDAO = new MembershipFeeDAOImpl();
-           boolean isDeleted = membershipFeeDAO.deleteMembershipFee(id);
+           boolean isDeleted = membershipFeeDAO.delete(id);
 
            if(isDeleted){
               new Alert(Alert.AlertType.CONFIRMATION,"Deleted successfully!!").show();
@@ -239,7 +239,7 @@ public class MembershipFeeFormController {
             var dto = new MembershipFeeDto(id,name,amount,date,status);
 
             try {
-                boolean isSaved = membershipFeeDAO.saveMembershipFee(dto);
+                boolean isSaved = membershipFeeDAO.save(dto);
 
                 if(isSaved){
                     new Alert(Alert.AlertType.CONFIRMATION,"success!!").show();
@@ -299,7 +299,7 @@ public class MembershipFeeFormController {
 
         var dto = new MembershipFeeDto(id,name,amount,date,status);
         try {
-            boolean isUpdated = membershipFeeDAO.updateMembershipfee(dto);
+            boolean isUpdated = membershipFeeDAO.update(dto);
 
             if(isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"successfully updated!").show();
@@ -319,7 +319,7 @@ public class MembershipFeeFormController {
         String id = txtId.getText();
 
         try {
-            MembershipFeeDto membershipFeeDto = membershipFeeDAO.searchMembershipFee(id);
+            MembershipFeeDto membershipFeeDto = membershipFeeDAO.search(id);
             if(membershipFeeDto != null){
                 txtId.setText(membershipFeeDto.getId());
                 txtName.setText(membershipFeeDto.getName());

@@ -145,7 +145,7 @@ public class ReservationFormController {
         ObservableList<ReservationTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<ReservationDto> reservationList = reservationDAO.getAllReservation();
+            List<ReservationDto> reservationList = reservationDAO.getAll();
 
             for(ReservationDto dto: reservationList){
                 obList.add(new ReservationTm(
@@ -172,7 +172,7 @@ public class ReservationFormController {
 
     private void generateNextReservationId() {
         try {
-            String reservationId = reservationDAO.generateNextReservationId();
+            String reservationId = reservationDAO.generateNextId();
             txtReservationId.setText(reservationId);
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -199,7 +199,7 @@ public class ReservationFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<MemberDto> mIdList = memberDAO.getAllMember();
+            List<MemberDto> mIdList = memberDAO.getAll();
 
             for(MemberDto dto : mIdList){
                 obList.add(dto.getMid());
@@ -228,7 +228,7 @@ public class ReservationFormController {
             var dto = new ReservationDto(reservationId,borrowedDate,dueDate,bookReturnDate,fineStatus,fineAmount,mid,ISBN);
 
             try {
-                boolean isAdd = reservationDAO.addReservation(dto);
+                boolean isAdd = reservationDAO.save(dto);
                 if(isAdd){
                     new Alert(Alert.AlertType.CONFIRMATION,"Adding reservation successfully!!!").show();
                     clearFields();
@@ -270,7 +270,7 @@ public class ReservationFormController {
         String  reservationId = txtReservationId.getText();
 
         try {
-            boolean isDeleted = reservationDAO.deleteReservation(reservationId);
+            boolean isDeleted = reservationDAO.delete(reservationId);
             if (isDeleted){
 
                 new Alert(Alert.AlertType.INFORMATION,"reservation deleted successfully!!").showAndWait();
@@ -287,7 +287,7 @@ public class ReservationFormController {
         String  reservationId = txtReservationId.getText();
 
         try {
-            ReservationDto dto = reservationDAO.searchReservation(reservationId);
+            ReservationDto dto = reservationDAO.search(reservationId);
 
             if (dto != null){
                 txtReservationId.setText(dto.getReservationId());
@@ -367,7 +367,7 @@ public class ReservationFormController {
         var dto = new ReservationDto(reservationId,borrowedDate,dueDate,bookReturnDate,fineStatus,fineAmount,mid,ISBN);
 
         try {
-            boolean isUpdated = reservationDAO.updateReservation(dto);
+            boolean isUpdated = reservationDAO.update(dto);
             if(isUpdated){
                 new Alert(Alert.AlertType.INFORMATION,"Reservation updated successfully!!!").show();
                 loadAllReservation();
@@ -392,7 +392,7 @@ public class ReservationFormController {
                 if(dto!=null){
                     //System.out.println("dto : "+dto);
                     lblBookName.setText(dto.getBookName());
-                    lblQtyOnHand.setText(dto.getQtyOnHand());
+                    lblQtyOnHand.setText(String.valueOf(dto.getQtyOnHand()));
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -404,7 +404,7 @@ public class ReservationFormController {
     void cmbMemberOnAction(ActionEvent event) {
         String mid = String.valueOf(cmbMemberId.getValue());
         try {
-            MemberDto dto = memberDAO.searchMember(mid);
+            MemberDto dto = memberDAO.search(mid);
             if(dto!=null) {
                 lblMemberName.setText(dto.getName());
             }

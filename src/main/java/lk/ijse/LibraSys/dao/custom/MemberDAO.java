@@ -1,5 +1,6 @@
 package lk.ijse.LibraSys.dao.custom;
 
+import lk.ijse.LibraSys.dao.CrudDAO;
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.MemberDto;
 
@@ -10,8 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface MemberDAO {
-    String generateNextMemberId() throws SQLException;
+public interface MemberDAO extends CrudDAO<MemberDto> {
+    /*String generateNextMemberId() throws SQLException;
 
     //for dashboard update
     String getMemberCount() throws SQLException;
@@ -24,7 +25,7 @@ public interface MemberDAO {
 
     MemberDto searchMember(String mid) throws SQLException;
 
-    List<MemberDto> getAllMember() throws SQLException;
+    List<MemberDto> getAllMember() throws SQLException;*/
 
 
 }

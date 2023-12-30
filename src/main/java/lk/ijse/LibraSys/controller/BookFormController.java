@@ -49,6 +49,10 @@ public class BookFormController {
     private TableColumn<?, ?> colAuthorId;
 
     @FXML
+    private TableColumn<?, ?> colRackCode;
+
+
+    @FXML
     private Label lblCategoryType;
 
     @FXML
@@ -85,8 +89,8 @@ public class BookFormController {
         generateNextBookISBN();
         loadRackCodes();
         loadAllBooks();
-        setCellValueFactory();
         loadAllAuthorIds();
+        setCellValueFactory();
         tableListener();
 
     }
@@ -102,9 +106,10 @@ public class BookFormController {
         if (newValue != null){
             txtISBN.setText(newValue.getISBN());
             txtBookName.setText(newValue.getBookName());
-            txtQtyOnHand.setText(newValue.getQtyOnHand());
+            txtQtyOnHand.setText(String.valueOf(newValue.getQtyOnHand()));
             txtCategory.setText(newValue.getCategory());
             cmbAuthorId.setValue(newValue.getAuthorId());
+            cmbRackCode.setValue(newValue.getRackCode());
         }
     }
 
@@ -125,6 +130,7 @@ public class BookFormController {
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
         colQtyOnHand.setCellValueFactory(new PropertyValueFactory<>("qtyOnHand"));
         colAuthorId.setCellValueFactory(new PropertyValueFactory<>("authorId"));
+        colRackCode.setCellValueFactory(new PropertyValueFactory<>("rackCode"));
     }
 
 
@@ -140,7 +146,8 @@ public class BookFormController {
                         dto.getBookName(),
                         dto.getCategory(),
                         dto.getQtyOnHand(),
-                        dto.getAuthorId()
+                        dto.getAuthorId(),
+                        dto.getRackCode()
                 ));
             }
             tblBook.setItems(obList);
@@ -214,6 +221,8 @@ public class BookFormController {
             if(isDeleted){
                 new Alert(Alert.AlertType.INFORMATION,"Book deleted Successfully!!!").show();
                 loadAllBooks();
+                clearFields();
+                generateNextBookISBN();
             }else{
                 new Alert(Alert.AlertType.ERROR,"not book deleted!!!").show();
             }
@@ -234,7 +243,7 @@ public class BookFormController {
                 txtISBN.setText(dto.getISBN());
                 txtBookName.setText(dto.getBookName());
                 txtCategory.setText(dto.getCategory());
-                txtQtyOnHand.setText(dto.getQtyOnHand());
+                txtQtyOnHand.setText(String.valueOf(dto.getQtyOnHand()));
                 cmbRackCode.setValue(dto.getRackCode());
                 cmbAuthorId.setValue(dto.getAuthorId());
             }else{
@@ -251,7 +260,7 @@ public class BookFormController {
             String ISBN = txtISBN.getText();
             String bookName = txtBookName.getText();
             String category = txtCategory.getText();
-            String qtyOnHand = txtQtyOnHand.getText();
+            int qtyOnHand = Integer.parseInt(txtQtyOnHand.getText());
             String rackCode = cmbRackCode.getValue();
             String authorId = cmbAuthorId.getValue();
 
@@ -265,13 +274,14 @@ public class BookFormController {
                     loadAllBooks();
                     setCellValueFactory();
                     generateNextBookISBN();
-                    bookRackDAO.updateQtyBooks(rackCode, Integer.parseInt(qtyOnHand));
+                    bookRackDAO.updateQtyBooks(rackCode, Integer.parseInt(String.valueOf(qtyOnHand)));
                     //bookRackModel.updatenameOfBooks(rackCode, bookName);
                 }else{
                     new Alert(Alert.AlertType.ERROR,"ohh,Book not Saved!!!").show();
                 }
             } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+//                new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+                e.printStackTrace();
             }
         }
     }
@@ -308,7 +318,7 @@ public class BookFormController {
         String ISBN = txtISBN.getText();
         String bookName = txtBookName.getText();
         String category = txtCategory.getText();
-        String qtyOnHand = txtQtyOnHand.getText();
+        int qtyOnHand = Integer.parseInt(txtQtyOnHand.getText());
         String rackCode = cmbRackCode.getValue();
         String authorId = cmbAuthorId.getValue();
 

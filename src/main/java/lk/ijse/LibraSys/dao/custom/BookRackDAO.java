@@ -26,5 +26,5 @@ public interface BookRackDAO  extends CrudDAO<BookRackDto> {
 
     boolean updateQtyBooks(String rackCode,int qtyBooks) throws SQLException;
 
-    boolean updatenameOfBooks(String rackCode,String nameOfBooks) throws SQLException;
+    //boolean updatenameOfBooks(String rackCode,String nameOfBooks) throws SQLException;
 }

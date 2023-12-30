@@ -15,7 +15,7 @@ import java.util.List;
 public class ReservationDAOImpl implements ReservationDAO {
 
     @Override
-    public  String getBookBorrowCount() throws SQLException {
+    public  String getCount() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT COUNT(reservationId) FROM  reservation");
 
@@ -28,7 +28,7 @@ public class ReservationDAOImpl implements ReservationDAO {
     }
 
     @Override
-    public  boolean addReservation(ReservationDto dto) throws SQLException {
+    public  boolean save(ReservationDto dto) throws SQLException {
         return SQLUtil.execute("INSERT INTO reservation VALUES (?,?,?,?,?,?,?,?)",
                 dto.getReservationId(),
                 dto.getBorrowedDate(),
@@ -55,7 +55,7 @@ public class ReservationDAOImpl implements ReservationDAO {
     }
 
     @Override
-    public boolean updateReservation(ReservationDto dto) throws SQLException {
+    public boolean update(ReservationDto dto) throws SQLException {
         return SQLUtil.execute("UPDATE  reservation SET borrowedDate=?,dueDate=?,bookReturnDate=?,fineStatus=?,fineAmount=?,mid=?,ISBN=? WHERE reservationId=?",
                 dto.getBorrowedDate(),
                 dto.getDueDate(),
@@ -83,7 +83,7 @@ public class ReservationDAOImpl implements ReservationDAO {
     }
 
     @Override
-    public  boolean deleteReservation(String reservationId) throws SQLException {
+    public  boolean delete(String reservationId) throws SQLException {
         return SQLUtil.execute("DELETE FROM reservation WHERE reservationId=?",reservationId);
         /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("DELETE FROM reservation WHERE reservationId=?");
@@ -96,7 +96,7 @@ public class ReservationDAOImpl implements ReservationDAO {
     }
 
     @Override
-    public ReservationDto searchReservation(String reservationId) throws SQLException {
+    public ReservationDto search(String reservationId) throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM reservation WHERE reservationId=?",reservationId);
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM reservation WHERE reservationId=?");
@@ -121,7 +121,7 @@ public class ReservationDAOImpl implements ReservationDAO {
     }
 
     @Override
-    public  String generateNextReservationId() throws SQLException {
+    public  String generateNextId() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT reservationId FROM reservation ORDER BY reservationId DESC LIMIT 1");
         /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT reservationId FROM reservation ORDER BY reservationId DESC LIMIT 1");
@@ -146,7 +146,7 @@ public class ReservationDAOImpl implements ReservationDAO {
     }
 
     @Override
-    public List<ReservationDto> getAllReservation() throws SQLException {
+    public List<ReservationDto> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM  reservation");
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM  reservation");

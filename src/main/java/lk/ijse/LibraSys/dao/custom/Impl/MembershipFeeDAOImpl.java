@@ -16,7 +16,12 @@ import java.util.List;
 public class MembershipFeeDAOImpl implements MembershipFeeDAO {
 
     @Override
-    public String generateNextMembershipFeeId() throws SQLException {
+    public String getCount() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public String generateNextId() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT fee_id FROM membershipFee ORDER BY fee_id DESC LIMIT 1");
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT fee_id FROM membershipFee ORDER BY fee_id DESC LIMIT 1");
@@ -63,7 +68,7 @@ public class MembershipFeeDAOImpl implements MembershipFeeDAO {
     }
 
     @Override
-    public boolean saveMembershipFee(MembershipFeeDto dto) throws SQLException {
+    public boolean save(MembershipFeeDto dto) throws SQLException {
         return SQLUtil.execute( "INSERT INTO membershipFee VALUES(?,?,?,?,?)",
                 dto.getId(),
                 dto.getName(),
@@ -90,7 +95,7 @@ public class MembershipFeeDAOImpl implements MembershipFeeDAO {
     }
 
     @Override
-    public boolean updateMembershipfee(MembershipFeeDto dto) throws SQLException {
+    public boolean update(MembershipFeeDto dto) throws SQLException {
         return SQLUtil.execute("UPDATE membershipFee SET name = ?, amount = ? ,date = ?, status = ?  WHERE fee_id =?",
                 dto.getName(),
                 dto.getAmount(),
@@ -114,7 +119,7 @@ public class MembershipFeeDAOImpl implements MembershipFeeDAO {
     }
 
     @Override
-    public MembershipFeeDto searchMembershipFee(String id) throws SQLException {
+    public MembershipFeeDto search(String id) throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM membershipFee WHERE fee_id = ?",id);
         /*Connection connection = DbConnection.getInstance().getConnection();
         String sql ="SELECT * FROM membershipFee WHERE fee_id = ?";
@@ -141,7 +146,7 @@ public class MembershipFeeDAOImpl implements MembershipFeeDAO {
     }
 
     @Override
-    public boolean deleteMembershipFee(String id) throws SQLException {
+    public boolean delete(String id) throws SQLException {
         return SQLUtil.execute("DELETE FROM membershipFee WHERE fee_id = ?",id);
         /*Connection connection = DbConnection.getInstance().getConnection();
 
@@ -154,7 +159,7 @@ public class MembershipFeeDAOImpl implements MembershipFeeDAO {
     }
 
     @Override
-    public List<MembershipFeeDto> getAllMemberShipFee() throws SQLException {
+    public List<MembershipFeeDto> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM membershipFee");
        /* Connection connection = DbConnection.getInstance().getConnection();
         String sql = "SELECT * FROM membershipFee";

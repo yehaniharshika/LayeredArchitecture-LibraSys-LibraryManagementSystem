@@ -106,7 +106,7 @@ public class SupplierFormController {
 
     private void generateNextSupplierId() {
         try {
-            String supplierId = supplierDAO.generateNextSupplierId();
+            String supplierId = supplierDAO.generateNextId();
             txtSupplierId.setText(supplierId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -167,10 +167,11 @@ public class SupplierFormController {
     void btnDeleteOnAction(ActionEvent event) {
         String supplierId = txtSupplierId.getText();
         try {
-            boolean isDeleted = supplierDAO.deleteSupplier(supplierId);
+            boolean isDeleted = supplierDAO.delete(supplierId);
             if (isDeleted){
                 new Alert(Alert.AlertType.INFORMATION,"Supplier Deleted Successfully!!!").show();
                 clearFields();
+                generateNextSupplierId();
             }else{
                 new Alert(Alert.AlertType.ERROR,"supplier not deleted!!!").show();
             }
@@ -190,10 +191,12 @@ public class SupplierFormController {
         var dto = new SupplierDto(supplierId,supplierName,contactNumber,email);
 
         try {
-            boolean isUpdated = supplierDAO.updateSupplier(dto);
+            boolean isUpdated = supplierDAO.update(dto);
 
             if (isUpdated){
                 new Alert(Alert.AlertType.INFORMATION,"supplier updated successfully!!!").show();
+                clearFields();
+                generateNextSupplierId();
             }else{
                 new Alert(Alert.AlertType.ERROR,"supplier not updated!!!").show();
             }
@@ -291,13 +294,15 @@ public class SupplierFormController {
                 var placeBooksSupplierOrderDto = new PlaceBooksSupplierOrderDto(supplierId,supName,contactNumber,email,supplierDate,supplierCartTmList);
                 try {
                     boolean isSuccess = placebookSupplierDAO.placeBooksOrder(placeBooksSupplierOrderDto);
+                    System.out.println(isSuccess);
                     if (isSuccess){
                         new Alert(Alert.AlertType.CONFIRMATION,"Order success!!!").show();
                         clearAllFields();
                         generateNextSupplierId();
                     }
                 } catch (SQLException e) {
-                    new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+//                    new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+                    e.printStackTrace();
                 }
             }
     }
@@ -358,7 +363,7 @@ public class SupplierFormController {
             BookDto dto = bookDAO.search(ISBN);
             if (dto != null){
                 lblBookName.setText(dto.getBookName());
-                lblQtyOnHand.setText(dto.getQtyOnHand());
+                lblQtyOnHand.setText(String.valueOf(dto.getQtyOnHand()));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -375,7 +380,7 @@ public class SupplierFormController {
         String supplierId = txtSupplierId.getText();
 
         try {
-            SupplierDto dto =supplierDAO.searchSupplier(supplierId);
+            SupplierDto dto =supplierDAO.search(supplierId);
             if (dto != null){
                 txtSupplierId.setText(dto.getSupplierId());
                 txtSupplierName.setText(dto.getSupplierName());

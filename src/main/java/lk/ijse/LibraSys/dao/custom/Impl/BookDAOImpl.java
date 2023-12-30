@@ -135,7 +135,7 @@ public class BookDAOImpl  implements BookDAO {
                  resultSet.getString(1),
                  resultSet.getString(2),
                  resultSet.getString(3),
-                 resultSet.getString(4),
+                 resultSet.getInt(4),
                  resultSet.getString(5),
                  resultSet.getString(6)
             );
@@ -158,7 +158,7 @@ public class BookDAOImpl  implements BookDAO {
                 resultSet.getString(1),
                 resultSet.getString(2),
                 resultSet.getString(3),
-                resultSet.getString(4),
+                resultSet.getInt(4),
                 resultSet.getString(5),
                 resultSet.getString(6)
             ));
@@ -181,14 +181,20 @@ public class BookDAOImpl  implements BookDAO {
 
     @Override
     public  boolean updateQty(String ISBN , int  qtyOnHand) throws SQLException {
-        return SQLUtil.execute("UPDATE book SET qtyOnHand = qtyOnHand + ? WHERE ISBN = ?",ISBN,qtyOnHand);
+//        return SQLUtil.execute("UPDATE book SET qtyOnHand = qtyOnHand + ? WHERE ISBN = ?", ISBN, qtyOnHand);
+        System.out.println("SQL Query: " + "UPDATE book SET qtyOnHand = qtyOnHand + CAST(? AS SIGNED) WHERE ISBN = ?");
+        return SQLUtil.execute("UPDATE book SET qtyOnHand = qtyOnHand + CAST(? AS SIGNED) WHERE ISBN = ?", qtyOnHand, ISBN);
+
        /* Connection connection = DbConnection.getInstance().getConnection();
         String sql ="UPDATE book SET qtyOnHand = qtyOnHand + ? WHERE ISBN = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         pstm.setInt(1,qtyOnHand);
         pstm.setString(2,ISBN);
-
+        return SQLUtil.execute("UPDATE bookRack SET qtyBooks = qtyBooks + CAST(? AS SIGNED) WHERE rackCode = ?",
+                 qtyBooks,
+                 rackCode
+         );
         return  pstm.executeUpdate() > 0;*/
     }
 

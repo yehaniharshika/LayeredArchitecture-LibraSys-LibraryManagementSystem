@@ -1,6 +1,7 @@
 package lk.ijse.LibraSys.dao.custom.Impl;
 
 import lk.ijse.LibraSys.dao.SQLUtil;
+import lk.ijse.LibraSys.dao.custom.BooksSupplierDetailsDAO;
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.BookSupplierDetailDto;
 import lk.ijse.LibraSys.dto.tm.SupplierCartTm;
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
-public class BooksSupplierDetailsDAOImpl {
+public class BooksSupplierDetailsDAOImpl implements BooksSupplierDetailsDAO {
 
     public  boolean saveBooksSupplierDetail(String supplierId,LocalDate supplierDate, List<SupplierCartTm> supplierCartTmList) throws SQLException {
         for (SupplierCartTm tm : supplierCartTmList){
@@ -23,6 +24,7 @@ public class BooksSupplierDetailsDAOImpl {
         return true;
     }
 
+    @Override
     public boolean saveBooksSupplierDetail(String supplierId,LocalDate supplierDate,SupplierCartTm tm) throws SQLException {
         return SQLUtil.execute("INSERT INTO booksSupplier_detail VALUES(?,?,?,?,?)",
                 supplierId,
@@ -40,6 +42,41 @@ public class BooksSupplierDetailsDAOImpl {
         pstm.setString(5, String.valueOf(supplierDate));
 
         return pstm.executeUpdate() > 0;*/
+    }
+
+    @Override
+    public String getCount() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public String generateNextId() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public boolean save(BookSupplierDetailDto dto) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean update(BookSupplierDetailDto dto) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String id) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public BookSupplierDetailDto search(String id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public List<BookSupplierDetailDto> getAll() throws SQLException {
+        return null;
     }
 
    /* public boolean saveBooksSupplierDetail(BookSupplierDetailDto dto) throws SQLException {

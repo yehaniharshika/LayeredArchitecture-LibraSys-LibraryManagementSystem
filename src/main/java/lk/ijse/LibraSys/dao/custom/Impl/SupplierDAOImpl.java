@@ -15,7 +15,7 @@ import java.util.List;
 public class SupplierDAOImpl implements SupplierDAO {
 
     @Override
-    public String generateNextSupplierId() throws SQLException {
+    public String generateNextId() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT supplierId FROM supplier ORDER BY supplierId DESC LIMIT 1");
         /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT supplierId FROM supplier ORDER BY supplierId DESC LIMIT 1");
@@ -28,8 +28,13 @@ public class SupplierDAOImpl implements SupplierDAO {
         return  splitSupplierId(null);
     }
 
+    @Override
+    public boolean save(SupplierDto dto) throws SQLException {
+        return false;
+    }
 
-        private String splitSupplierId(String currentId) {
+
+    private String splitSupplierId(String currentId) {
             if(currentId != null) {
                 String[] strings = currentId.split("SP0");
                 int id = Integer.parseInt(strings[1]);
@@ -51,7 +56,7 @@ public class SupplierDAOImpl implements SupplierDAO {
 
 
     @Override
-    public String getSupplierCount() throws SQLException {
+    public String getCount() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT COUNT(supplierId) FROM supplier");
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT COUNT(supplierId) FROM supplier");
@@ -85,7 +90,7 @@ public class SupplierDAOImpl implements SupplierDAO {
     }
 
     @Override
-    public boolean updateSupplier(SupplierDto dto) throws SQLException {
+    public boolean update(SupplierDto dto) throws SQLException {
         return SQLUtil.execute("UPDATE supplier SET supplierName=?,contactNumber=?,email=? WHERE supplierId=?",dto.getSupplierName(),dto.getContactNumber(),dto.getEmail(),dto.getSupplierId());
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("UPDATE supplier SET supplierName=?,contactNumber=?,email=? WHERE supplierId=?");
@@ -100,7 +105,7 @@ public class SupplierDAOImpl implements SupplierDAO {
     }
 
     @Override
-    public boolean deleteSupplier(String supplierId) throws SQLException {
+    public boolean delete(String supplierId) throws SQLException {
         return SQLUtil.execute("DELETE  FROM  supplier WHERE  supplierId=?",supplierId);
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("DELETE  FROM  supplier WHERE  supplierId=?");
@@ -111,7 +116,7 @@ public class SupplierDAOImpl implements SupplierDAO {
     }
 
     @Override
-    public SupplierDto searchSupplier(String supplierId) throws SQLException {
+    public SupplierDto search(String supplierId) throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT  * FROM supplier WHERE supplierId=?",supplierId);
         /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT  * FROM supplier WHERE supplierId=?");
@@ -131,7 +136,7 @@ public class SupplierDAOImpl implements SupplierDAO {
     }
 
     @Override
-    public List<SupplierDto> getAllSupplier() throws SQLException {
+    public List<SupplierDto> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM supplier");
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM supplier");

@@ -155,10 +155,11 @@ public class BookRackDAOImpl implements BookRackDAO {
 
      @Override
      public boolean updateQtyBooks(String rackCode,int qtyBooks) throws SQLException {
-         return  SQLUtil.execute("UPDATE bookRack SET qtyBooks = qtyBooks+? WHERE rackCode =?",
-                 rackCode,
-                 qtyBooks
+         return SQLUtil.execute("UPDATE bookRack SET qtyBooks = qtyBooks + CAST(? AS SIGNED) WHERE rackCode = ?",
+                 qtyBooks,
+                 rackCode
          );
+
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm= connection.prepareStatement("UPDATE bookRack SET qtyBooks = qtyBooks+? WHERE rackCode =?");
 
@@ -170,7 +171,7 @@ public class BookRackDAOImpl implements BookRackDAO {
          return isqtyUpdated;*/
      }
 
-     @Override
+     /*@Override
      public boolean updatenameOfBooks(String rackCode,String nameOfBooks) throws SQLException {
          Connection connection = DbConnection.getInstance().getConnection();
          PreparedStatement pstm = connection.prepareStatement("UPDATE bookrack SET nameOfBooks= nameOfBooks +? WHERE rackCode=?");
@@ -179,5 +180,5 @@ public class BookRackDAOImpl implements BookRackDAO {
 
          boolean isNameOfBooksUpdated = pstm.executeUpdate() > 0;
          return isNameOfBooksUpdated;
-     }
+     }*/
 }

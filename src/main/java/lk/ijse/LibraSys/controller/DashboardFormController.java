@@ -82,7 +82,7 @@ public class DashboardFormController {
 
     private void setSupplierCount() {
         try {
-            lblSupplierCount.setText(supplierModel.getSupplierCount());
+            lblSupplierCount.setText(supplierModel.getCount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -246,7 +246,7 @@ public class DashboardFormController {
 
     private void setBookBorrowCount() {
         try {
-            lblBorrowCount.setText(reservationModel.getBookBorrowCount());
+            lblBorrowCount.setText(reservationModel.getCount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -256,7 +256,7 @@ public class DashboardFormController {
     private void setMemberCount() {
 
         try {
-            lblMemberCount.setText(memberModel.getMemberCount());
+            lblMemberCount.setText(memberModel.getCount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

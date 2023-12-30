@@ -17,7 +17,7 @@ public class MemberDAOImpl implements MemberDAO {
 
    //for dashboard update
     @Override
-    public   String getMemberCount() throws SQLException {
+    public   String getCount() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT COUNT(mid) FROM  member");
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT COUNT(mid) FROM  member");
@@ -31,7 +31,7 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public  String generateNextMemberId() throws SQLException {
+    public  String generateNextId() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT mid FROM member ORDER BY  mid DESC LIMIT 1");
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT mid FROM member ORDER BY  mid DESC LIMIT 1");
@@ -64,7 +64,7 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public boolean saveMember(MemberDto dto) throws SQLException {
+    public boolean save(MemberDto dto) throws SQLException {
         return SQLUtil.execute("INSERT INTO member VALUES(?, ?, ?, ?, ?, ? ,?,?,?)",
                 dto.getMid(),
                 dto.getName(),
@@ -97,7 +97,7 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public  boolean updateMember(MemberDto dto) throws SQLException {
+    public  boolean update(MemberDto dto) throws SQLException {
         return SQLUtil.execute("UPDATE member SET name=?, address=?, gender=? ,tel =? ,EmailAddress =?,IDNumber=?, feeId=?,sNumber=? WHERE  mid=?",
                 dto.getName(),
                 dto.getAddress(),
@@ -129,7 +129,7 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public boolean deleteMember(String mid) throws SQLException {
+    public boolean delete(String mid) throws SQLException {
         return SQLUtil.execute("DELETE  FROM  member WHERE mid=?",mid);
         /*Connection connection =DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("DELETE  FROM  member WHERE mid=?");
@@ -141,7 +141,7 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public MemberDto searchMember(String mid) throws SQLException {
+    public MemberDto search(String mid) throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT  * FROM  member WHERE mid=?",mid);
         /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT  * FROM  member WHERE mid=?");
@@ -168,7 +168,7 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public List<MemberDto> getAllMember() throws SQLException {
+    public List<MemberDto> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM member");
         /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM member");

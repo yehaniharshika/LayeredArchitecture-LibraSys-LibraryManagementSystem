@@ -8,6 +8,7 @@ import lk.ijse.LibraSys.dto.SignupDto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 public class SignupDAOImpl implements SignupDAO {
 
@@ -36,5 +37,40 @@ public class SignupDAOImpl implements SignupDAO {
         boolean isRegistered = pstm.executeUpdate() > 0;
 
         return isRegistered;*/
+    }
+
+    @Override
+    public String getCount() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public String generateNextId() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public boolean save(SignupDto dto) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean update(SignupDto dto) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String id) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public SignupDto search(String id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public List<SignupDto> getAll() throws SQLException {
+        return null;
     }
 }

@@ -77,11 +77,12 @@
       </Label>
       <TableView fx:id="tblBook" layoutX="29.0" layoutY="428.0" prefHeight="326.0" prefWidth="904.0" style="-fx-background-color: #1B97B0;">
         <columns>
-          <TableColumn fx:id="colISBN" prefWidth="125.5" text="ISBN" />
-          <TableColumn fx:id="colBookName" prefWidth="216.5" text="Book Name" />
-            <TableColumn fx:id="colQtyOnHand" prefWidth="152.0" text="QtyOnHand" />
-            <TableColumn fx:id="colCategory" prefWidth="193.5" text="Category" />
-            <TableColumn fx:id="colAuthorId" prefWidth="215.5" text="Author ID" />
+          <TableColumn fx:id="colISBN" prefWidth="111.5" text="ISBN" />
+          <TableColumn fx:id="colBookName" prefWidth="220.5" text="Book Name" />
+            <TableColumn fx:id="colQtyOnHand" prefWidth="121.0" text="QtyOnHand" />
+            <TableColumn fx:id="colCategory" prefWidth="167.5" text="Category" />
+            <TableColumn fx:id="colAuthorId" prefWidth="138.5" text="Author ID" />
+            <TableColumn fx:id="colRackCode" prefWidth="144.0" text="Rack Code" />
         </columns>
       </TableView>
       <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="1013.0" layoutY="528.0">

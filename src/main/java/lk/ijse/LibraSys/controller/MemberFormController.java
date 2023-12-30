@@ -103,7 +103,6 @@ public class MemberFormController {
     MembershipFeeDAO membershipFeeDAO = new MembershipFeeDAOImpl();
     //private ObservableList<MemberTm> obList = FXCollections.observableArrayList();
     MemberDAO memberDAO = new MemberDAOImpl();
-    LoginDAO loginDAO = new LoginDAOImpl();
 
 
     public  void initialize(){
@@ -155,7 +154,7 @@ public class MemberFormController {
 
     private void generateNextMemberId() {
         try {
-            String mid = memberDAO.generateNextMemberId();
+            String mid = memberDAO.generateNextId();
             txtMid.setText(mid);
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -179,7 +178,7 @@ public class MemberFormController {
         ObservableList<MemberTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<MemberDto> memberList = memberDAO.getAllMember();
+            List<MemberDto> memberList = memberDAO.getAll();
 
             for (MemberDto dto : memberList){
                 obList.add(new MemberTm(
@@ -207,7 +206,7 @@ public class MemberFormController {
     private void loadFeeIds() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<MembershipFeeDto> idList = membershipFeeDAO.getAllMemberShipFee();
+            List<MembershipFeeDto> idList = membershipFeeDAO.getAll();
 
             for (MembershipFeeDto dto : idList ) {
                 obList.add(dto.getId());
@@ -242,7 +241,7 @@ public class MemberFormController {
         String mid = txtMid.getText();
 
         try {
-            MemberDto dto = memberDAO.searchMember(mid);
+            MemberDto dto = memberDAO.search(mid);
             if (dto != null){
                 txtMid.setText(dto.getMid());
                 txtName.setText(dto.getName());
@@ -266,7 +265,7 @@ public class MemberFormController {
         String mid  = txtMid.getText();
 
         try {
-            boolean isDeleted = memberDAO.deleteMember(mid);
+            boolean isDeleted = memberDAO.delete(mid);
             if(isDeleted){
                 new Alert(Alert.AlertType.INFORMATION,"member deleted successfully!!!").show();
                 loadAllMember();
@@ -308,7 +307,7 @@ public class MemberFormController {
             var dto = new MemberDto(mid,name,address,gender,tel,EmailAddress,IDNumber,feeId,sNumber);
 
             try {
-                boolean isSaved = memberDAO.saveMember(dto);
+                boolean isSaved = memberDAO.save(dto);
 
                 if(isSaved){
                     new Alert(Alert.AlertType.CONFIRMATION,"member registered successfully!!!!!!").show();
@@ -399,7 +398,7 @@ public class MemberFormController {
         var dto = new MemberDto(mid,name,address,gender,tel,EmailAddress,IDNumber,feeId,sNumber);
 
         try {
-            boolean isUpdated = memberDAO.updateMember(dto);
+            boolean isUpdated = memberDAO.update(dto);
             if (isUpdated){
                 new Alert(Alert.AlertType.INFORMATION,"member updated successfully!!!").show();
                 clearFields();
@@ -417,7 +416,7 @@ public class MemberFormController {
     void cmbMembershipFeeOnAction(ActionEvent event) {
         String id = String.valueOf(cmbmembershipFeeId.getValue());
         try {
-            MembershipFeeDto membershipFeeDto =membershipFeeDAO.searchMembershipFee(id);
+            MembershipFeeDto membershipFeeDto =membershipFeeDAO.search(id);
             if (membershipFeeDto != null){
                 lblPaidDate.setText(String.valueOf(membershipFeeDto.getDate()));
                 txtName.setText(membershipFeeDto.getName());

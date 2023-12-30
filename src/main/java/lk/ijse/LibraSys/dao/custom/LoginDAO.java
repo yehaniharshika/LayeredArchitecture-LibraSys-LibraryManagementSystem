@@ -1,5 +1,6 @@
 package lk.ijse.LibraSys.dao.custom;
 
+import lk.ijse.LibraSys.dao.CrudDAO;
 import lk.ijse.LibraSys.db.DbConnection;
 
 import java.sql.Connection;

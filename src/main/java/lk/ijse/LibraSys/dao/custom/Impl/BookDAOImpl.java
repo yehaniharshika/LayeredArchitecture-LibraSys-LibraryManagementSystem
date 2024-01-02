@@ -2,6 +2,7 @@ package lk.ijse.LibraSys.dao.custom.Impl;
 
 import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.BookDAO;
+import lk.ijse.LibraSys.dto.AuthorDto;
 import lk.ijse.LibraSys.dto.BookDto;
 import lk.ijse.LibraSys.dto.tm.SupplierCartTm;
 
@@ -144,7 +145,7 @@ public class BookDAOImpl  implements BookDAO {
     }
 
     @Override
-    public List<BookDto> getAll() throws SQLException {
+    public ArrayList<BookDto> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT  * FROM  book");
 //        Connection connection = DbConnection.getInstance().getConnection();
 //        PreparedStatement pstm = connection.prepareStatement("SELECT  * FROM  book");
@@ -163,7 +164,7 @@ public class BookDAOImpl  implements BookDAO {
                 resultSet.getString(6)
             ));
         }
-        return bookList;
+        return (ArrayList<BookDto>) bookList;
     }
 
     //transaction ekata

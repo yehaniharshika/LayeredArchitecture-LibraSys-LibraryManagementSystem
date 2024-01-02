@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.LibraSys.bo.*;
 import lk.ijse.LibraSys.dao.custom.AuthorDAO;
 import lk.ijse.LibraSys.dao.custom.BookDAO;
 import lk.ijse.LibraSys.dao.custom.BookRackDAO;
@@ -80,9 +81,13 @@ public class BookFormController {
 
     private AuthorDAOImpl authorModel = new AuthorDAOImpl();
     */
-    BookRackDAO bookRackDAO = new BookRackDAOImpl();
-    AuthorDAO authorDAO =  new AuthorDAOImpl();
-    BookDAO bookDAO = new BookDAOImpl();
+//  BookRackDAO bookRackDAO = new BookRackDAOImpl();
+//  AuthorDAO authorDAO =  new AuthorDAOImpl();
+//  BookDAO bookDAO = new BookDAOImpl();
+
+    BookRackBO bookRackBO =  new BookRackBOImpl();
+    AuthorBO authorBO = new AuthorBOImpl();
+    BookBO bookBO =  new BookBOImpl();
 
 
     public void initialize(){
@@ -116,7 +121,7 @@ public class BookFormController {
 
     private void generateNextBookISBN() {
         try {
-            String ISBN = bookDAO.generateNextId();
+            String ISBN = bookBO.generateNextBookISBN();
             txtISBN.setText(ISBN);
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -138,7 +143,9 @@ public class BookFormController {
         ObservableList<BookTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<BookDto> bookList = bookDAO.getAll();
+//          List<BookDto> bookList = bookDAO.getAll();
+            List<BookDto> bookList = bookBO.getAllBooks();
+
 
             for(BookDto dto : bookList){
                 obList.add(new BookTm(
@@ -160,7 +167,7 @@ public class BookFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<AuthorDto> authorDtos = authorDAO.getAll();
+            List<AuthorDto> authorDtos = authorBO.getAllAuthors();
 
             for (AuthorDto dto : authorDtos){
                 obList.add(dto.getAuthorId());
@@ -177,7 +184,9 @@ public class BookFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<BookRackDto> codeList  = bookRackDAO.getAll();
+//          List<BookRackDto> codeList  = bookRackDAO.getAll();
+            List<BookRackDto> codeList  = bookRackBO.getAllBookRack();
+
 
             for (BookRackDto bookRackDto : codeList){
                 obList.add(bookRackDto.getRackCode());
@@ -216,7 +225,7 @@ public class BookFormController {
         String ISBN = txtISBN.getText();
 
         try {
-            boolean isDeleted = bookDAO.delete(ISBN);
+            boolean isDeleted = bookBO.deleteBook(ISBN);
             
             if(isDeleted){
                 new Alert(Alert.AlertType.INFORMATION,"Book deleted Successfully!!!").show();
@@ -237,8 +246,10 @@ public class BookFormController {
         String ISBN = txtISBN.getText();
         
         try {
-            BookDto dto = bookDAO.search(ISBN);
-            
+//          BookDto dto = bookDAO.search(ISBN);
+            BookDto dto = bookBO.searchBook(ISBN);
+
+
             if(dto != null){
                 txtISBN.setText(dto.getISBN());
                 txtBookName.setText(dto.getBookName());
@@ -267,14 +278,14 @@ public class BookFormController {
             var dto = new BookDto(ISBN,bookName,category,qtyOnHand,rackCode,authorId);
 
             try {
-                boolean isSaved = bookDAO.save(dto);
+                boolean isSaved = bookBO.saveBook(dto);
                 if(isSaved){
                     new Alert(Alert.AlertType.CONFIRMATION,"Book saved successfully!!!").show();
                     clearFields();
                     loadAllBooks();
                     setCellValueFactory();
                     generateNextBookISBN();
-                    bookRackDAO.updateQtyBooks(rackCode, Integer.parseInt(String.valueOf(qtyOnHand)));
+                    bookRackBO.updateQtyBooks(rackCode, Integer.parseInt(String.valueOf(qtyOnHand)));
                     //bookRackModel.updatenameOfBooks(rackCode, bookName);
                 }else{
                     new Alert(Alert.AlertType.ERROR,"ohh,Book not Saved!!!").show();
@@ -325,7 +336,9 @@ public class BookFormController {
         var dto = new BookDto(ISBN,bookName,category,qtyOnHand,rackCode,authorId);
 
         try {
-            boolean isUpdated = bookDAO.update(dto);
+//          boolean isUpdated = bookDAO.update(dto);
+            boolean isUpdated = bookBO.updateBook(dto);
+
             if (isUpdated){
                 new Alert(Alert.AlertType.INFORMATION,"book updated successfully").show();
                 clearFields();
@@ -345,7 +358,7 @@ public class BookFormController {
         String rackCode = cmbRackCode.getValue();
 
         try {
-            BookRackDto bookRackDto = bookRackDAO.search(rackCode);
+            BookRackDto bookRackDto = bookRackBO.searchBookRack(rackCode);
             if (bookRackDto != null){
                 lblCategoryType.setText(bookRackDto.getCategoryOfBooks());
             }
@@ -360,7 +373,9 @@ public class BookFormController {
         String authorId = cmbAuthorId.getValue();
 
         try {
-            AuthorDto authorDto = authorDAO.search(authorId);
+//          AuthorDto authorDto = authorDAO.search(authorId);
+            AuthorDto authorDto = authorBO.searchAuthor(authorId);
+
             if (authorDto != null){
                 lblAuthorName.setText(authorDto.getAuthorName());
             }

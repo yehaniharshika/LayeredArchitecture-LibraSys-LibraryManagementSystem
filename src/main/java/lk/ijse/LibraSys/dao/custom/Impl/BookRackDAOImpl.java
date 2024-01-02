@@ -2,11 +2,9 @@ package lk.ijse.LibraSys.dao.custom.Impl;
 
 import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.BookRackDAO;
-import lk.ijse.LibraSys.db.DbConnection;
+import lk.ijse.LibraSys.dto.AuthorDto;
 import lk.ijse.LibraSys.dto.BookRackDto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -123,7 +121,7 @@ public class BookRackDAOImpl implements BookRackDAO {
     }
 
     @Override
-    public List<BookRackDto> getAll() throws SQLException {
+    public ArrayList<BookRackDto> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM bookRack");
      /*   Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM bookRack");*/
@@ -139,7 +137,7 @@ public class BookRackDAOImpl implements BookRackDAO {
             ));
 
         }
-        return rackList;
+        return (ArrayList<BookRackDto>) rackList;
     }
 
     /*public  boolean updateBooks(List<BookRackTm> bookTmList) throws SQLException {

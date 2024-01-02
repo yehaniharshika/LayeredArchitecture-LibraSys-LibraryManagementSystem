@@ -2,15 +2,12 @@ package lk.ijse.LibraSys.dao.custom.Impl;
 
 import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.MemberDAO;
-import lk.ijse.LibraSys.db.DbConnection;
+import lk.ijse.LibraSys.dto.AuthorDto;
 import lk.ijse.LibraSys.dto.MemberDto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MemberDAOImpl implements MemberDAO {
     private MembershipFeeDAOImpl membershipFeeModel =new MembershipFeeDAOImpl();
@@ -168,7 +165,7 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public List<MemberDto> getAll() throws SQLException {
+    public ArrayList<MemberDto> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM member");
         /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM member");

@@ -2,14 +2,13 @@ package lk.ijse.LibraSys.dao.custom.Impl;
 
 import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.BooksSupplierDetailsDAO;
-import lk.ijse.LibraSys.db.DbConnection;
+import lk.ijse.LibraSys.dto.AuthorDto;
 import lk.ijse.LibraSys.dto.BookSupplierDetailDto;
 import lk.ijse.LibraSys.dto.tm.SupplierCartTm;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BooksSupplierDetailsDAOImpl implements BooksSupplierDetailsDAO {
@@ -75,7 +74,7 @@ public class BooksSupplierDetailsDAOImpl implements BooksSupplierDetailsDAO {
     }
 
     @Override
-    public List<BookSupplierDetailDto> getAll() throws SQLException {
+    public ArrayList<BookSupplierDetailDto> getAll() throws SQLException {
         return null;
     }
 

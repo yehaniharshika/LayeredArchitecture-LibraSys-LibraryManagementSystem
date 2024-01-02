@@ -3,6 +3,7 @@ package lk.ijse.LibraSys.dao.custom.Impl;
 import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.ReservationDAO;
 import lk.ijse.LibraSys.db.DbConnection;
+import lk.ijse.LibraSys.dto.AuthorDto;
 import lk.ijse.LibraSys.dto.ReservationDto;
 
 import java.sql.Connection;
@@ -146,7 +147,7 @@ public class ReservationDAOImpl implements ReservationDAO {
     }
 
     @Override
-    public List<ReservationDto> getAll() throws SQLException {
+    public ArrayList<ReservationDto> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM  reservation");
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM  reservation");
@@ -165,6 +166,6 @@ public class ReservationDAOImpl implements ReservationDAO {
                  resultSet.getString(8)
             ));
         }
-        return reservationList;
+        return (ArrayList<ReservationDto>) reservationList;
     }
 }

@@ -2,13 +2,11 @@ package lk.ijse.LibraSys.dao.custom.Impl;
 
 import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.SignupDAO;
-import lk.ijse.LibraSys.db.DbConnection;
+import lk.ijse.LibraSys.dto.AuthorDto;
 import lk.ijse.LibraSys.dto.SignupDto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.ArrayList;
 
 public class SignupDAOImpl implements SignupDAO {
 
@@ -70,7 +68,7 @@ public class SignupDAOImpl implements SignupDAO {
     }
 
     @Override
-    public List<SignupDto> getAll() throws SQLException {
+    public ArrayList<SignupDto> getAll() throws SQLException {
         return null;
     }
 }

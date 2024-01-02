@@ -2,11 +2,9 @@ package lk.ijse.LibraSys.dao.custom.Impl;
 
 import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.SupplierDAO;
-import lk.ijse.LibraSys.db.DbConnection;
+import lk.ijse.LibraSys.dto.AuthorDto;
 import lk.ijse.LibraSys.dto.SupplierDto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -136,7 +134,7 @@ public class SupplierDAOImpl implements SupplierDAO {
     }
 
     @Override
-    public List<SupplierDto> getAll() throws SQLException {
+    public ArrayList<SupplierDto> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM supplier");
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM supplier");
@@ -151,7 +149,7 @@ public class SupplierDAOImpl implements SupplierDAO {
                  resultSet.getString(4)
             ));
         }
-        return supplierList;
+        return (ArrayList<SupplierDto>) supplierList;
     }
 
 

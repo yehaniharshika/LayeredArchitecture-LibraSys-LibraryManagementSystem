@@ -3,12 +3,10 @@ package lk.ijse.LibraSys.dao.custom.Impl;
 import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.AuthorDAO;
 import lk.ijse.LibraSys.dto.AuthorDto;
-import lk.ijse.LibraSys.dto.BookDto;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class AuthorDAOImpl implements AuthorDAO {
 
@@ -151,7 +149,7 @@ public class AuthorDAOImpl implements AuthorDAO {
     }
 
     @Override
-    public List<AuthorDto> getAll() throws SQLException {
+    public ArrayList<AuthorDto> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM author");
         ArrayList<AuthorDto> authorDtoList = new ArrayList<>();
 

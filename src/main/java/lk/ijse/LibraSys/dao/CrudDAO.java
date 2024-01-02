@@ -1,9 +1,9 @@
 package lk.ijse.LibraSys.dao;
 
-import lk.ijse.LibraSys.dto.BookDto;
+import lk.ijse.LibraSys.dto.AuthorDto;
 
 import java.sql.SQLException;
-import java.util.List;
+import java.util.ArrayList;
 
 public interface CrudDAO<T> {
     String getCount() throws SQLException;
@@ -18,6 +18,6 @@ public interface CrudDAO<T> {
 
     T search(String id) throws SQLException;
 
-    List<T> getAll() throws SQLException;
+    ArrayList<T> getAll() throws SQLException;
 
 }

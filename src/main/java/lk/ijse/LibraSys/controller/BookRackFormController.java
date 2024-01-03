@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.LibraSys.bo.BookRackBO;
+import lk.ijse.LibraSys.bo.BookRackBOImpl;
 import lk.ijse.LibraSys.dao.custom.BookRackDAO;
 import lk.ijse.LibraSys.dto.BookRackDto;
 import lk.ijse.LibraSys.dto.tm.BookRackTm;
@@ -49,7 +51,8 @@ public class BookRackFormController {
 
     @FXML
     private TextArea txtNameOfBooks;
-    private BookRackDAO bookRackDAO = new BookRackDAOImpl();
+//  private BookRackDAO bookRackDAO = new BookRackDAOImpl();
+    BookRackBO bookRackBO =  new BookRackBOImpl();
 
     public void initialize(){
         loadAllBookRacks();
@@ -61,7 +64,7 @@ public class BookRackFormController {
 
     private void generateNextRackCode() {
         try {
-            String rackCode =bookRackDAO.generateNextId();
+            String rackCode = bookRackBO.generateNextRackCode();
             txtCode.setText(rackCode);
         } catch (SQLException e) {
            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -112,7 +115,8 @@ public class BookRackFormController {
         ObservableList<BookRackTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<BookRackDto> rackList = bookRackDAO.getAll();
+//          List<BookRackDto> rackList = bookRackDAO.getAll();
+            List<BookRackDto> rackList = bookRackBO.getAllBookRack();
 
             for(BookRackDto dto : rackList){
                 obList.add(
@@ -144,7 +148,7 @@ public class BookRackFormController {
         String rackCode = txtCode.getText();
 
         try {
-            boolean isDeleted = bookRackDAO.delete(rackCode);
+            boolean isDeleted = bookRackBO.deleteBookRack(rackCode);
 
             if(isDeleted){
                 new Alert(Alert.AlertType.INFORMATION,"Deleting Successfully!!!").show();
@@ -171,7 +175,7 @@ public class BookRackFormController {
             var dto = new BookRackDto(rackCode,qtyBooks,categoryOfBooks,nameOfBooks);
 
             try {
-                boolean isSaved = bookRackDAO.save(dto);
+                boolean isSaved = bookRackBO.saveBookRack(dto);
                 if(isSaved){
                     new Alert(Alert.AlertType.CONFIRMATION,"Book Rack Adding Successfully!!!").show();
                     clearFields();
@@ -225,7 +229,7 @@ public class BookRackFormController {
         var dto = new BookRackDto(rackCode,qtyBooks,categoryOfBooks,nameOfBooks);
 
         try {
-            boolean isUpdated = bookRackDAO.update(dto);
+            boolean isUpdated = bookRackBO.updateBookRack(dto);
             if(isUpdated){
                 new Alert(Alert.AlertType.INFORMATION,"Updated successfully!!!").show();
                 clearFields();
@@ -244,7 +248,9 @@ public class BookRackFormController {
         String rackCode = txtCode.getText();
 
         try {
-            BookRackDto dto = bookRackDAO.search(rackCode);
+//          BookRackDto dto = bookRackDAO.search(rackCode);
+            BookRackDto dto = bookRackBO.searchBookRack(rackCode);
+
 
             if (dto != null){
                 txtCode.setText(dto.getRackCode());

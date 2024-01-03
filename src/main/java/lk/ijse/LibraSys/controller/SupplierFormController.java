@@ -261,7 +261,6 @@ public class SupplierFormController {
 
     @FXML
     void btnClearOnAction(ActionEvent event) {
-
         clearFields();
         generateNextSupplierId();
     }
@@ -294,7 +293,7 @@ public class SupplierFormController {
                 var placeBooksSupplierOrderDto = new PlaceBooksSupplierOrderDto(supplierId,supName,contactNumber,email,supplierDate,supplierCartTmList);
                 try {
                     boolean isSuccess = placebookSupplierDAO.placeBooksOrder(placeBooksSupplierOrderDto);
-                    System.out.println(isSuccess);
+                    //System.out.println(isSuccess);
                     if (isSuccess){
                         new Alert(Alert.AlertType.CONFIRMATION,"Order success!!!").show();
                         clearAllFields();

@@ -2,7 +2,6 @@ package lk.ijse.LibraSys.dao.custom.Impl;
 
 import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.BooksSupplierDetailsDAO;
-import lk.ijse.LibraSys.dto.AuthorDto;
 import lk.ijse.LibraSys.dto.BookSupplierDetailDto;
 import lk.ijse.LibraSys.dto.tm.SupplierCartTm;
 
@@ -23,8 +22,7 @@ public class BooksSupplierDetailsDAOImpl implements BooksSupplierDetailsDAO {
         return true;
     }
 
-    @Override
-    public boolean saveBooksSupplierDetail(String supplierId,LocalDate supplierDate,SupplierCartTm tm) throws SQLException {
+    private boolean saveBooksSupplierDetail(String supplierId, LocalDate supplierDate, SupplierCartTm tm) throws SQLException {
         return SQLUtil.execute("INSERT INTO booksSupplier_detail VALUES(?,?,?,?,?)",
                 supplierId,
                 tm.getISBN(),
@@ -32,7 +30,20 @@ public class BooksSupplierDetailsDAOImpl implements BooksSupplierDetailsDAO {
                 tm.getQty(),
                 supplierDate
         );
-      /*  Connection connection = DbConnection.getInstance().getConnection();
+    }
+
+/*
+    @Override
+    public boolean saveBooksSupplierDetail(String supplierId, LocalDate supplierDate, List<SupplierCartTm> tm) throws SQLException {
+        return SQLUtil.execute("INSERT INTO booksSupplier_detail VALUES(?,?,?,?,?)",
+                supplierId,
+                tm.getISBN(),
+                tm.getBookName(),
+                tm.getQty(),
+                supplierDate
+        );
+      */
+/*  Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("INSERT INTO booksSupplier_detail VALUES(?,?,?,?,?)");
         pstm.setString(1,supplierId);
         pstm.setString(2,tm.getISBN());
@@ -40,8 +51,10 @@ public class BooksSupplierDetailsDAOImpl implements BooksSupplierDetailsDAO {
         pstm.setInt(4,tm.getQty());
         pstm.setString(5, String.valueOf(supplierDate));
 
-        return pstm.executeUpdate() > 0;*/
+        return pstm.executeUpdate() > 0;*//*
+
     }
+*/
 
     @Override
     public String getCount() throws SQLException {

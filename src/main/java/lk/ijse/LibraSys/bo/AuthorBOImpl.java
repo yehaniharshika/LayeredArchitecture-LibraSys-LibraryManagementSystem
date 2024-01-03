@@ -51,17 +51,6 @@ public class AuthorBOImpl implements AuthorBO{
         return authorDAO.search(authorId);
     }
 
-    /*@Override
-    public List<AuthorDto> getAllAuthors() throws SQLException {
-        ArrayList<AuthorDto> authorDtoList = new ArrayList<>();
-        authorDtoList = authorDAO.getAll();
-
-        for (AuthorDto dto : authorDtoList){
-            authorDtoList.add(new AuthorDto(dto.getAuthorId(),dto.getAuthorName(),dto.getText(),dto.getNationality(),dto.getCurrentlyBooksWrittenQty()));
-        }
-        return authorDtoList;
-    }*/
-
     @Override
     public List<AuthorDto> getAllAuthors() throws SQLException {
         ArrayList<AuthorDto> authorDtos = new ArrayList<>();

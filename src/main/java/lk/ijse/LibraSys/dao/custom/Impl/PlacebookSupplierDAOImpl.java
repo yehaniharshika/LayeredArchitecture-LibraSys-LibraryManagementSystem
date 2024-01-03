@@ -1,6 +1,9 @@
 package lk.ijse.LibraSys.dao.custom.Impl;
 
+import lk.ijse.LibraSys.dao.custom.BookDAO;
+import lk.ijse.LibraSys.dao.custom.BooksSupplierDetailsDAO;
 import lk.ijse.LibraSys.dao.custom.PlaceBookSupplierDAO;
+import lk.ijse.LibraSys.dao.custom.SupplierDAO;
 import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.BookSupplierDetailDto;
 import lk.ijse.LibraSys.dto.PlaceBooksSupplierOrderDto;
@@ -9,9 +12,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class PlacebookSupplierDAOImpl implements PlaceBookSupplierDAO {
-    private SupplierDAOImpl supplierModel = new SupplierDAOImpl();
-    private BookDAOImpl bookModel = new BookDAOImpl();
-    private BooksSupplierDetailsDAOImpl booksSupplierDetailModel = new BooksSupplierDetailsDAOImpl();
+    private SupplierDAO supplierDAO = new SupplierDAOImpl();
+    private BookDAO bookDAO = new BookDAOImpl();
+    private BooksSupplierDetailsDAO booksSupplierDetailsDAO = new BooksSupplierDetailsDAOImpl();
     private BookSupplierDetailDto bookSupplierDetailDto = new BookSupplierDetailDto();
 
     @Override
@@ -29,14 +32,14 @@ public class PlacebookSupplierDAOImpl implements PlaceBookSupplierDAO {
 
 
             //man methana wenas kara
-            boolean isSupplierSaved = supplierModel.saveSupplier(supplierId,supName,contactNumber,email);
+            boolean isSupplierSaved = supplierDAO.saveSupplier(supplierId,supName,contactNumber,email);
 
             if(isSupplierSaved){
-                boolean isUpdated = bookModel.updateBooks(palceBooksSupplierOrderDto.getSupplierCartTmList());
+                boolean isUpdated = bookDAO.updateBooks(palceBooksSupplierOrderDto.getSupplierCartTmList());
 
                 if (isUpdated){
 
-                    boolean isBooksSupplierDetailSaved = booksSupplierDetailModel.saveBooksSupplierDetail(palceBooksSupplierOrderDto.getSupplierId(),palceBooksSupplierOrderDto.getSupplierDate(),palceBooksSupplierOrderDto.getSupplierCartTmList());
+                    boolean isBooksSupplierDetailSaved = booksSupplierDetailsDAO.saveBooksSupplierDetail(palceBooksSupplierOrderDto.getSupplierId(),palceBooksSupplierOrderDto.getSupplierDate(),palceBooksSupplierOrderDto.getSupplierCartTmList());
                     if (isBooksSupplierDetailSaved){
                         connection.commit();
                     }else {

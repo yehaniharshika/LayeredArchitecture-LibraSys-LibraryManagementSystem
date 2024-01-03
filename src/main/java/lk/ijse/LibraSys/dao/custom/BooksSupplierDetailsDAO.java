@@ -6,7 +6,8 @@ import lk.ijse.LibraSys.dto.tm.SupplierCartTm;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 public interface BooksSupplierDetailsDAO extends CrudDAO<BookSupplierDetailDto> {
-    boolean saveBooksSupplierDetail(String supplierId, LocalDate supplierDate, SupplierCartTm tm) throws SQLException;
+    boolean saveBooksSupplierDetail(String supplierId, LocalDate supplierDate, List<SupplierCartTm> tm) throws SQLException;
 }

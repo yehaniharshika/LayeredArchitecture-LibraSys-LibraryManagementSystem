@@ -13,6 +13,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 //import lk.ijse.LibraSys.db.DbConnection;
+import lk.ijse.LibraSys.bo.MemberBO;
+import lk.ijse.LibraSys.bo.MemberBOImpl;
 import lk.ijse.LibraSys.dao.custom.Impl.LoginDAOImpl;
 import lk.ijse.LibraSys.dao.custom.Impl.SignupDAOImpl;
 import lk.ijse.LibraSys.dao.custom.LoginDAO;
@@ -101,34 +103,19 @@ public class MemberFormController {
     @FXML
     private TextField txtTel;
     MembershipFeeDAO membershipFeeDAO = new MembershipFeeDAOImpl();
-    //private ObservableList<MemberTm> obList = FXCollections.observableArrayList();
-    MemberDAO memberDAO = new MemberDAOImpl();
 
+//  private ObservableList<MemberTm> obList = FXCollections.observableArrayList();
+//  MemberDAO memberDAO = new MemberDAOImpl();
 
+    MemberBO memberBO = new MemberBOImpl();
     public  void initialize(){
         generateNextMemberId();
         loadFeeIds();
         loadAllMember();
         setCellValueFactory();
         tableListener();
-        //setServiceNumber();
 
     }
-
-    /*private void setServiceNumber() {
-        try {
-            MemberDto memberDto= new MemberDto();
-            SignupDto signupDto = new SignupDto();
-            String sNumber = signupDto.getSNumber();
-            String userName = s
-            String serviceNumber = loginDAO.checkCredentials(sNumber,String userName,pw);
-            memberDto.setSNumber(serviceNumber);
-            txtSnumber.setText(serviceNumber);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }*/
 
     private void tableListener() {
         tblMember.getSelectionModel().selectedItemProperty().addListener((observable, oldValued, newValue) -> {
@@ -154,7 +141,8 @@ public class MemberFormController {
 
     private void generateNextMemberId() {
         try {
-            String mid = memberDAO.generateNextId();
+//          String mid = memberDAO.generateNextId();
+            String mid = memberBO.generateNextMemberId();
             txtMid.setText(mid);
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -178,7 +166,7 @@ public class MemberFormController {
         ObservableList<MemberTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<MemberDto> memberList = memberDAO.getAll();
+            List<MemberDto> memberList = memberBO.getAllMember();
 
             for (MemberDto dto : memberList){
                 obList.add(new MemberTm(
@@ -241,7 +229,9 @@ public class MemberFormController {
         String mid = txtMid.getText();
 
         try {
-            MemberDto dto = memberDAO.search(mid);
+//          MemberDto dto = memberDAO.search(mid);
+            MemberDto dto = memberBO.searchMember(mid);
+
             if (dto != null){
                 txtMid.setText(dto.getMid());
                 txtName.setText(dto.getName());
@@ -265,11 +255,12 @@ public class MemberFormController {
         String mid  = txtMid.getText();
 
         try {
-            boolean isDeleted = memberDAO.delete(mid);
+            boolean isDeleted = memberBO.deleteMember(mid);
             if(isDeleted){
                 new Alert(Alert.AlertType.INFORMATION,"member deleted successfully!!!").show();
                 loadAllMember();
                 clearFields();
+                generateNextMemberId();
             }
         } catch (SQLException e) {
            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -307,7 +298,8 @@ public class MemberFormController {
             var dto = new MemberDto(mid,name,address,gender,tel,EmailAddress,IDNumber,feeId,sNumber);
 
             try {
-                boolean isSaved = memberDAO.save(dto);
+//              boolean isSaved = memberDAO.save(dto);
+                boolean isSaved = memberBO.saveMember(dto);
 
                 if(isSaved){
                     new Alert(Alert.AlertType.CONFIRMATION,"member registered successfully!!!!!!").show();
@@ -398,11 +390,12 @@ public class MemberFormController {
         var dto = new MemberDto(mid,name,address,gender,tel,EmailAddress,IDNumber,feeId,sNumber);
 
         try {
-            boolean isUpdated = memberDAO.update(dto);
+            boolean isUpdated = memberBO.updateMember(dto);
             if (isUpdated){
                 new Alert(Alert.AlertType.INFORMATION,"member updated successfully!!!").show();
                 clearFields();
                 loadAllMember();
+                generateNextMemberId();
             }else{
                 new  Alert(Alert.AlertType.ERROR,"not updated!!!").show();
             }

@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.LibraSys.bo.MembershipFeeBO;
+import lk.ijse.LibraSys.bo.MembershipFeeBOImpl;
 import lk.ijse.LibraSys.dao.custom.MembershipFeeDAO;
 import lk.ijse.LibraSys.dto.MembershipFeeDto;
 import lk.ijse.LibraSys.dto.tm.MembershipFeeTm;
@@ -81,7 +83,8 @@ public class MembershipFeeFormController {
     @FXML
     private TextField txtStatus;
 
-    private MembershipFeeDAO membershipFeeDAO = new MembershipFeeDAOImpl();
+//  private MembershipFeeDAO membershipFeeDAO = new MembershipFeeDAOImpl();
+    MembershipFeeBO membershipFeeBO = new MembershipFeeBOImpl();
 
     public  void initialize() {
         setDate();
@@ -95,7 +98,7 @@ public class MembershipFeeFormController {
 
     private void setTotalAmount() {
         try {
-            lblTotalAmount.setText(membershipFeeDAO.getTotalAmount());
+            lblTotalAmount.setText(membershipFeeBO.getTotalAmount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -143,7 +146,9 @@ public class MembershipFeeFormController {
     //generate next membership fee Id
     private void generateNextMembershipFeeId() {
         try {
-            String id = membershipFeeDAO.generateNextId();
+//          String id = membershipFeeDAO.generateNextId();
+            String id = membershipFeeBO.generateNextMembershipFeeId();
+
             txtId.setText(id);
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -211,13 +216,15 @@ public class MembershipFeeFormController {
         String id =txtId.getText();
 
        try {
-           //MembershipFeeDAO membershipFeeDAO = new MembershipFeeDAOImpl();
-           boolean isDeleted = membershipFeeDAO.delete(id);
+//         boolean isDeleted = membershipFeeDAO.delete(id);
+           boolean isDeleted = membershipFeeBO.deleteMembershipFee(id);
 
            if(isDeleted){
               new Alert(Alert.AlertType.CONFIRMATION,"Deleted successfully!!").show();
               loadAllMembershipFee();
               setTotalAmount();
+              clearFields();
+              generateNextMembershipFeeId();
            }
        } catch (SQLException e) {
            new Alert(Alert.AlertType.CONFIRMATION,"Deleted not successfully").show();
@@ -239,7 +246,7 @@ public class MembershipFeeFormController {
             var dto = new MembershipFeeDto(id,name,amount,date,status);
 
             try {
-                boolean isSaved = membershipFeeDAO.save(dto);
+                boolean isSaved = membershipFeeBO.saveMembershipFee(dto);
 
                 if(isSaved){
                     new Alert(Alert.AlertType.CONFIRMATION,"success!!").show();
@@ -299,13 +306,14 @@ public class MembershipFeeFormController {
 
         var dto = new MembershipFeeDto(id,name,amount,date,status);
         try {
-            boolean isUpdated = membershipFeeDAO.update(dto);
+            boolean isUpdated = membershipFeeBO.updateMembershipfee(dto);
 
             if(isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"successfully updated!").show();
                 clearFields();
                 setDate();
                 loadAllMembershipFee();
+                generateNextMembershipFeeId();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -319,7 +327,9 @@ public class MembershipFeeFormController {
         String id = txtId.getText();
 
         try {
-            MembershipFeeDto membershipFeeDto = membershipFeeDAO.search(id);
+//          MembershipFeeDto membershipFeeDto = membershipFeeDAO.search(id);
+            MembershipFeeDto membershipFeeDto = membershipFeeBO.searchMembershipFee(id);
+
             if(membershipFeeDto != null){
                 txtId.setText(membershipFeeDto.getId());
                 txtName.setText(membershipFeeDto.getName());

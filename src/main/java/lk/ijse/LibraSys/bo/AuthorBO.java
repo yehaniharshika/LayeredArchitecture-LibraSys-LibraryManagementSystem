@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface AuthorBO {
-    String getAuthorCount() throws SQLException;
+
 
     String generateNextAuthorId() throws SQLException;
 
@@ -19,4 +19,5 @@ public interface AuthorBO {
     AuthorDto searchAuthor(String authorId) throws SQLException;
 
     List<AuthorDto> getAllAuthors() throws SQLException;
+
 }

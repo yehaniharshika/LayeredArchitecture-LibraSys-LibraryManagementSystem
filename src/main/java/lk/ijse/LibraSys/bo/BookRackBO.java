@@ -18,5 +18,4 @@ public interface BookRackBO {
 
     List<BookRackDto> getAllBookRack() throws SQLException;
 
-    boolean updateQtyBooks(String rackCode,int qtyBooks) throws SQLException;
 }

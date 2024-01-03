@@ -14,9 +14,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.LibraSys.bo.PlaceBooksSupplierOrderBO;
+import lk.ijse.LibraSys.bo.PlaceBooksSupplierOrderBOImpl;
 import lk.ijse.LibraSys.dao.custom.BookDAO;
 import lk.ijse.LibraSys.dao.custom.Impl.BookDAOImpl;
-import lk.ijse.LibraSys.dao.custom.Impl.PlacebookSupplierDAOImpl;
+//import lk.ijse.LibraSys.dao.custom.Impl.PlacebookSupplierDAOImpl;
 import lk.ijse.LibraSys.dao.custom.Impl.SupplierDAOImpl;
 import lk.ijse.LibraSys.dao.custom.PlaceBookSupplierDAO;
 import lk.ijse.LibraSys.dao.custom.SupplierDAO;
@@ -89,10 +91,12 @@ public class SupplierFormController {
     @FXML
     private TextField txtSupplyQuantity;
 
-    BookDAO bookDAO= new BookDAOImpl();
-    SupplierDAO supplierDAO = new SupplierDAOImpl();
+//    BookDAO bookDAO= new BookDAOImpl();
+//    SupplierDAO supplierDAO = new SupplierDAOImpl();
     ObservableList<SupplierCartTm> obList = FXCollections.observableArrayList();
-    PlaceBookSupplierDAO placebookSupplierDAO = new PlacebookSupplierDAOImpl();
+    //PlaceBookSupplierDAO placebookSupplierDAO = new PlacebookSupplierDAOImpl();
+
+    PlaceBooksSupplierOrderBO placeBooksSupplierOrderBO = new PlaceBooksSupplierOrderBOImpl();
 
 
 
@@ -106,7 +110,7 @@ public class SupplierFormController {
 
     private void generateNextSupplierId() {
         try {
-            String supplierId = supplierDAO.generateNextId();
+            String supplierId = placeBooksSupplierOrderBO.generateNextSupplierId();
             txtSupplierId.setText(supplierId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -152,7 +156,8 @@ public class SupplierFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<BookDto> ISBNList= bookDAO.getAll();
+//            List<BookDto> ISBNList= bookDAO.getAll();
+            List<BookDto> ISBNList= placeBooksSupplierOrderBO.getAllBooks();
 
             for(BookDto dto : ISBNList){
                 obList.add(dto.getISBN());
@@ -167,7 +172,9 @@ public class SupplierFormController {
     void btnDeleteOnAction(ActionEvent event) {
         String supplierId = txtSupplierId.getText();
         try {
-            boolean isDeleted = supplierDAO.delete(supplierId);
+           // boolean isDeleted = supplierDAO.delete(supplierId);
+            boolean isDeleted = placeBooksSupplierOrderBO.deleteSupplier(supplierId);
+
             if (isDeleted){
                 new Alert(Alert.AlertType.INFORMATION,"Supplier Deleted Successfully!!!").show();
                 clearFields();
@@ -191,7 +198,9 @@ public class SupplierFormController {
         var dto = new SupplierDto(supplierId,supplierName,contactNumber,email);
 
         try {
-            boolean isUpdated = supplierDAO.update(dto);
+//          boolean isUpdated = supplierDAO.update(dto);
+            boolean isUpdated = placeBooksSupplierOrderBO.updateSupplier(dto);
+
 
             if (isUpdated){
                 new Alert(Alert.AlertType.INFORMATION,"supplier updated successfully!!!").show();
@@ -292,8 +301,9 @@ public class SupplierFormController {
 
                 var placeBooksSupplierOrderDto = new PlaceBooksSupplierOrderDto(supplierId,supName,contactNumber,email,supplierDate,supplierCartTmList);
                 try {
-                    boolean isSuccess = placebookSupplierDAO.placeBooksOrder(placeBooksSupplierOrderDto);
-                    //System.out.println(isSuccess);
+//                    boolean isSuccess = placebookSupplierDAO.placeBooksOrder(placeBooksSupplierOrderDto);
+                    boolean isSuccess = placeBooksSupplierOrderBO.placeBooksOrder(placeBooksSupplierOrderDto);
+                    System.out.println("isSuccess : " + isSuccess);
                     if (isSuccess){
                         new Alert(Alert.AlertType.CONFIRMATION,"Order success!!!").show();
                         clearAllFields();
@@ -359,7 +369,9 @@ public class SupplierFormController {
 
         txtSupplyQuantity.requestFocus();
         try {
-            BookDto dto = bookDAO.search(ISBN);
+//          BookDto dto = bookDAO.search(ISBN);
+            BookDto dto = placeBooksSupplierOrderBO.searchBook(ISBN);
+
             if (dto != null){
                 lblBookName.setText(dto.getBookName());
                 lblQtyOnHand.setText(String.valueOf(dto.getQtyOnHand()));
@@ -379,7 +391,7 @@ public class SupplierFormController {
         String supplierId = txtSupplierId.getText();
 
         try {
-            SupplierDto dto =supplierDAO.search(supplierId);
+            SupplierDto dto =placeBooksSupplierOrderBO.searchSupplier(supplierId);
             if (dto != null){
                 txtSupplierId.setText(dto.getSupplierId());
                 txtSupplierName.setText(dto.getSupplierName());

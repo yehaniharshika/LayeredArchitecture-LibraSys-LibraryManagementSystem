@@ -1,7 +1,13 @@
 package lk.ijse.LibraSys.bo;
 
+import lk.ijse.LibraSys.dao.custom.BookDAO;
+import lk.ijse.LibraSys.dao.custom.Impl.BookDAOImpl;
+import lk.ijse.LibraSys.dao.custom.Impl.MemberDAOImpl;
 import lk.ijse.LibraSys.dao.custom.Impl.ReservationDAOImpl;
+import lk.ijse.LibraSys.dao.custom.MemberDAO;
 import lk.ijse.LibraSys.dao.custom.ReservationDAO;
+import lk.ijse.LibraSys.dto.BookDto;
+import lk.ijse.LibraSys.dto.MemberDto;
 import lk.ijse.LibraSys.dto.ReservationDto;
 
 import java.sql.SQLException;
@@ -11,10 +17,9 @@ import java.util.List;
 public class ReservationBOImpl implements  ReservationBo{
 
     ReservationDAO reservationDAO = new ReservationDAOImpl();
-    @Override
-    public String getBookBorrowCount() throws SQLException {
-        return reservationDAO.getCount();
-    }
+    MemberDAO memberDAO = new MemberDAOImpl();
+    BookDAO bookDAO = new BookDAOImpl();
+
 
     @Override
     public boolean addReservation(ReservationDto dto) throws SQLException {
@@ -54,6 +59,53 @@ public class ReservationBOImpl implements  ReservationBo{
     @Override
     public String generateNextReservationId() throws SQLException {
         return reservationDAO.generateNextId();
+    }
+
+    @Override
+    public MemberDto searchMember(String mid) throws SQLException {
+        return memberDAO.search(mid);
+    }
+
+    @Override
+    public BookDto searchBook(String ISBN) throws SQLException {
+        return bookDAO.search(ISBN);
+    }
+
+    @Override
+    public List<MemberDto> getAllMember() throws SQLException {
+        ArrayList<MemberDto> memberDtos = new ArrayList<>();
+        List<MemberDto> membersList = memberDAO.getAll();
+
+        for (MemberDto dto : membersList){
+            memberDtos.add(new MemberDto(dto.getMid(),
+                    dto.getName(),
+                    dto.getAddress(),
+                    dto.getGender(),
+                    dto.getTel(),
+                    dto.getEmailAddress(),
+                    dto.getIDNumber(),
+                    dto.getFeeId(),
+                    dto.getSNumber())
+            );
+        }
+        return memberDtos;
+    }
+
+    @Override
+    public List<BookDto> getAllBooks() throws SQLException {
+        ArrayList<BookDto> bookDtos = new ArrayList<>();
+        List<BookDto> booksList =  bookDAO.getAll();
+
+        for (BookDto dto : booksList){
+            bookDtos.add(new BookDto(dto.getISBN(),
+                    dto.getBookName(),
+                    dto.getCategory(),
+                    dto.getQtyOnHand(),
+                    dto.getRackCode(),
+                    dto.getAuthorId())
+            );
+        }
+        return bookDtos;
     }
 
     @Override

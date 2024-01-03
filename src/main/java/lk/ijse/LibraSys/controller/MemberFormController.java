@@ -102,7 +102,6 @@ public class MemberFormController {
 
     @FXML
     private TextField txtTel;
-    MembershipFeeDAO membershipFeeDAO = new MembershipFeeDAOImpl();
 
 //  private ObservableList<MemberTm> obList = FXCollections.observableArrayList();
 //  MemberDAO memberDAO = new MemberDAOImpl();
@@ -194,7 +193,7 @@ public class MemberFormController {
     private void loadFeeIds() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<MembershipFeeDto> idList = membershipFeeDAO.getAll();
+            List<MembershipFeeDto> idList = memberBO.getAllMemberShipFee();
 
             for (MembershipFeeDto dto : idList ) {
                 obList.add(dto.getId());
@@ -409,7 +408,7 @@ public class MemberFormController {
     void cmbMembershipFeeOnAction(ActionEvent event) {
         String id = String.valueOf(cmbmembershipFeeId.getValue());
         try {
-            MembershipFeeDto membershipFeeDto =membershipFeeDAO.search(id);
+            MembershipFeeDto membershipFeeDto =memberBO.searchMembershipFee(id);
             if (membershipFeeDto != null){
                 lblPaidDate.setText(String.valueOf(membershipFeeDto.getDate()));
                 txtName.setText(membershipFeeDto.getName());

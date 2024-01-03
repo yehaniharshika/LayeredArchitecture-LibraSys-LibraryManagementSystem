@@ -9,6 +9,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.LibraSys.bo.SignUpBO;
+import lk.ijse.LibraSys.bo.SignUpBOImpl;
 import lk.ijse.LibraSys.dto.SignupDto;
 import lk.ijse.LibraSys.dao.custom.Impl.SignupDAOImpl;
 
@@ -41,7 +43,8 @@ public class SignupFormController {
     @FXML
     private TextField txtUserName;
 
-    private SignupDAOImpl signupModel = new SignupDAOImpl();
+    //SignupDAOImpl signupModel = new SignupDAOImpl();
+    SignUpBO signUpBO = new SignUpBOImpl();
     @FXML
     void btnCreateAccountOnAction(ActionEvent event) {
         String sNumber = txtServiceNumber.getText();
@@ -54,7 +57,7 @@ public class SignupFormController {
 
         var dto = new SignupDto(sNumber,fristName,lastName,nic,eAddress,username,pw);
         try {
-            boolean isRegistered = signupModel.registerLibrarian(dto);
+            boolean isRegistered = signUpBO.registerLibrarian(dto);
             if (isRegistered){
                 new Alert(Alert.AlertType.CONFIRMATION,"Registration is successful!!!").show();
 

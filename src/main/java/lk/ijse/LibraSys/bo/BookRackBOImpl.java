@@ -59,8 +59,5 @@ public class BookRackBOImpl implements BookRackBO{
         return bookRackDtos;
     }
 
-    @Override
-    public boolean updateQtyBooks(String rackCode, int qtyBooks) throws SQLException {
-        return bookRackDAO.updateQtyBooks(rackCode,qtyBooks);
-    }
+
 }

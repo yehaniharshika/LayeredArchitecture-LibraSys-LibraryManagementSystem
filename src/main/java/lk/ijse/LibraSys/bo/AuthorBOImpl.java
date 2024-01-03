@@ -11,10 +11,6 @@ import java.util.List;
 public class AuthorBOImpl implements AuthorBO{
 
     AuthorDAO authorDAO = new AuthorDAOImpl();
-    @Override
-    public String getAuthorCount() throws SQLException {
-        return authorDAO.getCount();
-    }
 
     @Override
     public String generateNextAuthorId() throws SQLException {

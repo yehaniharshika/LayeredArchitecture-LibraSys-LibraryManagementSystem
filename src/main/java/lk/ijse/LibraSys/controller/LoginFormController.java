@@ -9,6 +9,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.LibraSys.bo.LoginBO;
+import lk.ijse.LibraSys.bo.LoginBOImpl;
 import lk.ijse.LibraSys.dao.custom.Impl.LoginDAOImpl;
 
 import java.io.IOException;
@@ -27,9 +29,8 @@ public class LoginFormController {
 
     @FXML
     private TextField txtUserName;
-    private LoginDAOImpl loginModel = new LoginDAOImpl();
-
-
+    //private LoginDAOImpl loginModel = new LoginDAOImpl();
+    LoginBO loginBO = new LoginBOImpl();
 
 
     @FXML
@@ -39,7 +40,7 @@ public class LoginFormController {
         String pw = txtPassword.getText();
 
         try {
-            boolean dto = loginModel.checkCredentials(sNumber,username,pw);
+            boolean dto = loginBO.checkCredentials(sNumber,username,pw);
 
             if(dto){
                 Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/dashboard_Form.fxml"));

@@ -85,8 +85,8 @@ public class BookFormController {
 //  AuthorDAO authorDAO =  new AuthorDAOImpl();
 //  BookDAO bookDAO = new BookDAOImpl();
 
-    BookRackBO bookRackBO =  new BookRackBOImpl();
-    AuthorBO authorBO = new AuthorBOImpl();
+//    BookRackBO bookRackBO =  new BookRackBOImpl();
+//    AuthorBO authorBO = new AuthorBOImpl();
     BookBO bookBO =  new BookBOImpl();
 
 
@@ -167,7 +167,7 @@ public class BookFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<AuthorDto> authorDtos = authorBO.getAllAuthors();
+            List<AuthorDto> authorDtos = bookBO.getAllAuthors();
 
             for (AuthorDto dto : authorDtos){
                 obList.add(dto.getAuthorId());
@@ -185,7 +185,7 @@ public class BookFormController {
 
         try {
 //          List<BookRackDto> codeList  = bookRackDAO.getAll();
-            List<BookRackDto> codeList  = bookRackBO.getAllBookRack();
+            List<BookRackDto> codeList  = bookBO.getAllBookRack();
 
 
             for (BookRackDto bookRackDto : codeList){
@@ -285,7 +285,7 @@ public class BookFormController {
                     loadAllBooks();
                     setCellValueFactory();
                     generateNextBookISBN();
-                    bookRackBO.updateQtyBooks(rackCode, Integer.parseInt(String.valueOf(qtyOnHand)));
+                    bookBO.updateQtyBooks(rackCode, Integer.parseInt(String.valueOf(qtyOnHand)));
                     //bookRackModel.updatenameOfBooks(rackCode, bookName);
                 }else{
                     new Alert(Alert.AlertType.ERROR,"ohh,Book not Saved!!!").show();
@@ -358,7 +358,7 @@ public class BookFormController {
         String rackCode = cmbRackCode.getValue();
 
         try {
-            BookRackDto bookRackDto = bookRackBO.searchBookRack(rackCode);
+            BookRackDto bookRackDto = bookBO.searchBookRack(rackCode);
             if (bookRackDto != null){
                 lblCategoryType.setText(bookRackDto.getCategoryOfBooks());
             }
@@ -374,7 +374,7 @@ public class BookFormController {
 
         try {
 //          AuthorDto authorDto = authorDAO.search(authorId);
-            AuthorDto authorDto = authorBO.searchAuthor(authorId);
+            AuthorDto authorDto = bookBO.searchAuthor(authorId);
 
             if (authorDto != null){
                 lblAuthorName.setText(authorDto.getAuthorName());

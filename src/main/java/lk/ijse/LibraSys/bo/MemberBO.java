@@ -1,15 +1,13 @@
 package lk.ijse.LibraSys.bo;
 
 import lk.ijse.LibraSys.dto.MemberDto;
+import lk.ijse.LibraSys.dto.MembershipFeeDto;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public interface MemberBO {
     String generateNextMemberId() throws SQLException;
-
-    //for dashboard update
-    String getMemberCount() throws SQLException;
 
     boolean saveMember(MemberDto dto) throws SQLException;
 
@@ -20,4 +18,9 @@ public interface MemberBO {
     MemberDto searchMember(String mid) throws SQLException;
 
     List<MemberDto> getAllMember() throws SQLException;
+
+    MembershipFeeDto searchMembershipFee(String id) throws SQLException;
+
+    List<MembershipFeeDto> getAllMemberShipFee() throws SQLException;
+
 }

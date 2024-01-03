@@ -99,8 +99,8 @@ public class ReservationFormController {
 //    MemberDAO memberDAO= new MemberDAOImpl();
 //    ReservationDAO reservationDAO= new ReservationDAOImpl();
 
-    BookBO bookBO = new BookBOImpl();
-    MemberBO memberBO =  new MemberBOImpl();
+//    BookBO bookBO = new BookBOImpl();
+//    MemberBO memberBO =  new MemberBOImpl();
     ReservationBo reservationBo = new ReservationBOImpl();
 
     public void initialize(){
@@ -191,7 +191,7 @@ public class ReservationFormController {
 
         try {
             //List<BookDto> ISBNlist = bookDAO.getAll();
-            List<BookDto> ISBNlist = bookBO.getAllBooks();
+            List<BookDto> ISBNlist = reservationBo.getAllBooks();
 
 
             for (BookDto dto : ISBNlist){
@@ -207,7 +207,7 @@ public class ReservationFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<MemberDto> mIdList = memberBO.getAllMember();
+            List<MemberDto> mIdList = reservationBo.getAllMember();
 
             for(MemberDto dto : mIdList){
                 obList.add(dto.getMid());
@@ -400,7 +400,7 @@ public class ReservationFormController {
         String ISBN = cmbISBN.getValue();
         if(ISBN!=null){
             try {
-                BookDto dto = bookBO.searchBook(ISBN);
+                BookDto dto = reservationBo.searchBook(ISBN);
                 if(dto!=null){
                     //System.out.println("dto : "+dto);
                     lblBookName.setText(dto.getBookName());
@@ -417,14 +417,15 @@ public class ReservationFormController {
         String mid = String.valueOf(cmbMemberId.getValue());
         try {
 //          MemberDto dto = memberDAO.search(mid);
-            MemberDto dto = memberBO.searchMember(mid);
+            MemberDto dto = reservationBo.searchMember(mid);
 
             if(dto!=null) {
                 lblMemberName.setText(dto.getName());
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+//            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 

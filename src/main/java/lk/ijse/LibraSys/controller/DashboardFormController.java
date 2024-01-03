@@ -12,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.LibraSys.bo.DashboardBO;
+import lk.ijse.LibraSys.bo.DashboardBOImpl;
 import lk.ijse.LibraSys.dao.custom.Impl.*;
 import lk.ijse.LibraSys.db.DbConnection;
 import net.sf.jasperreports.engine.*;
@@ -60,14 +62,13 @@ public class DashboardFormController {
     @FXML
     private Label lblSupplierCount;
 
-    private MemberDAOImpl memberModel = new MemberDAOImpl();
     private MemberFormController memberFormController = new MemberFormController();
 
-    private ReservationDAOImpl reservationModel = new ReservationDAOImpl();
-    private BookDAOImpl bookModel = new BookDAOImpl();
-    private AuthorDAOImpl authorModel = new AuthorDAOImpl();
-    
-    private SupplierDAOImpl supplierModel = new SupplierDAOImpl();
+    //private ReservationDAOImpl reservationModel = new ReservationDAOImpl();
+    //private BookDAOImpl bookModel = new BookDAOImpl();
+    //private AuthorDAOImpl authorModel = new AuthorDAOImpl();
+    //private SupplierDAOImpl supplierModel = new SupplierDAOImpl();
+    DashboardBO dashboardBO = new DashboardBOImpl();
 
     public void initialize(){
         updateTime();
@@ -82,7 +83,7 @@ public class DashboardFormController {
 
     private void setSupplierCount() {
         try {
-            lblSupplierCount.setText(supplierModel.getCount());
+            lblSupplierCount.setText(dashboardBO.getSupplierCount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -90,7 +91,7 @@ public class DashboardFormController {
 
     private void setAuthorCount() {
         try {
-            lblAuthorCount.setText(authorModel.getCount());
+            lblAuthorCount.setText(dashboardBO.getAuthorCount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -98,7 +99,7 @@ public class DashboardFormController {
 
     private void setNewBookCount() {
         try {
-            lblBookCount.setText(bookModel.getCount());
+            lblBookCount.setText(dashboardBO.getBookCount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -246,7 +247,7 @@ public class DashboardFormController {
 
     private void setBookBorrowCount() {
         try {
-            lblBorrowCount.setText(reservationModel.getCount());
+            lblBorrowCount.setText(dashboardBO.getBookBorrowCount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -256,7 +257,7 @@ public class DashboardFormController {
     private void setMemberCount() {
 
         try {
-            lblMemberCount.setText(memberModel.getCount());
+            lblMemberCount.setText(dashboardBO.getMemberCount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

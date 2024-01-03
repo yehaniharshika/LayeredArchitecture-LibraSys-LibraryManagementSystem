@@ -1,5 +1,7 @@
-package lk.ijse.LibraSys.bo;
+package lk.ijse.LibraSys.bo.custom.Impl;
 
+import lk.ijse.LibraSys.bo.custom.MemberBO;
+import lk.ijse.LibraSys.dao.DAOFactory;
 import lk.ijse.LibraSys.dao.custom.Impl.MemberDAOImpl;
 import lk.ijse.LibraSys.dao.custom.Impl.MembershipFeeDAOImpl;
 import lk.ijse.LibraSys.dao.custom.MemberDAO;
@@ -11,10 +13,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MemberBOImpl implements MemberBO{
+public class MemberBOImpl implements MemberBO {
 
-    MemberDAO memberDAO = new MemberDAOImpl();
-    MembershipFeeDAO membershipFeeDAO = new MembershipFeeDAOImpl();
+    MemberDAO memberDAO = (MemberDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.MEMBER);
+    MembershipFeeDAO membershipFeeDAO = (MembershipFeeDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.MEMBERSHIP_FEE);
     @Override
     public String generateNextMemberId() throws SQLException {
         return memberDAO.generateNextId();

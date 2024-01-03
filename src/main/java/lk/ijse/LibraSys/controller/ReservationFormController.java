@@ -12,13 +12,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.LibraSys.bo.*;
-import lk.ijse.LibraSys.dao.custom.BookDAO;
-import lk.ijse.LibraSys.dao.custom.Impl.BookDAOImpl;
-import lk.ijse.LibraSys.dao.custom.Impl.MemberDAOImpl;
-import lk.ijse.LibraSys.dao.custom.Impl.ReservationDAOImpl;
-import lk.ijse.LibraSys.dao.custom.MemberDAO;
-import lk.ijse.LibraSys.dao.custom.ReservationDAO;
+import lk.ijse.LibraSys.bo.custom.Impl.ReservationBOImpl;
+import lk.ijse.LibraSys.bo.custom.ReservationBo;
 import lk.ijse.LibraSys.dto.BookDto;
 import lk.ijse.LibraSys.dto.MemberDto;
 import lk.ijse.LibraSys.dto.ReservationDto;
@@ -284,6 +279,7 @@ public class ReservationFormController {
                 new Alert(Alert.AlertType.INFORMATION,"reservation deleted successfully!!").showAndWait();
                 loadAllReservation();
                 clearFields();
+                setDate();
                 generateNextReservationId();
             }else {
                 new Alert(Alert.AlertType.ERROR,"reservation not deleted!!!").show();

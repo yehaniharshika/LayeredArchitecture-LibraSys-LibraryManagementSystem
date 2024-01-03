@@ -1,4 +1,4 @@
-package lk.ijse.LibraSys.bo;
+package lk.ijse.LibraSys.bo.custom;
 
 import lk.ijse.LibraSys.dto.MemberDto;
 import lk.ijse.LibraSys.dto.MembershipFeeDto;

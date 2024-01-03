@@ -8,9 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.LibraSys.bo.MembershipFeeBO;
-import lk.ijse.LibraSys.bo.MembershipFeeBOImpl;
-import lk.ijse.LibraSys.dao.custom.MembershipFeeDAO;
+import lk.ijse.LibraSys.bo.custom.MembershipFeeBO;
+import lk.ijse.LibraSys.bo.custom.Impl.MembershipFeeBOImpl;
 import lk.ijse.LibraSys.dto.MembershipFeeDto;
 import lk.ijse.LibraSys.dto.tm.MembershipFeeTm;
 import lk.ijse.LibraSys.dao.custom.Impl.MembershipFeeDAOImpl;
@@ -313,6 +312,7 @@ public class MembershipFeeFormController {
                 clearFields();
                 setDate();
                 loadAllMembershipFee();
+                setTotalAmount();
                 generateNextMembershipFeeId();
             }
         } catch (SQLException e) {

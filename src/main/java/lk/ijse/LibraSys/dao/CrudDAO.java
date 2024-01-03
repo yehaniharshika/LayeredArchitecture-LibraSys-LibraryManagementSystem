@@ -5,7 +5,7 @@ import lk.ijse.LibraSys.dto.AuthorDto;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface CrudDAO<T> {
+public interface CrudDAO<T> extends SuperDAO {
     String getCount() throws SQLException;
 
     String generateNextId() throws SQLException;

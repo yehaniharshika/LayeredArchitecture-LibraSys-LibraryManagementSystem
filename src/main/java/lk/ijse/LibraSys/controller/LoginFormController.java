@@ -9,9 +9,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.LibraSys.bo.LoginBO;
-import lk.ijse.LibraSys.bo.LoginBOImpl;
-import lk.ijse.LibraSys.dao.custom.Impl.LoginDAOImpl;
+import lk.ijse.LibraSys.bo.custom.LoginBO;
+import lk.ijse.LibraSys.bo.custom.Impl.LoginBOImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;

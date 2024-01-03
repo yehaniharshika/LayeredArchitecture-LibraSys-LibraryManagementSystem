@@ -7,12 +7,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.LibraSys.bo.BookRackBO;
-import lk.ijse.LibraSys.bo.BookRackBOImpl;
-import lk.ijse.LibraSys.dao.custom.BookRackDAO;
+import lk.ijse.LibraSys.bo.custom.BookRackBO;
+import lk.ijse.LibraSys.bo.custom.Impl.BookRackBOImpl;
 import lk.ijse.LibraSys.dto.BookRackDto;
 import lk.ijse.LibraSys.dto.tm.BookRackTm;
-import lk.ijse.LibraSys.dao.custom.Impl.BookRackDAOImpl;
 
 
 import java.sql.SQLException;

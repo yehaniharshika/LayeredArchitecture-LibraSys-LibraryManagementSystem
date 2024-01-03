@@ -1,5 +1,7 @@
-package lk.ijse.LibraSys.bo;
+package lk.ijse.LibraSys.bo.custom.Impl;
 
+import lk.ijse.LibraSys.bo.custom.MembershipFeeBO;
+import lk.ijse.LibraSys.dao.DAOFactory;
 import lk.ijse.LibraSys.dao.custom.Impl.MembershipFeeDAOImpl;
 import lk.ijse.LibraSys.dao.custom.MembershipFeeDAO;
 import lk.ijse.LibraSys.dto.MembershipFeeDto;
@@ -8,8 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MembershipFeeBOImpl implements MembershipFeeBO{
-    MembershipFeeDAO membershipFeeDAO =  new MembershipFeeDAOImpl();
+public class MembershipFeeBOImpl implements MembershipFeeBO {
+    MembershipFeeDAO membershipFeeDAO = (MembershipFeeDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.MEMBERSHIP_FEE);
     @Override
     public String getTotalAmount() throws SQLException {
         return membershipFeeDAO.getTotalAmount();

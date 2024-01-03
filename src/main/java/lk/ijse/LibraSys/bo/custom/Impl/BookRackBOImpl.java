@@ -1,5 +1,7 @@
-package lk.ijse.LibraSys.bo;
+package lk.ijse.LibraSys.bo.custom.Impl;
 
+import lk.ijse.LibraSys.bo.custom.BookRackBO;
+import lk.ijse.LibraSys.dao.DAOFactory;
 import lk.ijse.LibraSys.dao.custom.BookRackDAO;
 import lk.ijse.LibraSys.dao.custom.Impl.BookRackDAOImpl;
 import lk.ijse.LibraSys.dto.BookRackDto;
@@ -8,9 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookRackBOImpl implements BookRackBO{
+public class BookRackBOImpl implements BookRackBO {
 
-    BookRackDAO bookRackDAO = new BookRackDAOImpl();
+    BookRackDAO bookRackDAO = (BookRackDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOKRACK);
     @Override
     public String generateNextRackCode() throws SQLException {
         return bookRackDAO.generateNextId();

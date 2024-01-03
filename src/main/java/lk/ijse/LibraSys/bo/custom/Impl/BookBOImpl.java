@@ -1,5 +1,7 @@
-package lk.ijse.LibraSys.bo;
+package lk.ijse.LibraSys.bo.custom.Impl;
 
+import lk.ijse.LibraSys.bo.custom.BookBO;
+import lk.ijse.LibraSys.dao.DAOFactory;
 import lk.ijse.LibraSys.dao.custom.AuthorDAO;
 import lk.ijse.LibraSys.dao.custom.BookDAO;
 import lk.ijse.LibraSys.dao.custom.BookRackDAO;
@@ -15,10 +17,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookBOImpl implements  BookBO{
-    BookDAO bookDAO  = new BookDAOImpl();
-    AuthorDAO authorDAO = new AuthorDAOImpl();
-    BookRackDAO bookRackDAO = new BookRackDAOImpl();
+public class BookBOImpl implements BookBO {
+    BookDAO bookDAO  = (BookDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOK);
+    //AuthorDAO authorDAO = new AuthorDAOImpl();
+    AuthorDAO authorDAO = (AuthorDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.AUTHOR);
+    BookRackDAO bookRackDAO = (BookRackDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOKRACK);
 
     @Override
     public String generateNextBookISBN() throws SQLException {

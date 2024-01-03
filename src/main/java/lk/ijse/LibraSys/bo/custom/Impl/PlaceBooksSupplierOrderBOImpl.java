@@ -1,5 +1,7 @@
-package lk.ijse.LibraSys.bo;
+package lk.ijse.LibraSys.bo.custom.Impl;
 
+import lk.ijse.LibraSys.bo.custom.PlaceBooksSupplierOrderBO;
+import lk.ijse.LibraSys.dao.DAOFactory;
 import lk.ijse.LibraSys.dao.custom.BookDAO;
 import lk.ijse.LibraSys.dao.custom.BooksSupplierDetailsDAO;
 import lk.ijse.LibraSys.dao.custom.Impl.BookDAOImpl;
@@ -18,9 +20,11 @@ import java.util.List;
 
 public class PlaceBooksSupplierOrderBOImpl implements PlaceBooksSupplierOrderBO {
 
-    SupplierDAO supplierDAO = new SupplierDAOImpl();
-    BookDAO bookDAO = new BookDAOImpl();
-    BooksSupplierDetailsDAO booksSupplierDetailsDAO = new BooksSupplierDetailsDAOImpl();
+//    SupplierDAO supplierDAO = new SupplierDAOImpl();
+    SupplierDAO supplierDAO = (SupplierDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.SUPPLIER);
+
+    BookDAO bookDAO = (BookDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOK);
+    BooksSupplierDetailsDAO booksSupplierDetailsDAO = (BooksSupplierDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOKS_SUPPLIER_DETAILS);
     //BookSupplierDetailDto bookSupplierDetailDto = new BookSupplierDetailDto();
 
     @Override

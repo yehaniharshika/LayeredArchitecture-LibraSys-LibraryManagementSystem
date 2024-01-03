@@ -1,5 +1,7 @@
-package lk.ijse.LibraSys.bo;
+package lk.ijse.LibraSys.bo.custom.Impl;
 
+import lk.ijse.LibraSys.bo.custom.AuthorBO;
+import lk.ijse.LibraSys.dao.DAOFactory;
 import lk.ijse.LibraSys.dao.custom.AuthorDAO;
 import lk.ijse.LibraSys.dao.custom.Impl.AuthorDAOImpl;
 import lk.ijse.LibraSys.dto.AuthorDto;
@@ -8,9 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuthorBOImpl implements AuthorBO{
+public class AuthorBOImpl implements AuthorBO {
 
-    AuthorDAO authorDAO = new AuthorDAOImpl();
+    //AuthorDAO authorDAO = new AuthorDAOImpl();
+    AuthorDAO authorDAO = (AuthorDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.AUTHOR);
 
     @Override
     public String generateNextAuthorId() throws SQLException {

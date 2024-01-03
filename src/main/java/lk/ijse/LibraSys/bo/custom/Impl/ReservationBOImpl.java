@@ -1,5 +1,7 @@
-package lk.ijse.LibraSys.bo;
+package lk.ijse.LibraSys.bo.custom.Impl;
 
+import lk.ijse.LibraSys.bo.custom.ReservationBo;
+import lk.ijse.LibraSys.dao.DAOFactory;
 import lk.ijse.LibraSys.dao.custom.BookDAO;
 import lk.ijse.LibraSys.dao.custom.Impl.BookDAOImpl;
 import lk.ijse.LibraSys.dao.custom.Impl.MemberDAOImpl;
@@ -14,11 +16,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReservationBOImpl implements  ReservationBo{
+public class ReservationBOImpl implements ReservationBo {
 
-    ReservationDAO reservationDAO = new ReservationDAOImpl();
-    MemberDAO memberDAO = new MemberDAOImpl();
-    BookDAO bookDAO = new BookDAOImpl();
+    ReservationDAO reservationDAO = (ReservationDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.RESERVATION);
+    MemberDAO memberDAO = (MemberDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.MEMBER);
+    BookDAO bookDAO = (BookDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOK);
 
 
     @Override

@@ -11,12 +11,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.LibraSys.bo.AuthorBO;
-import lk.ijse.LibraSys.bo.AuthorBOImpl;
-import lk.ijse.LibraSys.dao.custom.AuthorDAO;
+import lk.ijse.LibraSys.bo.custom.AuthorBO;
+import lk.ijse.LibraSys.bo.custom.Impl.AuthorBOImpl;
 import lk.ijse.LibraSys.dto.AuthorDto;
 import lk.ijse.LibraSys.dto.tm.AuthorTm;
-import lk.ijse.LibraSys.dao.custom.Impl.AuthorDAOImpl;
 
 import java.sql.SQLException;
 import java.util.List;

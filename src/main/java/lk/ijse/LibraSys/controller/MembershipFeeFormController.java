@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.LibraSys.bo.BOFactory;
 import lk.ijse.LibraSys.bo.custom.MembershipFeeBO;
 import lk.ijse.LibraSys.bo.custom.Impl.MembershipFeeBOImpl;
 import lk.ijse.LibraSys.dto.MembershipFeeDto;
@@ -83,7 +84,7 @@ public class MembershipFeeFormController {
     private TextField txtStatus;
 
 //  private MembershipFeeDAO membershipFeeDAO = new MembershipFeeDAOImpl();
-    MembershipFeeBO membershipFeeBO = new MembershipFeeBOImpl();
+    MembershipFeeBO membershipFeeBO = (MembershipFeeBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.MEMBERSHIP_FEE);
 
     public  void initialize() {
         setDate();

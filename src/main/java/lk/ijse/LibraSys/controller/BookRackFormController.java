@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.LibraSys.bo.BOFactory;
 import lk.ijse.LibraSys.bo.custom.BookRackBO;
 import lk.ijse.LibraSys.bo.custom.Impl.BookRackBOImpl;
 import lk.ijse.LibraSys.dto.BookRackDto;
@@ -50,7 +51,9 @@ public class BookRackFormController {
     @FXML
     private TextArea txtNameOfBooks;
 //  private BookRackDAO bookRackDAO = new BookRackDAOImpl();
-    BookRackBO bookRackBO =  new BookRackBOImpl();
+    //BookRackBO bookRackBO =  new BookRackBOImpl();
+    BookRackBO bookRackBO = (BookRackBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.BOOKRACK);
+
 
     public void initialize(){
         loadAllBookRacks();

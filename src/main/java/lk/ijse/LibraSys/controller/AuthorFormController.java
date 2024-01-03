@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.LibraSys.bo.BOFactory;
 import lk.ijse.LibraSys.bo.custom.AuthorBO;
 import lk.ijse.LibraSys.bo.custom.Impl.AuthorBOImpl;
 import lk.ijse.LibraSys.dto.AuthorDto;
@@ -71,7 +72,9 @@ public class AuthorFormController {
 
 //  AuthorDAO authorDAO = new AuthorDAOImpl(); //property Injection
 
-    AuthorBO authorBO = new AuthorBOImpl();
+    //AuthorBO authorBO = new AuthorBOImpl();
+    AuthorBO authorBO = (AuthorBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.AUTHOR);
+
 
 
     public void initialize(){
@@ -168,7 +171,10 @@ public class AuthorFormController {
 
             if(isDeleted){
                 new Alert(Alert.AlertType.INFORMATION,"Author deleted successfully!!!").show();
+                clearFields();
                 loadAllAuthors();
+                generateNextAuthorId();
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -255,6 +261,8 @@ public class AuthorFormController {
             if(isUpdated){
                 new Alert(Alert.AlertType.INFORMATION,"Author updated successfully!!!").show();
                 loadAllAuthors();
+                clearFields();
+                generateNextAuthorId();
             }else{
                 new Alert(Alert.AlertType.ERROR,"Author not updated!!!").show();
             }

@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 //import lk.ijse.LibraSys.db.DbConnection;
+import lk.ijse.LibraSys.bo.BOFactory;
 import lk.ijse.LibraSys.bo.custom.MemberBO;
 import lk.ijse.LibraSys.bo.custom.Impl.MemberBOImpl;
 import lk.ijse.LibraSys.dto.MemberDto;
@@ -97,7 +98,7 @@ public class MemberFormController {
 //  private ObservableList<MemberTm> obList = FXCollections.observableArrayList();
 //  MemberDAO memberDAO = new MemberDAOImpl();
 
-    MemberBO memberBO = new MemberBOImpl();
+    MemberBO memberBO = (MemberBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.MEMBER);
     public  void initialize(){
         generateNextMemberId();
         loadFeeIds();

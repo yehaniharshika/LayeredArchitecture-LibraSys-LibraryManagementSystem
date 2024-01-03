@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.LibraSys.bo.BOFactory;
 import lk.ijse.LibraSys.bo.custom.Impl.ReservationBOImpl;
 import lk.ijse.LibraSys.bo.custom.ReservationBo;
 import lk.ijse.LibraSys.dto.BookDto;
@@ -96,7 +97,7 @@ public class ReservationFormController {
 
 //    BookBO bookBO = new BookBOImpl();
 //    MemberBO memberBO =  new MemberBOImpl();
-    ReservationBo reservationBo = new ReservationBOImpl();
+    ReservationBo reservationBo = (ReservationBo) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.RESERVATION);
 
     public void initialize(){
         generateNextReservationId();

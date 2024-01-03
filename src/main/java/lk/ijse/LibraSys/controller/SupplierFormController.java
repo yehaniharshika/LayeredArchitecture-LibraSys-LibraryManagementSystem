@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.LibraSys.bo.BOFactory;
 import lk.ijse.LibraSys.bo.custom.PlaceBooksSupplierOrderBO;
 import lk.ijse.LibraSys.bo.custom.Impl.PlaceBooksSupplierOrderBOImpl;
 //import lk.ijse.LibraSys.dao.custom.Impl.PlacebookSupplierDAOImpl;
@@ -91,7 +92,7 @@ public class SupplierFormController {
     ObservableList<SupplierCartTm> obList = FXCollections.observableArrayList();
     //PlaceBookSupplierDAO placebookSupplierDAO = new PlacebookSupplierDAOImpl();
 
-    PlaceBooksSupplierOrderBO placeBooksSupplierOrderBO = new PlaceBooksSupplierOrderBOImpl();
+    PlaceBooksSupplierOrderBO placeBooksSupplierOrderBO = (PlaceBooksSupplierOrderBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PLACE_BOOKS_SUPPLIER_ORDER);
 
 
 

@@ -1,5 +1,6 @@
 package lk.ijse.LibraSys.bo.custom;
 
+import lk.ijse.LibraSys.bo.SuperBO;
 import lk.ijse.LibraSys.dto.BookDto;
 import lk.ijse.LibraSys.dto.PlaceBooksSupplierOrderDto;
 import lk.ijse.LibraSys.dto.SupplierDto;
@@ -7,7 +8,7 @@ import lk.ijse.LibraSys.dto.SupplierDto;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface PlaceBooksSupplierOrderBO {
+public interface PlaceBooksSupplierOrderBO extends SuperBO {
     boolean placeBooksOrder(PlaceBooksSupplierOrderDto palceBooksSupplierOrderDto) throws SQLException;
     String generateNextSupplierId() throws SQLException;
 

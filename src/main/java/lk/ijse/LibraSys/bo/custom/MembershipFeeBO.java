@@ -1,11 +1,12 @@
 package lk.ijse.LibraSys.bo.custom;
 
+import lk.ijse.LibraSys.bo.SuperBO;
 import lk.ijse.LibraSys.dto.MembershipFeeDto;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public interface MembershipFeeBO {
+public interface MembershipFeeBO extends SuperBO {
     String getTotalAmount() throws SQLException;
 
     String generateNextMembershipFeeId() throws SQLException;

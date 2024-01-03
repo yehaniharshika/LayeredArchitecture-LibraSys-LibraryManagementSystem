@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.LibraSys.bo.BOFactory;
 import lk.ijse.LibraSys.bo.custom.LoginBO;
 import lk.ijse.LibraSys.bo.custom.Impl.LoginBOImpl;
 
@@ -29,7 +30,7 @@ public class LoginFormController {
     @FXML
     private TextField txtUserName;
     //private LoginDAOImpl loginModel = new LoginDAOImpl();
-    LoginBO loginBO = new LoginBOImpl();
+    LoginBO loginBO = (LoginBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.LOGIN);
 
 
     @FXML

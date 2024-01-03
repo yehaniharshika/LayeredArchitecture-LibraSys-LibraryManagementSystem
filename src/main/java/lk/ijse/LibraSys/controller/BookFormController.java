@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.LibraSys.bo.BOFactory;
 import lk.ijse.LibraSys.bo.custom.BookBO;
 import lk.ijse.LibraSys.bo.custom.Impl.BookBOImpl;
 import lk.ijse.LibraSys.dto.AuthorDto;
@@ -82,7 +83,7 @@ public class BookFormController {
 
 //    BookRackBO bookRackBO =  new BookRackBOImpl();
 //    AuthorBO authorBO = new AuthorBOImpl();
-    BookBO bookBO =  new BookBOImpl();
+    BookBO bookBO = (BookBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.BOOK);
 
 
     public void initialize(){

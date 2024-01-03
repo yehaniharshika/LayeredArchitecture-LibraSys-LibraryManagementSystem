@@ -1,5 +1,6 @@
 package lk.ijse.LibraSys.bo.custom;
 
+import lk.ijse.LibraSys.bo.SuperBO;
 import lk.ijse.LibraSys.dto.BookDto;
 import lk.ijse.LibraSys.dto.MemberDto;
 import lk.ijse.LibraSys.dto.ReservationDto;
@@ -7,7 +8,7 @@ import lk.ijse.LibraSys.dto.ReservationDto;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface ReservationBo {
+public interface ReservationBo extends SuperBO {
 
 
     boolean addReservation(ReservationDto dto) throws SQLException;

@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.LibraSys.bo.BOFactory;
 import lk.ijse.LibraSys.bo.custom.DashboardBO;
 import lk.ijse.LibraSys.bo.custom.Impl.DashboardBOImpl;
 import lk.ijse.LibraSys.db.DbConnection;
@@ -63,11 +64,7 @@ public class DashboardFormController {
 
     private MemberFormController memberFormController = new MemberFormController();
 
-    //private ReservationDAOImpl reservationModel = new ReservationDAOImpl();
-    //private BookDAOImpl bookModel = new BookDAOImpl();
-    //private AuthorDAOImpl authorModel = new AuthorDAOImpl();
-    //private SupplierDAOImpl supplierModel = new SupplierDAOImpl();
-    DashboardBO dashboardBO = new DashboardBOImpl();
+    DashboardBO dashboardBO = (DashboardBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.DASHBOARD);
 
     public void initialize(){
         updateTime();

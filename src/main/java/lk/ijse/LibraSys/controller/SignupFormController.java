@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.LibraSys.bo.BOFactory;
 import lk.ijse.LibraSys.bo.custom.SignUpBO;
 import lk.ijse.LibraSys.bo.custom.Impl.SignUpBOImpl;
 import lk.ijse.LibraSys.dto.SignupDto;
@@ -43,7 +44,7 @@ public class SignupFormController {
     private TextField txtUserName;
 
     //SignupDAOImpl signupModel = new SignupDAOImpl();
-    SignUpBO signUpBO = new SignUpBOImpl();
+    SignUpBO signUpBO = (SignUpBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.SIGNUP);
     @FXML
     void btnCreateAccountOnAction(ActionEvent event) {
         String sNumber = txtServiceNumber.getText();

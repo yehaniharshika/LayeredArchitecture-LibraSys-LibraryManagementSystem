@@ -145,7 +145,6 @@ public class SupplierFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-//            List<BookDto> ISBNList= bookDAO.getAll();
             List<BookDto> ISBNList= placeBooksSupplierOrderBO.getAllBooks();
 
             for(BookDto dto : ISBNList){
@@ -161,7 +160,6 @@ public class SupplierFormController {
     void btnDeleteOnAction(ActionEvent event) {
         String supplierId = txtSupplierId.getText();
         try {
-           // boolean isDeleted = supplierDAO.delete(supplierId);
             boolean isDeleted = placeBooksSupplierOrderBO.deleteSupplier(supplierId);
 
             if (isDeleted){
@@ -187,7 +185,6 @@ public class SupplierFormController {
         var dto = new SupplierDto(supplierId,supplierName,contactNumber,email);
 
         try {
-//          boolean isUpdated = supplierDAO.update(dto);
             boolean isUpdated = placeBooksSupplierOrderBO.updateSupplier(dto);
 
 
@@ -292,14 +289,15 @@ public class SupplierFormController {
                 try {
 //                    boolean isSuccess = placebookSupplierDAO.placeBooksOrder(placeBooksSupplierOrderDto);
                     boolean isSuccess = placeBooksSupplierOrderBO.placeBooksOrder(placeBooksSupplierOrderDto);
+                    System.out.println("isSuccess : " + isSuccess);
                     if (isSuccess){
                         new Alert(Alert.AlertType.CONFIRMATION,"Order success!!!").show();
                         clearAllFields();
                         generateNextSupplierId();
                     }
                 } catch (SQLException e) {
-//                    new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-                    e.printStackTrace();
+                   new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+
                 }
             }
     }

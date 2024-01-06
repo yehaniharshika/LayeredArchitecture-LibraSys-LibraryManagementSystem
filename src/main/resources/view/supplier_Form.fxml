@@ -14,7 +14,7 @@
 
 <AnchorPane fx:id="Root" prefHeight="765.0" prefWidth="1196.0" style="-fx-background-color: #c8d6e5; -fx-background-radius: 8;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.LibraSys.controller.SupplierFormController">
    <children>
-      <JFXButton buttonType="RAISED" layoutX="980.0" layoutY="446.0" onAction="#btnAddSupplierCartOnAction" prefHeight="41.0" prefWidth="203.0" style="-fx-background-color: #273c75; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #f5f6fa;" text=" ADD TO CART" textFill="#fdfcfc" textOverrun="CENTER_WORD_ELLIPSIS">
+      <JFXButton buttonType="RAISED" layoutX="949.0" layoutY="463.0" onAction="#btnAddSupplierCartOnAction" prefHeight="41.0" prefWidth="203.0" style="-fx-background-color: #273c75; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #f5f6fa;" text=" ADD TO CART" textFill="#fdfcfc" textOverrun="CENTER_WORD_ELLIPSIS">
          <font>
             <Font name="KacstOne Bold" size="12.0" />
          </font>
@@ -65,12 +65,12 @@
          <font>
             <Font name="System Bold" size="15.0" />
          </font></TextField>
-      <TableView fx:id="tblSupplierDetail" layoutX="186.0" layoutY="463.0" prefHeight="291.0" prefWidth="773.0" style="-fx-background-color: #1B97B0;">
+      <TableView fx:id="tblSupplierDetail" layoutX="186.0" layoutY="463.0" prefHeight="292.0" prefWidth="743.0" style="-fx-background-color: #1B97B0;">
         <columns>
             <TableColumn fx:id="colBookISBN" prefWidth="147.5" text="Book ISBN" />
-            <TableColumn fx:id="colBookName" prefWidth="313.5" text="Book Name" />
-            <TableColumn fx:id="colQty" prefWidth="150.0" text="Qty" />
-            <TableColumn fx:id="colAction" prefWidth="161.0" text="Action" />
+            <TableColumn fx:id="colBookName" prefWidth="297.5" text="Book Name" />
+            <TableColumn fx:id="colQty" prefWidth="130.0" text="Qty" />
+            <TableColumn fx:id="colAction" prefWidth="166.5" text="Action" />
         </columns>
       </TableView>
       <ImageView fitHeight="32.0" fitWidth="33.0" layoutX="991.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true" />
@@ -92,12 +92,12 @@
             <Font name="MathJax_Main-Bold" size="17.0" />
          </font>
       </Label>
-      <Label layoutX="991.0" layoutY="554.0" prefHeight="41.0" prefWidth="159.0" text="Total books count">
+      <Label layoutX="971.0" layoutY="555.0" prefHeight="41.0" prefWidth="159.0" text="Total books count">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lblTotalBooksCount" layoutX="1059.0" layoutY="610.0" prefHeight="41.0" prefWidth="64.0" textFill="#b51616">
+      <Label fx:id="lblTotalBooksCount" layoutX="1032.0" layoutY="596.0" prefHeight="41.0" prefWidth="64.0" textFill="#b51616">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
@@ -110,7 +110,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton layoutX="980.0" layoutY="715.0" onAction="#PlaceBooksOrderOnAction" prefHeight="41.0" prefWidth="203.0" style="-fx-background-color: #273c75; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #f5f6fa;" text="         PLACE BOOKS ORDER" textFill="#fdfcfc">
+      <JFXButton layoutX="949.0" layoutY="716.0" onAction="#PlaceBooksOrderOnAction" prefHeight="41.0" prefWidth="203.0" style="-fx-background-color: #273c75; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #f5f6fa;" text="         PLACE BOOKS ORDER" textFill="#fdfcfc">
          <font>
             <Font name="KacstOne Bold" size="12.0" />
          </font>
@@ -128,7 +128,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="999.0" layoutY="450.0">
+      <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="964.0" layoutY="467.0">
          <image>
             <Image url="@../icon/addTocart.png" />
          </image>
@@ -140,7 +140,7 @@
          </image>
       </ImageView>
       <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="947.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="32.0" fitWidth="33.0" layoutX="990.0" layoutY="720.0">
+      <ImageView fitHeight="32.0" fitWidth="33.0" layoutX="959.0" layoutY="721.0">
          <image>
             <Image url="@../icon/placeSupplierOrder.png" />
          </image>

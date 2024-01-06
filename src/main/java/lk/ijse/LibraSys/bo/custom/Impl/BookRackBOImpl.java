@@ -5,6 +5,7 @@ import lk.ijse.LibraSys.dao.DAOFactory;
 import lk.ijse.LibraSys.dao.custom.BookRackDAO;
 import lk.ijse.LibraSys.dao.custom.Impl.BookRackDAOImpl;
 import lk.ijse.LibraSys.dto.BookRackDto;
+import lk.ijse.LibraSys.entity.BookRack;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class BookRackBOImpl implements BookRackBO {
 
     @Override
     public boolean saveBookRack(BookRackDto dto) throws SQLException {
-        return bookRackDAO.save(new BookRackDto(dto.getRackCode(),
+        return bookRackDAO.save(new BookRack(dto.getRackCode(),
                 dto.getQtyBooks(),
                 dto.getCategoryOfBooks(),
                 dto.getNameOfBooks())
@@ -29,7 +30,7 @@ public class BookRackBOImpl implements BookRackBO {
 
     @Override
     public boolean updateBookRack(BookRackDto dto) throws SQLException {
-        return bookRackDAO.update(new BookRackDto(dto.getRackCode(),
+        return bookRackDAO.update(new BookRack(dto.getRackCode(),
                 dto.getQtyBooks(),
                 dto.getCategoryOfBooks(),
                 dto.getNameOfBooks())
@@ -43,19 +44,26 @@ public class BookRackBOImpl implements BookRackBO {
 
     @Override
     public BookRackDto searchBookRack(String rackCode) throws SQLException {
-        return bookRackDAO.search(rackCode);
+        BookRack bookRack = bookRackDAO.search(rackCode);
+
+        if (bookRack != null){
+            return new BookRackDto(bookRack);
+        }
+        return null;
     }
 
     @Override
     public List<BookRackDto> getAllBookRack() throws SQLException {
-        ArrayList<BookRackDto> bookRackDtos = new ArrayList<>();
-        List<BookRackDto> bookRackList = bookRackDAO.getAll();
+        List<BookRack> allBookRacks = bookRackDAO.getAll();
 
-        for (BookRackDto dto : bookRackList){
-            bookRackDtos.add(new BookRackDto(dto.getRackCode(),
-                    dto.getQtyBooks(),
-                    dto.getCategoryOfBooks(),
-                    dto.getNameOfBooks())
+        ArrayList<BookRackDto> bookRackDtos = new ArrayList<>();
+
+        for (BookRack bookRack :allBookRacks){
+            bookRackDtos.add(new BookRackDto(
+                    bookRack.getRackCode(),
+                    bookRack.getQtyBooks(),
+                    bookRack.getCategoryOfBooks(),
+                    bookRack.getNameOfBooks())
             );
         }
         return bookRackDtos;

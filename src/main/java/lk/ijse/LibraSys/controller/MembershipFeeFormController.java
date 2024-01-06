@@ -172,7 +172,7 @@ public class MembershipFeeFormController {
         ObservableList<MembershipFeeTm> obList = FXCollections.observableArrayList();
 
         try{
-            List<MembershipFeeDto> feeList = model.getAll();
+            List<MembershipFeeDto> feeList = membershipFeeBO.getAllMemberShipFee();
             for(MembershipFeeDto dto : feeList){
                 obList.add(
                         new MembershipFeeTm(

@@ -8,6 +8,8 @@ import lk.ijse.LibraSys.dao.custom.MemberDAO;
 import lk.ijse.LibraSys.dao.custom.MembershipFeeDAO;
 import lk.ijse.LibraSys.dto.MemberDto;
 import lk.ijse.LibraSys.dto.MembershipFeeDto;
+import lk.ijse.LibraSys.entity.Member;
+import lk.ijse.LibraSys.entity.MembershipFee;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ public class MemberBOImpl implements MemberBO {
 
     @Override
     public boolean saveMember(MemberDto dto) throws SQLException {
-        return memberDAO.save(new MemberDto(dto.getMid(),
+        return memberDAO.save(new Member(dto.getMid(),
                 dto.getName(),
                 dto.getAddress(),
                 dto.getGender(),
@@ -38,7 +40,7 @@ public class MemberBOImpl implements MemberBO {
 
     @Override
     public boolean updateMember(MemberDto dto) throws SQLException {
-        return memberDAO.update(new MemberDto(dto.getMid(),
+        return memberDAO.update(new Member(dto.getMid(),
                 dto.getName(),
                 dto.getAddress(),
                 dto.getGender(),
@@ -57,24 +59,29 @@ public class MemberBOImpl implements MemberBO {
 
     @Override
     public MemberDto searchMember(String mid) throws SQLException {
-        return memberDAO.search(mid);
+        Member member = memberDAO.search(mid);
+        if (member != null){
+            return new MemberDto(member);
+        }
+        return null;
     }
 
     @Override
     public List<MemberDto> getAllMember() throws SQLException {
+        List<Member> allMembers = memberDAO.getAll();
         ArrayList<MemberDto> memberDtos = new ArrayList<>();
-        List<MemberDto> membersList = memberDAO.getAll();
 
-        for (MemberDto dto : membersList){
-            memberDtos.add(new MemberDto(dto.getMid(),
-                    dto.getName(),
-                    dto.getAddress(),
-                    dto.getGender(),
-                    dto.getTel(),
-                    dto.getEmailAddress(),
-                    dto.getIDNumber(),
-                    dto.getFeeId(),
-                    dto.getSNumber())
+        for (Member member : allMembers){
+            memberDtos.add(new MemberDto(
+                    member.getMid(),
+                    member.getName(),
+                    member.getAddress(),
+                    member.getGender(),
+                    member.getTel(),
+                    member.getEmailAddress(),
+                    member.getIDNumber(),
+                    member.getFeeId(),
+                    member.getSNumber())
             );
         }
         return memberDtos;
@@ -82,21 +89,25 @@ public class MemberBOImpl implements MemberBO {
 
     @Override
     public MembershipFeeDto searchMembershipFee(String id) throws SQLException {
-        return membershipFeeDAO.search(id);
-    }
+        MembershipFee membershipFee =  membershipFeeDAO.search(id);
+
+        if (membershipFee != null){
+            return new MembershipFeeDto();
+        }
+        return null;    }
 
     @Override
     public List<MembershipFeeDto> getAllMemberShipFee() throws SQLException {
+        ArrayList<MembershipFee> allMembershipFees = membershipFeeDAO.getAll();
         ArrayList<MembershipFeeDto> membershipFeeDtos =  new ArrayList<>();
-        List<MembershipFeeDto> membershipFeeList = membershipFeeDAO.getAll();
 
-        for (MembershipFeeDto  dto : membershipFeeList){
+        for (MembershipFee membershipFee : allMembershipFees){
             membershipFeeDtos.add(new MembershipFeeDto(
-                    dto.getId(),
-                    dto.getName(),
-                    dto.getAmount(),
-                    dto.getDate(),
-                    dto.getStatus())
+                    membershipFee.getId(),
+                    membershipFee.getName(),
+                    membershipFee.getAmount(),
+                    membershipFee.getDate(),
+                    membershipFee.getStatus())
             );
         }
         return membershipFeeDtos;

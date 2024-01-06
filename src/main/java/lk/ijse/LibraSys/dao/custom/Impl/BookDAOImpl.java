@@ -5,6 +5,7 @@ import lk.ijse.LibraSys.dao.custom.BookDAO;
 import lk.ijse.LibraSys.dto.AuthorDto;
 import lk.ijse.LibraSys.dto.BookDto;
 import lk.ijse.LibraSys.dto.tm.SupplierCartTm;
+import lk.ijse.LibraSys.entity.Book;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -62,14 +63,14 @@ public class BookDAOImpl  implements BookDAO {
     }
 
     @Override
-    public  boolean save(BookDto dto) throws SQLException {
+    public  boolean save(Book entity) throws SQLException {
         return SQLUtil.execute("INSERT INTO book VALUES (?,?,?,?,?,?)",
-                dto.getISBN(),
-                dto.getBookName(),
-                dto.getCategory(),
-                dto.getQtyOnHand(),
-                dto.getRackCode(),
-                dto.getAuthorId()
+                entity.getISBN(),
+                entity.getBookName(),
+                entity.getCategory(),
+                entity.getQtyOnHand(),
+                entity.getRackCode(),
+                entity.getAuthorId()
         );
         /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("INSERT INTO book VALUES (?,?,?,?,?,?)");
@@ -85,14 +86,14 @@ public class BookDAOImpl  implements BookDAO {
     }
 
     @Override
-    public boolean update(BookDto dto) throws SQLException {
+    public boolean update(Book entity) throws SQLException {
         return SQLUtil.execute("UPDATE book SET bookName=?, category =?,qtyOnHand=?, rackCode=?,authorId=? WHERE ISBN=?",
-                dto.getBookName(),
-                dto.getCategory(),
-                dto.getQtyOnHand(),
-                dto.getRackCode(),
-                dto.getAuthorId(),
-                dto.getISBN()
+                entity.getBookName(),
+                entity.getCategory(),
+                entity.getQtyOnHand(),
+                entity.getRackCode(),
+                entity.getAuthorId(),
+                entity.getISBN()
         );
         /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("UPDATE book SET bookName=?, category =?,qtyOnHand=?, rackCode=?,authorId=? WHERE ISBN=?");
@@ -119,7 +120,7 @@ public class BookDAOImpl  implements BookDAO {
     }
 
     @Override
-    public BookDto search(String ISBN) throws SQLException {
+    public Book search(String ISBN) throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM book WHERE ISBN=?",
                 ISBN
         );
@@ -130,9 +131,9 @@ public class BookDAOImpl  implements BookDAO {
 
         //ResultSet resultSet = pstm.executeQuery();
 
-        BookDto dto= null;
+        Book entity= null;
         if(resultSet.next()){
-            dto = new BookDto(
+             entity = new Book(
                  resultSet.getString(1),
                  resultSet.getString(2),
                  resultSet.getString(3),
@@ -141,30 +142,31 @@ public class BookDAOImpl  implements BookDAO {
                  resultSet.getString(6)
             );
         }
-        return dto;
+        return entity;
     }
 
     @Override
-    public ArrayList<BookDto> getAll() throws SQLException {
+    public ArrayList<Book> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT  * FROM  book");
 //        Connection connection = DbConnection.getInstance().getConnection();
 //        PreparedStatement pstm = connection.prepareStatement("SELECT  * FROM  book");
 
-        List<BookDto> bookList = new ArrayList<>();
+        List<Book> bookList = new ArrayList<>();
 
 //        ResultSet resultSet = pstm.executeQuery();
 
         while (resultSet.next()){
-            bookList.add(new BookDto(
-                resultSet.getString(1),
-                resultSet.getString(2),
-                resultSet.getString(3),
-                resultSet.getInt(4),
-                resultSet.getString(5),
-                resultSet.getString(6)
-            ));
+            Book entity = new Book(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getInt(4),
+                    resultSet.getString(5),
+                    resultSet.getString(6)
+            );
+            bookList.add(entity);
         }
-        return (ArrayList<BookDto>) bookList;
+        return (ArrayList<Book>) bookList;
     }
 
     //transaction ekata

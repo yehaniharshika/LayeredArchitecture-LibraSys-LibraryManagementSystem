@@ -3,8 +3,8 @@ package lk.ijse.LibraSys.bo.custom.Impl;
 import lk.ijse.LibraSys.bo.custom.AuthorBO;
 import lk.ijse.LibraSys.dao.DAOFactory;
 import lk.ijse.LibraSys.dao.custom.AuthorDAO;
-import lk.ijse.LibraSys.dao.custom.Impl.AuthorDAOImpl;
 import lk.ijse.LibraSys.dto.AuthorDto;
+import lk.ijse.LibraSys.entity.Author;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class AuthorBOImpl implements AuthorBO {
 
     @Override
     public boolean saveAuthor(AuthorDto dto) throws SQLException {
-        return authorDAO.save(new AuthorDto(dto.getAuthorId(),
+        return authorDAO.save(new Author(dto.getAuthorId(),
                 dto.getAuthorName(),
                 dto.getText(),
                 dto.getNationality(),
@@ -32,7 +32,7 @@ public class AuthorBOImpl implements AuthorBO {
 
     @Override
     public boolean updateAuthor(AuthorDto dto) throws SQLException {
-        return authorDAO.update(new AuthorDto(dto.getAuthorId(),
+        return authorDAO.update(new Author(dto.getAuthorId(),
                 dto.getAuthorName(),
                 dto.getText(),
                 dto.getNationality(),
@@ -47,16 +47,28 @@ public class AuthorBOImpl implements AuthorBO {
 
     @Override
     public AuthorDto searchAuthor(String authorId) throws SQLException {
-        return authorDAO.search(authorId);
+        Author author = authorDAO.search(authorId);
+
+        if (author != null){
+            return new AuthorDto(author);
+        }else {
+            return null;
+        }
     }
 
     @Override
     public List<AuthorDto> getAllAuthors() throws SQLException {
+        ArrayList<Author> allAuthors = authorDAO.getAll();
         ArrayList<AuthorDto> authorDtos = new ArrayList<>();
-        List<AuthorDto> authorsList = authorDAO.getAll();
 
-        for (AuthorDto dto : authorsList){
-            authorDtos.add(new AuthorDto(dto.getAuthorId(), dto.getAuthorName(), dto.getText(), dto.getNationality(), dto.getCurrentlyBooksWrittenQty()));
+
+        for (Author  author : allAuthors){
+            authorDtos.add(new AuthorDto(author.getAuthorId(),
+                    author.getAuthorName(),
+                    author.getText(),
+                    author.getNationality(),
+                    author.getCurrentlyBooksWrittenQty())
+            );
         }
         return authorDtos;
     }

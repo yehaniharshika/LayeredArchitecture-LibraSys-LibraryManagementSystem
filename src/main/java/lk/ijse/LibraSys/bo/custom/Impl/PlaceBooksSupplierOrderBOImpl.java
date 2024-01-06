@@ -12,6 +12,8 @@ import lk.ijse.LibraSys.db.DbConnection;
 import lk.ijse.LibraSys.dto.BookDto;
 import lk.ijse.LibraSys.dto.PlaceBooksSupplierOrderDto;
 import lk.ijse.LibraSys.dto.SupplierDto;
+import lk.ijse.LibraSys.entity.Book;
+import lk.ijse.LibraSys.entity.Supplier;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -82,7 +84,7 @@ public class PlaceBooksSupplierOrderBOImpl implements PlaceBooksSupplierOrderBO 
 
     @Override
     public boolean updateSupplier(SupplierDto dto) throws SQLException {
-        return supplierDAO.update(new SupplierDto(dto.getSupplierId(),
+        return supplierDAO.update(new Supplier(dto.getSupplierId(),
                 dto.getSupplierName(),
                 dto.getContactNumber(),
                 dto.getEmail())
@@ -96,19 +98,25 @@ public class PlaceBooksSupplierOrderBOImpl implements PlaceBooksSupplierOrderBO 
 
     @Override
     public SupplierDto searchSupplier(String supplierId) throws SQLException {
-        return supplierDAO.search(supplierId);
+        Supplier supplier = supplierDAO.search(supplierId);
+
+        if (supplier != null){
+            return new SupplierDto(supplier);
+        }
+        return null;
     }
 
     @Override
     public List<SupplierDto> getAllSupplier() throws SQLException {
+        List<Supplier> allSuppliers = supplierDAO.getAll();
         ArrayList<SupplierDto> supplierDtos = new ArrayList<>();
-        List<SupplierDto> suppliersList = supplierDAO.getAll();
 
-        for (SupplierDto dto : suppliersList){
-            supplierDtos.add(new SupplierDto(dto.getSupplierId(),
-                    dto.getSupplierName(),
-                    dto.getContactNumber(),
-                    dto.getEmail())
+        for (Supplier supplier : allSuppliers){
+            supplierDtos.add(new SupplierDto(
+                    supplier.getSupplierId(),
+                    supplier.getSupplierName(),
+                    supplier.getContactNumber(),
+                    supplier.getEmail())
             );
         }
         return supplierDtos;
@@ -116,21 +124,27 @@ public class PlaceBooksSupplierOrderBOImpl implements PlaceBooksSupplierOrderBO 
 
     @Override
     public BookDto searchBook(String ISBN) throws SQLException {
-        return bookDAO.search(ISBN);
+        Book book = bookDAO.search(ISBN);
+
+        if (book != null){
+            return new BookDto(book);
+        }
+        return null;
     }
 
     @Override
     public List<BookDto> getAllBooks() throws SQLException {
+        ArrayList<Book> allBooks = bookDAO.getAll();
         ArrayList<BookDto> bookDtos = new ArrayList<>();
-        List<BookDto> booksList = bookDAO.getAll();
 
-        for (BookDto dto : booksList){
-            bookDtos.add(new BookDto(dto.getISBN(),
-                    dto.getBookName(),
-                    dto.getCategory(),
-                    dto.getQtyOnHand(),
-                    dto.getRackCode(),
-                    dto.getAuthorId())
+        for (Book book : allBooks){
+            bookDtos.add(new BookDto(
+                    book.getISBN(),
+                    book.getBookName(),
+                    book.getCategory(),
+                    book.getQtyOnHand(),
+                    book.getRackCode(),
+                    book.getAuthorId())
             );
         }
         return bookDtos;

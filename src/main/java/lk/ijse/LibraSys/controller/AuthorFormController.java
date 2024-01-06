@@ -105,7 +105,6 @@ public class AuthorFormController {
     private String generateNextAuthorId() {
         try {
             String authorId = authorBO.generateNextAuthorId();
-            System.out.println(authorId);
             txtAuthorId.setText(authorId);
         } catch (SQLException e) {
             e.printStackTrace();

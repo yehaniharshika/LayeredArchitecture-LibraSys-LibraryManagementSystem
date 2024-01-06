@@ -11,6 +11,9 @@ import lk.ijse.LibraSys.dao.custom.ReservationDAO;
 import lk.ijse.LibraSys.dto.BookDto;
 import lk.ijse.LibraSys.dto.MemberDto;
 import lk.ijse.LibraSys.dto.ReservationDto;
+import lk.ijse.LibraSys.entity.Book;
+import lk.ijse.LibraSys.entity.Member;
+import lk.ijse.LibraSys.entity.Reservation;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ public class ReservationBOImpl implements ReservationBo {
 
     @Override
     public boolean addReservation(ReservationDto dto) throws SQLException {
-        return reservationDAO.save(new ReservationDto(dto.getReservationId(),
+        return reservationDAO.save(new Reservation(dto.getReservationId(),
                 dto.getBorrowedDate(),
                 dto.getDueDate(),
                 dto.getBookReturnDate(),
@@ -38,7 +41,7 @@ public class ReservationBOImpl implements ReservationBo {
 
     @Override
     public boolean updateReservation(ReservationDto dto) throws SQLException {
-        return reservationDAO.update(new ReservationDto(dto.getReservationId(),
+        return reservationDAO.update(new Reservation(dto.getReservationId(),
                 dto.getBorrowedDate(),
                 dto.getDueDate(),
                 dto.getBookReturnDate(),
@@ -55,7 +58,11 @@ public class ReservationBOImpl implements ReservationBo {
 
     @Override
     public ReservationDto searchReservation(String reservationId) throws SQLException {
-        return reservationDAO.search(reservationId);
+        Reservation reservation = reservationDAO.search(reservationId);
+        if (reservation != null){
+            return new ReservationDto(reservation);
+        }
+        return null;
     }
 
     @Override
@@ -65,29 +72,39 @@ public class ReservationBOImpl implements ReservationBo {
 
     @Override
     public MemberDto searchMember(String mid) throws SQLException {
-        return memberDAO.search(mid);
+        Member member = memberDAO.search(mid);
+        if (member != null){
+            return new MemberDto(member);
+        }
+        return null;
     }
 
     @Override
     public BookDto searchBook(String ISBN) throws SQLException {
-        return bookDAO.search(ISBN);
+        Book book = bookDAO.search(ISBN);
+
+        if (book != null){
+            return new BookDto(book);
+        }
+        return null;
     }
 
     @Override
     public List<MemberDto> getAllMember() throws SQLException {
+        List<Member> allMembers = memberDAO.getAll();
         ArrayList<MemberDto> memberDtos = new ArrayList<>();
-        List<MemberDto> membersList = memberDAO.getAll();
 
-        for (MemberDto dto : membersList){
-            memberDtos.add(new MemberDto(dto.getMid(),
-                    dto.getName(),
-                    dto.getAddress(),
-                    dto.getGender(),
-                    dto.getTel(),
-                    dto.getEmailAddress(),
-                    dto.getIDNumber(),
-                    dto.getFeeId(),
-                    dto.getSNumber())
+        for (Member member : allMembers){
+            memberDtos.add(new MemberDto(
+                    member.getMid(),
+                    member.getName(),
+                    member.getAddress(),
+                    member.getGender(),
+                    member.getTel(),
+                    member.getEmailAddress(),
+                    member.getIDNumber(),
+                    member.getFeeId(),
+                    member.getSNumber())
             );
         }
         return memberDtos;
@@ -95,16 +112,18 @@ public class ReservationBOImpl implements ReservationBo {
 
     @Override
     public List<BookDto> getAllBooks() throws SQLException {
+        ArrayList<Book> allBooks = bookDAO.getAll();
         ArrayList<BookDto> bookDtos = new ArrayList<>();
-        List<BookDto> booksList =  bookDAO.getAll();
+//        List<BookDto> booksList =  bookDAO.getAll();
 
-        for (BookDto dto : booksList){
-            bookDtos.add(new BookDto(dto.getISBN(),
-                    dto.getBookName(),
-                    dto.getCategory(),
-                    dto.getQtyOnHand(),
-                    dto.getRackCode(),
-                    dto.getAuthorId())
+        for (Book book : allBooks){
+            bookDtos.add(new BookDto(
+                    book.getISBN(),
+                    book.getBookName(),
+                    book.getCategory(),
+                    book.getQtyOnHand(),
+                    book.getRackCode(),
+                    book.getAuthorId())
             );
         }
         return bookDtos;
@@ -112,19 +131,19 @@ public class ReservationBOImpl implements ReservationBo {
 
     @Override
     public List<ReservationDto> getAllReservation() throws SQLException {
+        List<Reservation> allReservations = reservationDAO.getAll();
         ArrayList<ReservationDto> reservationDtos = new ArrayList<>();
-        List<ReservationDto> reservationsList = reservationDAO.getAll();
 
-        for (ReservationDto dto : reservationsList){
+        for (Reservation reservation : allReservations){
             reservationDtos.add(new ReservationDto(
-                    dto.getReservationId(),
-                    dto.getBorrowedDate(),
-                    dto.getDueDate(),
-                    dto.getBookReturnDate(),
-                    dto.getFineStatus(),
-                    dto.getFineAmount(),
-                    dto.getMid(),
-                    dto.getISBN())
+                    reservation.getReservationId(),
+                    reservation.getBorrowedDate(),
+                    reservation.getDueDate(),
+                    reservation.getBookReturnDate(),
+                    reservation.getFineStatus(),
+                    reservation.getFineAmount(),
+                    reservation.getMid(),
+                    reservation.getISBN())
             );
         }
         return reservationDtos;

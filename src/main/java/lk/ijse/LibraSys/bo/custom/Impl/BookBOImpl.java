@@ -5,13 +5,13 @@ import lk.ijse.LibraSys.dao.DAOFactory;
 import lk.ijse.LibraSys.dao.custom.AuthorDAO;
 import lk.ijse.LibraSys.dao.custom.BookDAO;
 import lk.ijse.LibraSys.dao.custom.BookRackDAO;
-import lk.ijse.LibraSys.dao.custom.Impl.AuthorDAOImpl;
-import lk.ijse.LibraSys.dao.custom.Impl.BookDAOImpl;
-import lk.ijse.LibraSys.dao.custom.Impl.BookRackDAOImpl;
 import lk.ijse.LibraSys.dto.AuthorDto;
 import lk.ijse.LibraSys.dto.BookDto;
 import lk.ijse.LibraSys.dto.BookRackDto;
 import lk.ijse.LibraSys.dto.tm.SupplierCartTm;
+import lk.ijse.LibraSys.entity.Author;
+import lk.ijse.LibraSys.entity.Book;
+import lk.ijse.LibraSys.entity.BookRack;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class BookBOImpl implements BookBO {
 
     @Override
     public boolean saveBook(BookDto dto) throws SQLException {
-        return bookDAO.save(new BookDto(dto.getISBN(),
+        return bookDAO.save(new Book(dto.getISBN(),
                 dto.getBookName(),
                 dto.getCategory(),
                 dto.getQtyOnHand(),
@@ -41,7 +41,7 @@ public class BookBOImpl implements BookBO {
 
     @Override
     public boolean updateBook(BookDto dto) throws SQLException {
-        return bookDAO.update(new BookDto(dto.getISBN(),
+        return bookDAO.update(new Book(dto.getISBN(),
                 dto.getBookName(),
                 dto.getCategory(),
                 dto.getQtyOnHand(),
@@ -57,21 +57,28 @@ public class BookBOImpl implements BookBO {
 
     @Override
     public BookDto searchBook(String ISBN) throws SQLException {
-        return bookDAO.search(ISBN);
+        Book book = bookDAO.search(ISBN);
+
+        if (book != null){
+            return new BookDto(book);
+        }
+        return null;
     }
 
     @Override
     public List<BookDto> getAllBooks() throws SQLException {
+        ArrayList<Book> allBooks = bookDAO.getAll();
         ArrayList<BookDto> bookDtos = new ArrayList<>();
-        List<BookDto> booksList =  bookDAO.getAll();
+//        List<BookDto> booksList =  bookDAO.getAll();
 
-        for (BookDto dto : booksList){
-            bookDtos.add(new BookDto(dto.getISBN(),
-                    dto.getBookName(),
-                    dto.getCategory(),
-                    dto.getQtyOnHand(),
-                    dto.getRackCode(),
-                    dto.getAuthorId())
+        for (Book book : allBooks){
+            bookDtos.add(new BookDto(
+                    book.getISBN(),
+                    book.getBookName(),
+                    book.getCategory(),
+                    book.getQtyOnHand(),
+                    book.getRackCode(),
+                    book.getAuthorId())
             );
         }
         return bookDtos;
@@ -89,25 +96,32 @@ public class BookBOImpl implements BookBO {
 
     @Override
     public List<AuthorDto> getAllAuthors() throws SQLException {
+        ArrayList<Author> allAuthors = authorDAO.getAll();
         ArrayList<AuthorDto> authorDtos = new ArrayList<>();
-        List<AuthorDto> authorsList = authorDAO.getAll();
+        //List<AuthorDto> authorsList = authorDAO.getAll();
 
-        for (AuthorDto dto : authorsList){
-            authorDtos.add(new AuthorDto(dto.getAuthorId(), dto.getAuthorName(), dto.getText(), dto.getNationality(), dto.getCurrentlyBooksWrittenQty()));
+        for (Author entity : allAuthors){
+            authorDtos.add(new AuthorDto(entity.getAuthorId(),
+                    entity.getAuthorName(),
+                    entity.getText(),
+                    entity.getNationality(),
+                    entity.getCurrentlyBooksWrittenQty())
+            );
         }
         return authorDtos;
     }
 
     @Override
     public List<BookRackDto> getAllBookRack() throws SQLException {
+        List<BookRack> allBookRacks = bookRackDAO.getAll();
         ArrayList<BookRackDto> bookRackDtos = new ArrayList<>();
-        List<BookRackDto> bookRackList = bookRackDAO.getAll();
 
-        for (BookRackDto dto : bookRackList){
-            bookRackDtos.add(new BookRackDto(dto.getRackCode(),
-                    dto.getQtyBooks(),
-                    dto.getCategoryOfBooks(),
-                    dto.getNameOfBooks())
+        for (BookRack bookRack :allBookRacks){
+            bookRackDtos.add(new BookRackDto(
+                    bookRack.getRackCode(),
+                    bookRack.getQtyBooks(),
+                    bookRack.getCategoryOfBooks(),
+                    bookRack.getNameOfBooks())
             );
         }
         return bookRackDtos;
@@ -115,12 +129,23 @@ public class BookBOImpl implements BookBO {
 
     @Override
     public AuthorDto searchAuthor(String authorId) throws SQLException {
-        return authorDAO.search(authorId);
+        Author author = authorDAO.search(authorId);
+
+        if (author != null){
+            return new AuthorDto(author);
+        }else {
+            return null;
+        }
     }
 
     @Override
     public BookRackDto searchBookRack(String rackCode) throws SQLException {
-        return bookRackDAO.search(rackCode);
+        BookRack bookRack = bookRackDAO.search(rackCode);
+
+        if (bookRack != null){
+            return new BookRackDto(bookRack);
+        }
+        return null;
     }
 
     @Override

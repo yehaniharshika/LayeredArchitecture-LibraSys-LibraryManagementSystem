@@ -1,5 +1,6 @@
 package lk.ijse.LibraSys.dto;
 
+import lk.ijse.LibraSys.entity.Member;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -38,4 +39,15 @@ public class MemberDto {
         this.sNumber = sNumber;
     }
 
+    public MemberDto(Member member) {
+        this.mid = member.getMid();
+        this.name = member.getName();
+        this.address = member.getAddress();
+        this.gender = member.getGender();
+        this.tel = member.getTel();
+        this.EmailAddress = member.getEmailAddress();
+        this.IDNumber = member.getIDNumber();
+        this.feeId = member.getFeeId();
+        this.sNumber = member.getSNumber();
+    }
 }

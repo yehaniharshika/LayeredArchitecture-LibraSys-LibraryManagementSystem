@@ -4,6 +4,7 @@ import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.MemberDAO;
 import lk.ijse.LibraSys.dto.AuthorDto;
 import lk.ijse.LibraSys.dto.MemberDto;
+import lk.ijse.LibraSys.entity.Member;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,17 +62,17 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public boolean save(MemberDto dto) throws SQLException {
+    public boolean save(Member entity) throws SQLException {
         return SQLUtil.execute("INSERT INTO member VALUES(?, ?, ?, ?, ?, ? ,?,?,?)",
-                dto.getMid(),
-                dto.getName(),
-                dto.getAddress(),
-                dto.getGender(),
-                dto.getTel(),
-                dto.getEmailAddress(),
-                dto.getIDNumber(),
-                dto.getFeeId(),
-                dto.getSNumber()
+                entity.getMid(),
+                entity.getName(),
+                entity.getAddress(),
+                entity.getGender(),
+                entity.getTel(),
+                entity.getEmailAddress(),
+                entity.getIDNumber(),
+                entity.getFeeId(),
+                entity.getSNumber()
         );
        /* Connection connection = DbConnection.getInstance().getConnection();
         String sql = "INSERT INTO member VALUES(?, ?, ?, ?, ?, ? ,?,?,?)";
@@ -94,17 +95,17 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public  boolean update(MemberDto dto) throws SQLException {
+    public  boolean update(Member entity) throws SQLException {
         return SQLUtil.execute("UPDATE member SET name=?, address=?, gender=? ,tel =? ,EmailAddress =?,IDNumber=?, feeId=?,sNumber=? WHERE  mid=?",
-                dto.getName(),
-                dto.getAddress(),
-                dto.getGender(),
-                dto.getTel(),
-                dto.getEmailAddress(),
-                dto.getIDNumber(),
-                dto.getFeeId(),
-                dto.getSNumber(),
-                dto.getMid()
+                entity.getName(),
+                entity.getAddress(),
+                entity.getGender(),
+                entity.getTel(),
+                entity.getEmailAddress(),
+                entity.getIDNumber(),
+                entity.getFeeId(),
+                entity.getSNumber(),
+                entity.getMid()
         );
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("UPDATE member SET name=?, address=?, gender=? ,tel =? ,EmailAddress =?,IDNumber=?, feeId=?,sNumber=? WHERE  mid=?");
@@ -138,7 +139,7 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public MemberDto search(String mid) throws SQLException {
+    public Member search(String mid) throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT  * FROM  member WHERE mid=?",mid);
         /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT  * FROM  member WHERE mid=?");
@@ -146,10 +147,10 @@ public class MemberDAOImpl implements MemberDAO {
 
         ResultSet resultSet = pstm.executeQuery();
 */
-        MemberDto dto = null;
+        Member entity = null;
 
         if(resultSet.next()){
-            dto = new MemberDto(
+            entity = new Member(
                 resultSet.getString(1),
                 resultSet.getString(2),
                 resultSet.getString(3),
@@ -161,20 +162,20 @@ public class MemberDAOImpl implements MemberDAO {
                 resultSet.getString(9)
             );
         }
-        return dto;
+        return entity;
     }
 
     @Override
-    public ArrayList<MemberDto> getAll() throws SQLException {
+    public ArrayList<Member> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM member");
         /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM member");
 */
-        ArrayList<MemberDto> memberList = new ArrayList<>();
+        ArrayList<Member> memberList = new ArrayList<>();
 
 //        ResultSet resultSet = pstm.executeQuery();
         while(resultSet.next()){
-           memberList.add(new MemberDto(
+           memberList.add(new Member(
                   resultSet.getString(1),
                   resultSet.getString(2),
                   resultSet.getString(3),

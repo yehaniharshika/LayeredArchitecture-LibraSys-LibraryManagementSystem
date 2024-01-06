@@ -4,6 +4,7 @@ import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.SupplierDAO;
 import lk.ijse.LibraSys.dto.AuthorDto;
 import lk.ijse.LibraSys.dto.SupplierDto;
+import lk.ijse.LibraSys.entity.Supplier;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,7 +28,7 @@ public class SupplierDAOImpl implements SupplierDAO {
     }
 
     @Override
-    public boolean save(SupplierDto dto) throws SQLException {
+    public boolean save(Supplier dto) throws SQLException {
         return false;
     }
 
@@ -88,8 +89,13 @@ public class SupplierDAOImpl implements SupplierDAO {
     }
 
     @Override
-    public boolean update(SupplierDto dto) throws SQLException {
-        return SQLUtil.execute("UPDATE supplier SET supplierName=?,contactNumber=?,email=? WHERE supplierId=?",dto.getSupplierName(),dto.getContactNumber(),dto.getEmail(),dto.getSupplierId());
+    public boolean update(Supplier entity) throws SQLException {
+        return SQLUtil.execute("UPDATE supplier SET supplierName=?,contactNumber=?,email=? WHERE supplierId=?",
+                entity.getSupplierName(),
+                entity.getContactNumber(),
+                entity.getEmail(),
+                entity.getSupplierId()
+        );
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("UPDATE supplier SET supplierName=?,contactNumber=?,email=? WHERE supplierId=?");
 
@@ -114,42 +120,42 @@ public class SupplierDAOImpl implements SupplierDAO {
     }
 
     @Override
-    public SupplierDto search(String supplierId) throws SQLException {
+    public Supplier search(String supplierId) throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT  * FROM supplier WHERE supplierId=?",supplierId);
         /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT  * FROM supplier WHERE supplierId=?");
         pstm.setString(1,supplierId);
 
         ResultSet resultSet = pstm.executeQuery();*/
-        SupplierDto dto = null;
+        Supplier entity = null;
         if (resultSet.next()){
-            dto = new SupplierDto(
+            entity = new Supplier(
               resultSet.getString(1),
               resultSet.getString(2),
               resultSet.getString(3),
               resultSet.getString(4)
             );
         }
-        return dto;
+        return entity;
     }
 
     @Override
-    public ArrayList<SupplierDto> getAll() throws SQLException {
+    public ArrayList<Supplier> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM supplier");
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM supplier");
 */
-        List<SupplierDto> supplierList = new ArrayList<>();
+        List<Supplier> supplierList = new ArrayList<>();
 //        ResultSet resultSet = pstm.executeQuery();
         while (resultSet.next()){
-            supplierList.add(new SupplierDto(
+            supplierList.add(new Supplier(
                  resultSet.getString(1),
                  resultSet.getString(2),
                  resultSet.getString(3),
                  resultSet.getString(4)
             ));
         }
-        return (ArrayList<SupplierDto>) supplierList;
+        return (ArrayList<Supplier>) supplierList;
     }
 
 

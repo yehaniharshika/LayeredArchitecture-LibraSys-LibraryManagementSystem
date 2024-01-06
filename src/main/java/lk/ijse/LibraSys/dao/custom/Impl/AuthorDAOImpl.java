@@ -3,6 +3,7 @@ package lk.ijse.LibraSys.dao.custom.Impl;
 import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.AuthorDAO;
 import lk.ijse.LibraSys.dto.AuthorDto;
+import lk.ijse.LibraSys.entity.Author;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -63,9 +64,9 @@ public class AuthorDAOImpl implements AuthorDAO {
     }
 
     @Override
-    public boolean save(AuthorDto dto) throws SQLException {
+    public boolean save(Author entity) throws SQLException {
         return SQLUtil.execute("INSERT INTO author VALUES (?,?,?,?,?)",
-                dto.getAuthorId(),dto.getAuthorName(),dto.getText(),dto.getNationality(),dto.getCurrentlyBooksWrittenQty()
+                entity.getAuthorId(),entity.getAuthorName(),entity.getText(),entity.getNationality(),entity.getCurrentlyBooksWrittenQty()
         );
 
 //        Connection connection = DbConnection.getInstance().getConnection();
@@ -83,10 +84,10 @@ public class AuthorDAOImpl implements AuthorDAO {
     }
 
     @Override
-    public  boolean update(AuthorDto dto) throws SQLException {
+    public  boolean update(Author entity) throws SQLException {
 
         return SQLUtil.execute("UPDATE author SET authorName=?,text=?,nationality=?,currentlyBooksWrittenQty=? WHERE authorId=?",
-                dto.getAuthorName(),dto.getText(),dto.getNationality(),dto.getCurrentlyBooksWrittenQty(),dto.getAuthorId()
+                entity.getAuthorName(),entity.getText(),entity.getNationality(),entity.getCurrentlyBooksWrittenQty(),entity.getAuthorId()
         );
 //        Connection connection = DbConnection.getInstance().getConnection();
 //        PreparedStatement pstm = connection.prepareStatement("UPDATE author SET authorName=?,text=?,nationality=?,currentlyBooksWrittenQty=? WHERE authorId=?");
@@ -113,14 +114,14 @@ public class AuthorDAOImpl implements AuthorDAO {
     }
 
     @Override
-    public AuthorDto search(String authorId) throws SQLException {
+    public Author search(String authorId) throws SQLException {
 
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM  author WHERE authorId=?",
                 authorId
         );
-        AuthorDto dto = null;
+        Author entity = null;
         if (resultSet.next()){
-            dto = new AuthorDto(
+            entity = new Author(
                     resultSet.getString("authorId"),
                     resultSet.getString("authorName"),
                     resultSet.getString("text"),
@@ -128,7 +129,7 @@ public class AuthorDAOImpl implements AuthorDAO {
                     resultSet.getInt("currentlyBooksWrittenQty")
                     );
         }
-        return dto;
+        return entity;
         /*Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM  author WHERE authorId=?");
         pstm.setString(1,authorId);
@@ -149,18 +150,21 @@ public class AuthorDAOImpl implements AuthorDAO {
     }
 
     @Override
-    public ArrayList<AuthorDto> getAll() throws SQLException {
+    public ArrayList<Author> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM author");
-        ArrayList<AuthorDto> authorDtoList = new ArrayList<>();
+        ArrayList<Author> authorDtoList = new ArrayList<>();
 
         while (resultSet.next()){
-            authorDtoList.add(new AuthorDto(
+            Author entity = new Author(
                     resultSet.getString(1),
                     resultSet.getString(2),
                     resultSet.getString(3),
                     resultSet.getString(4),
                     resultSet.getInt(5)
-            ));
+
+            );
+            authorDtoList.add(entity);
+
         }
         return authorDtoList;
 

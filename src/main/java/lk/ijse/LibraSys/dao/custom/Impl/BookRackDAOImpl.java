@@ -4,6 +4,7 @@ import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.BookRackDAO;
 import lk.ijse.LibraSys.dto.AuthorDto;
 import lk.ijse.LibraSys.dto.BookRackDto;
+import lk.ijse.LibraSys.entity.BookRack;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -50,12 +51,12 @@ public class BookRackDAOImpl implements BookRackDAO {
     }
 
     @Override
-    public boolean save(BookRackDto dto) throws SQLException {
+    public boolean save(BookRack entity) throws SQLException {
         return SQLUtil.execute("INSERT INTO  bookRack VALUES (?,?,?,?)",
-                dto.getRackCode(),
-                dto.getQtyBooks(),
-                dto.getCategoryOfBooks(),
-                dto.getNameOfBooks()
+                entity.getRackCode(),
+                entity.getQtyBooks(),
+                entity.getCategoryOfBooks(),
+                entity.getNameOfBooks()
         );
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("INSERT INTO  bookRack VALUES (?,?,?,?)");
@@ -69,12 +70,12 @@ public class BookRackDAOImpl implements BookRackDAO {
     }
 
     @Override
-    public  boolean update(BookRackDto dto) throws SQLException {
+    public  boolean update(BookRack entity) throws SQLException {
         return SQLUtil.execute("UPDATE bookRack SET qtyBooks=?,nameOfBooks =? ,categoryOfBooks=? WHERE rackCode =?",
-                dto.getQtyBooks(),
-                dto.getNameOfBooks(),
-                dto.getCategoryOfBooks(),
-                dto.getRackCode()
+                entity.getQtyBooks(),
+                entity.getNameOfBooks(),
+                entity.getCategoryOfBooks(),
+                entity.getRackCode()
         );
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("UPDATE bookRack SET qtyBooks=?,nameOfBooks =? ,categoryOfBooks=? WHERE rackCode =?");
@@ -99,7 +100,7 @@ public class BookRackDAOImpl implements BookRackDAO {
     }
 
     @Override
-    public BookRackDto search(String rackCode) throws SQLException {
+    public BookRack search(String rackCode) throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM bookRack WHERE rackCode=?",rackCode);
        /* Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM bookRack WHERE rackCode=?");
@@ -107,29 +108,29 @@ public class BookRackDAOImpl implements BookRackDAO {
 
         ResultSet resultSet = pstm.executeQuery();*/
 
-        BookRackDto dto = null;
+        BookRack entity = null;
 
         if(resultSet.next()){
-            dto = new BookRackDto(
+            entity = new BookRack(
                   resultSet.getString(1),
                   resultSet.getInt(2),
                   resultSet.getString(3),
                   resultSet.getString(4)
             );
         }
-        return dto;
+        return entity;
     }
 
     @Override
-    public ArrayList<BookRackDto> getAll() throws SQLException {
+    public ArrayList<BookRack> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM bookRack");
      /*   Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM bookRack");*/
 
-        List<BookRackDto> rackList = new ArrayList<>();
+        List<BookRack> rackList = new ArrayList<>();
 
         while(resultSet.next()){
-            rackList.add(new BookRackDto(
+            rackList.add(new BookRack(
                 resultSet.getString(1),
                 resultSet.getInt(2),
                 resultSet.getString(3),
@@ -137,7 +138,7 @@ public class BookRackDAOImpl implements BookRackDAO {
             ));
 
         }
-        return (ArrayList<BookRackDto>) rackList;
+        return (ArrayList<BookRack>) rackList;
     }
 
     /*public  boolean updateBooks(List<BookRackTm> bookTmList) throws SQLException {

@@ -5,6 +5,7 @@ import lk.ijse.LibraSys.dao.DAOFactory;
 import lk.ijse.LibraSys.dao.custom.Impl.MembershipFeeDAOImpl;
 import lk.ijse.LibraSys.dao.custom.MembershipFeeDAO;
 import lk.ijse.LibraSys.dto.MembershipFeeDto;
+import lk.ijse.LibraSys.entity.MembershipFee;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class MembershipFeeBOImpl implements MembershipFeeBO {
 
     @Override
     public boolean saveMembershipFee(MembershipFeeDto dto) throws SQLException {
-        return membershipFeeDAO.save(new MembershipFeeDto(dto.getId(),
+        return membershipFeeDAO.save(new MembershipFee(dto.getId(),
                 dto.getName(),
                 dto.getAmount(),
                 dto.getDate(),
@@ -34,7 +35,7 @@ public class MembershipFeeBOImpl implements MembershipFeeBO {
 
     @Override
     public boolean updateMembershipfee(MembershipFeeDto dto) throws SQLException {
-        return membershipFeeDAO.update(new MembershipFeeDto(dto.getId(),
+        return membershipFeeDAO.update(new MembershipFee(dto.getId(),
                 dto.getName(),
                 dto.getAmount(),
                 dto.getDate(),
@@ -44,7 +45,12 @@ public class MembershipFeeBOImpl implements MembershipFeeBO {
 
     @Override
     public MembershipFeeDto searchMembershipFee(String id) throws SQLException {
-        return membershipFeeDAO.search(id);
+        MembershipFee membershipFee =  membershipFeeDAO.search(id);
+
+        if (membershipFee != null){
+            return new MembershipFeeDto(membershipFee);
+        }
+        return null;
     }
 
     @Override
@@ -54,16 +60,16 @@ public class MembershipFeeBOImpl implements MembershipFeeBO {
 
     @Override
     public List<MembershipFeeDto> getAllMemberShipFee() throws SQLException {
+        ArrayList<MembershipFee> allMembershipFees = membershipFeeDAO.getAll();
         ArrayList<MembershipFeeDto> membershipFeeDtos =  new ArrayList<>();
-        List<MembershipFeeDto> membershipFeeList = membershipFeeDAO.getAll();
 
-        for (MembershipFeeDto  dto : membershipFeeList){
+        for (MembershipFee membershipFee : allMembershipFees){
             membershipFeeDtos.add(new MembershipFeeDto(
-                    dto.getId(),
-                    dto.getName(),
-                    dto.getAmount(),
-                    dto.getDate(),
-                    dto.getStatus())
+                    membershipFee.getId(),
+                    membershipFee.getName(),
+                    membershipFee.getAmount(),
+                    membershipFee.getDate(),
+                    membershipFee.getStatus())
             );
         }
         return membershipFeeDtos;

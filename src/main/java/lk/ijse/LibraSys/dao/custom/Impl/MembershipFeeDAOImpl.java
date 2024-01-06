@@ -4,6 +4,7 @@ import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.MembershipFeeDAO;
 import lk.ijse.LibraSys.dto.AuthorDto;
 import lk.ijse.LibraSys.dto.MembershipFeeDto;
+import lk.ijse.LibraSys.entity.MembershipFee;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -65,13 +66,13 @@ public class MembershipFeeDAOImpl implements MembershipFeeDAO {
     }
 
     @Override
-    public boolean save(MembershipFeeDto dto) throws SQLException {
+    public boolean save(MembershipFee entity) throws SQLException {
         return SQLUtil.execute( "INSERT INTO membershipFee VALUES(?,?,?,?,?)",
-                dto.getId(),
-                dto.getName(),
-                dto.getAmount(),
-                dto.getDate(),
-                dto.getStatus()
+                entity.getId(),
+                entity.getName(),
+                entity.getAmount(),
+                entity.getDate(),
+                entity.getStatus()
         );
        /* Connection connection = DbConnection.getInstance().getConnection();
 
@@ -92,13 +93,13 @@ public class MembershipFeeDAOImpl implements MembershipFeeDAO {
     }
 
     @Override
-    public boolean update(MembershipFeeDto dto) throws SQLException {
+    public boolean update(MembershipFee entity) throws SQLException {
         return SQLUtil.execute("UPDATE membershipFee SET name = ?, amount = ? ,date = ?, status = ?  WHERE fee_id =?",
-                dto.getName(),
-                dto.getAmount(),
-                dto.getDate(),
-                dto.getStatus(),
-                dto.getId()
+                entity.getName(),
+                entity.getAmount(),
+                entity.getDate(),
+                entity.getStatus(),
+                entity.getId()
         );
 //        Connection connection = DbConnection.getInstance().getConnection();
 //
@@ -116,7 +117,7 @@ public class MembershipFeeDAOImpl implements MembershipFeeDAO {
     }
 
     @Override
-    public MembershipFeeDto search(String id) throws SQLException {
+    public MembershipFee search(String id) throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM membershipFee WHERE fee_id = ?",id);
         /*Connection connection = DbConnection.getInstance().getConnection();
         String sql ="SELECT * FROM membershipFee WHERE fee_id = ?";
@@ -126,7 +127,7 @@ public class MembershipFeeDAOImpl implements MembershipFeeDAO {
 
         ResultSet resultSet = pstm.executeQuery();*/
 
-        MembershipFeeDto dto = null ;
+        MembershipFee entity = null ;
 
         if(resultSet.next()){
             String feeid = resultSet.getString(1);
@@ -135,10 +136,10 @@ public class MembershipFeeDAOImpl implements MembershipFeeDAO {
             LocalDate paidDate = LocalDate.parse(resultSet.getString(4));
             String feeStatus = resultSet.getString(5);
 
-            dto = new MembershipFeeDto(feeid,mName,feeAmount,paidDate,feeStatus);
+            entity = new MembershipFee(feeid,mName,feeAmount,paidDate,feeStatus);
 
         }
-        return dto;
+        return entity;
 
     }
 
@@ -156,7 +157,7 @@ public class MembershipFeeDAOImpl implements MembershipFeeDAO {
     }
 
     @Override
-    public ArrayList<MembershipFeeDto> getAll() throws SQLException {
+    public ArrayList<MembershipFee> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM membershipFee");
        /* Connection connection = DbConnection.getInstance().getConnection();
         String sql = "SELECT * FROM membershipFee";
@@ -164,11 +165,11 @@ public class MembershipFeeDAOImpl implements MembershipFeeDAO {
         PreparedStatement pstm = connection.prepareStatement(sql);
         ResultSet resultSet =pstm.executeQuery();*/
 
-        ArrayList<MembershipFeeDto> feeList = new ArrayList<>();
+        ArrayList<MembershipFee> feeList = new ArrayList<>();
 
         while (resultSet.next()){
             feeList.add(
-                    new MembershipFeeDto(
+                    new MembershipFee(
                             resultSet.getString(1),
                             resultSet.getString(2),
                             resultSet.getDouble(3),

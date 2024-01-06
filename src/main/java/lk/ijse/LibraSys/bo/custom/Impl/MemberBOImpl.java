@@ -92,7 +92,7 @@ public class MemberBOImpl implements MemberBO {
         MembershipFee membershipFee =  membershipFeeDAO.search(id);
 
         if (membershipFee != null){
-            return new MembershipFeeDto();
+            return new MembershipFeeDto(membershipFee);
         }
         return null;    }
 

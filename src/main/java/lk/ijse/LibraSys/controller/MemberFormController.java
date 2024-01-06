@@ -408,7 +408,7 @@ public class MemberFormController {
 
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 

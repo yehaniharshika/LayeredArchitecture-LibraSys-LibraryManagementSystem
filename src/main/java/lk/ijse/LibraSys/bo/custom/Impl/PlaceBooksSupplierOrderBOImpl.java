@@ -41,8 +41,6 @@ public class PlaceBooksSupplierOrderBOImpl implements PlaceBooksSupplierOrderBO 
             connection = DbConnection.getInstance().getConnection();
             connection.setAutoCommit(false);
 
-
-
             //man methana wenas kara
             boolean isSupplierSaved = supplierDAO.saveSupplier(supplierId,supName,contactNumber,email);
 

@@ -4,6 +4,7 @@ import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.BooksSupplierDetailsDAO;
 import lk.ijse.LibraSys.dto.BookSupplierDetailDto;
 import lk.ijse.LibraSys.dto.tm.SupplierCartTm;
+import lk.ijse.LibraSys.entity.BookSupplierDetail;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -67,12 +68,12 @@ public class BooksSupplierDetailsDAOImpl implements BooksSupplierDetailsDAO {
     }
 
     @Override
-    public boolean save(BookSupplierDetailDto dto) throws SQLException {
+    public boolean save(BookSupplierDetail entity) throws SQLException {
         return false;
     }
 
     @Override
-    public boolean update(BookSupplierDetailDto dto) throws SQLException {
+    public boolean update(BookSupplierDetail entity) throws SQLException {
         return false;
     }
 
@@ -82,12 +83,12 @@ public class BooksSupplierDetailsDAOImpl implements BooksSupplierDetailsDAO {
     }
 
     @Override
-    public BookSupplierDetailDto search(String id) throws SQLException {
+    public BookSupplierDetail search(String id) throws SQLException {
         return null;
     }
 
     @Override
-    public ArrayList<BookSupplierDetailDto> getAll() throws SQLException {
+    public ArrayList<BookSupplierDetail> getAll() throws SQLException {
         return null;
     }
 

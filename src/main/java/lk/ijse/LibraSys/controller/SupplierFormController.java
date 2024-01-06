@@ -59,7 +59,6 @@ public class SupplierFormController {
     @FXML
     private Label lblSupplierDate;
 
-
     @FXML
     private Label lblBookName;
 
@@ -90,11 +89,7 @@ public class SupplierFormController {
 //    BookDAO bookDAO= new BookDAOImpl();
 //    SupplierDAO supplierDAO = new SupplierDAOImpl();
     ObservableList<SupplierCartTm> obList = FXCollections.observableArrayList();
-    //PlaceBookSupplierDAO placebookSupplierDAO = new PlacebookSupplierDAOImpl();
-
     PlaceBooksSupplierOrderBO placeBooksSupplierOrderBO = (PlaceBooksSupplierOrderBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PLACE_BOOKS_SUPPLIER_ORDER);
-
-
 
     public  void initialize() {
         generateNextSupplierId();
@@ -114,7 +109,6 @@ public class SupplierFormController {
         }
     }
 
-
     private void clearAllFields() {
         txtSupplierId.setText("");
         txtSupplierName.setText("");
@@ -133,7 +127,6 @@ public class SupplierFormController {
         txtContactNumber.setText("");
         txtEmail.setText("");
     }
-
 
     private void setDate() {
         lblSupplierDate.setText(String.valueOf(LocalDate.now()));
@@ -299,7 +292,6 @@ public class SupplierFormController {
                 try {
 //                    boolean isSuccess = placebookSupplierDAO.placeBooksOrder(placeBooksSupplierOrderDto);
                     boolean isSuccess = placeBooksSupplierOrderBO.placeBooksOrder(placeBooksSupplierOrderDto);
-                    System.out.println("isSuccess : " + isSuccess);
                     if (isSuccess){
                         new Alert(Alert.AlertType.CONFIRMATION,"Order success!!!").show();
                         clearAllFields();

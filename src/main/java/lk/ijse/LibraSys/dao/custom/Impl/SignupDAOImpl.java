@@ -4,6 +4,7 @@ import lk.ijse.LibraSys.dao.SQLUtil;
 import lk.ijse.LibraSys.dao.custom.SignupDAO;
 import lk.ijse.LibraSys.dto.AuthorDto;
 import lk.ijse.LibraSys.dto.SignupDto;
+import lk.ijse.LibraSys.entity.Signup;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -48,12 +49,12 @@ public class SignupDAOImpl implements SignupDAO {
     }
 
     @Override
-    public boolean save(SignupDto dto) throws SQLException {
+    public boolean save(Signup entity) throws SQLException {
         return false;
     }
 
     @Override
-    public boolean update(SignupDto dto) throws SQLException {
+    public boolean update(Signup entity) throws SQLException {
         return false;
     }
 
@@ -63,12 +64,12 @@ public class SignupDAOImpl implements SignupDAO {
     }
 
     @Override
-    public SignupDto search(String id) throws SQLException {
+    public Signup search(String id) throws SQLException {
         return null;
     }
 
     @Override
-    public ArrayList<SignupDto> getAll() throws SQLException {
+    public ArrayList<Signup> getAll() throws SQLException {
         return null;
     }
 }

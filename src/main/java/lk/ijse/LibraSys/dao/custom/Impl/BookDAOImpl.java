@@ -17,11 +17,8 @@ public class BookDAOImpl  implements BookDAO {
     @Override
     public String getCount() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT COUNT(ISBN) FROM  book");
-//        Connection connection = DbConnection.getInstance().getConnection();
-//        PreparedStatement pstm = connection.prepareStatement("SELECT COUNT(ISBN) FROM  book");
 
         String count = null;
-        //ResultSet resultSet = pstm.executeQuery();
         if (resultSet.next()){
             count = resultSet.getString(1);
         }
@@ -31,10 +28,6 @@ public class BookDAOImpl  implements BookDAO {
     @Override
     public  String generateNextId() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT ISBN FROM book ORDER BY ISBN DESC LIMIT 1");
-       /* Connection connection = DbConnection.getInstance().getConnection();
-
-        PreparedStatement pstm = connection.prepareStatement("SELECT ISBN FROM book ORDER BY ISBN DESC LIMIT 1");
-        ResultSet resultSet = pstm.executeQuery();*/
         if (resultSet.next()){
             return splitBookISBN(resultSet.getString(1));
 
@@ -72,17 +65,7 @@ public class BookDAOImpl  implements BookDAO {
                 entity.getRackCode(),
                 entity.getAuthorId()
         );
-        /*Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("INSERT INTO book VALUES (?,?,?,?,?,?)");
-        pstm.setString(1, dto.getISBN());
-        pstm.setString(2, dto.getBookName());
-        pstm.setString(3, dto.getCategory());
-        pstm.setString(4, dto.getQtyOnHand());
-        pstm.setString(5,dto.getRackCode());
-        pstm.setString(6, dto.getAuthorId());
 
-        boolean isSaved = pstm.executeUpdate() > 0;
-        return isSaved;*/
     }
 
     @Override
@@ -95,28 +78,13 @@ public class BookDAOImpl  implements BookDAO {
                 entity.getAuthorId(),
                 entity.getISBN()
         );
-        /*Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("UPDATE book SET bookName=?, category =?,qtyOnHand=?, rackCode=?,authorId=? WHERE ISBN=?");
-        pstm.setString(1, dto.getBookName());
-        pstm.setString(2, dto.getCategory());
-        pstm.setString(3, dto.getQtyOnHand());
-        pstm.setString(4, dto.getRackCode());
-        pstm.setString(5, dto.getAuthorId());
-        pstm.setString(6, dto.getISBN());
 
-        boolean isUpdated = pstm.executeUpdate() > 0;
-        return isUpdated;*/
     }
 
     @Override
     public boolean delete(String ISBN) throws SQLException {
         return SQLUtil.execute("DELETE  FROM  book WHERE ISBN=?",ISBN);
-       /* Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("DELETE  FROM  book WHERE ISBN=?");
-        pstm.setString(1,ISBN);
 
-        boolean isDeleted = pstm.executeUpdate() > 0;
-        return isDeleted;*/
     }
 
     @Override
@@ -124,12 +92,6 @@ public class BookDAOImpl  implements BookDAO {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM book WHERE ISBN=?",
                 ISBN
         );
-       /* Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM book WHERE ISBN=?");
-        pstm.setString(1,ISBN);*/
-       // System.out.println("search book id +"+ISBN);
-
-        //ResultSet resultSet = pstm.executeQuery();
 
         Book entity= null;
         if(resultSet.next()){
@@ -148,12 +110,9 @@ public class BookDAOImpl  implements BookDAO {
     @Override
     public ArrayList<Book> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT  * FROM  book");
-//        Connection connection = DbConnection.getInstance().getConnection();
-//        PreparedStatement pstm = connection.prepareStatement("SELECT  * FROM  book");
+
 
         List<Book> bookList = new ArrayList<>();
-
-//        ResultSet resultSet = pstm.executeQuery();
 
         while (resultSet.next()){
             Book entity = new Book(
@@ -184,21 +143,9 @@ public class BookDAOImpl  implements BookDAO {
 
     @Override
     public  boolean updateQty(String ISBN , int  qtyOnHand) throws SQLException {
-//        return SQLUtil.execute("UPDATE book SET qtyOnHand = qtyOnHand + ? WHERE ISBN = ?", ISBN, qtyOnHand);
-        System.out.println("SQL Query: " + "UPDATE book SET qtyOnHand = qtyOnHand + CAST(? AS SIGNED) WHERE ISBN = ?");
+//        System.out.println("SQL Query: " + "UPDATE book SET qtyOnHand = qtyOnHand + CAST(? AS SIGNED) WHERE ISBN = ?");
         return SQLUtil.execute("UPDATE book SET qtyOnHand = qtyOnHand + CAST(? AS SIGNED) WHERE ISBN = ?", qtyOnHand, ISBN);
 
-       /* Connection connection = DbConnection.getInstance().getConnection();
-        String sql ="UPDATE book SET qtyOnHand = qtyOnHand + ? WHERE ISBN = ?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-
-        pstm.setInt(1,qtyOnHand);
-        pstm.setString(2,ISBN);
-        return SQLUtil.execute("UPDATE bookRack SET qtyBooks = qtyBooks + CAST(? AS SIGNED) WHERE rackCode = ?",
-                 qtyBooks,
-                 rackCode
-         );
-        return  pstm.executeUpdate() > 0;*/
     }
 
 

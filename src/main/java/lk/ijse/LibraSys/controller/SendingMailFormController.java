@@ -34,16 +34,6 @@ public class SendingMailFormController {
     private TextField txtSubject;
     @FXML
     private Label lblStatus;
-    /*@FXML
-    void bnBackOnAction(ActionEvent event) throws IOException {
-        AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/dashboard_Form.fxml"));
-        Scene scene = new Scene(anchorPane);
-        Stage stage = (Stage) anchor.getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("Dashboard Form");
-        stage.centerOnScreen();
-        stage.show();
-    }*/
 
     @FXML
    void btnMailSendOnAction(ActionEvent event) {

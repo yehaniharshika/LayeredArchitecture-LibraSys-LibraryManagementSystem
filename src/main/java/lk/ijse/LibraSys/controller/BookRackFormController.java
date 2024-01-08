@@ -50,8 +50,7 @@ public class BookRackFormController {
 
     @FXML
     private TextArea txtNameOfBooks;
-//  private BookRackDAO bookRackDAO = new BookRackDAOImpl();
-    //BookRackBO bookRackBO =  new BookRackBOImpl();
+
     BookRackBO bookRackBO = (BookRackBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.BOOKRACK);
 
 
@@ -60,7 +59,7 @@ public class BookRackFormController {
         setCellValueFactory();
         tableListener();
         generateNextRackCode();
-        //setQuantity;
+
     }
 
     private void generateNextRackCode() {
@@ -87,16 +86,6 @@ public class BookRackFormController {
             txtNameOfBooks.setText(row.getNameOfBooks());
         }
     }
-    @FXML
-    void txtQuantityOfBooksOnAction(ActionEvent event) {
-//        ArrayList<Integer> qty = new ArrayList<>();
-//
-//        for (Integer i : qty){
-//
-//        }
-//        int qty += txtNameOfBooks;
-//        int txtQuantity = qty;
-    }
 
     @FXML
     void btnClearOnAction(ActionEvent event) {
@@ -116,7 +105,6 @@ public class BookRackFormController {
         ObservableList<BookRackTm> obList = FXCollections.observableArrayList();
 
         try {
-//          List<BookRackDto> rackList = bookRackDAO.getAll();
             List<BookRackDto> rackList = bookRackBO.getAllBookRack();
 
             for(BookRackDto dto : rackList){
@@ -249,7 +237,6 @@ public class BookRackFormController {
         String rackCode = txtCode.getText();
 
         try {
-//          BookRackDto dto = bookRackDAO.search(rackCode);
             BookRackDto dto = bookRackBO.searchBookRack(rackCode);
 
 

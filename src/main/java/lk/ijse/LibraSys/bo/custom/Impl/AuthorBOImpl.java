@@ -12,7 +12,6 @@ import java.util.List;
 
 public class AuthorBOImpl implements AuthorBO {
 
-    //AuthorDAO authorDAO = new AuthorDAOImpl();
     AuthorDAO authorDAO = (AuthorDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.AUTHOR);
 
     @Override

@@ -29,7 +29,7 @@ public class LoginFormController {
 
     @FXML
     private TextField txtUserName;
-    //private LoginDAOImpl loginModel = new LoginDAOImpl();
+
     LoginBO loginBO = (LoginBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.LOGIN);
 
 

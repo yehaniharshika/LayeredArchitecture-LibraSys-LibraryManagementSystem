@@ -19,7 +19,6 @@ import java.util.List;
 
 public class BookBOImpl implements BookBO {
     BookDAO bookDAO  = (BookDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOK);
-    //AuthorDAO authorDAO = new AuthorDAOImpl();
     AuthorDAO authorDAO = (AuthorDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.AUTHOR);
     BookRackDAO bookRackDAO = (BookRackDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOKRACK);
 

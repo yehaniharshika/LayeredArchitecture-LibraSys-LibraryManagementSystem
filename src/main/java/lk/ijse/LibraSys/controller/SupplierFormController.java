@@ -86,8 +86,6 @@ public class SupplierFormController {
     @FXML
     private TextField txtSupplyQuantity;
 
-//    BookDAO bookDAO= new BookDAOImpl();
-//    SupplierDAO supplierDAO = new SupplierDAOImpl();
     ObservableList<SupplierCartTm> obList = FXCollections.observableArrayList();
     PlaceBooksSupplierOrderBO placeBooksSupplierOrderBO = (PlaceBooksSupplierOrderBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PLACE_BOOKS_SUPPLIER_ORDER);
 
@@ -302,9 +300,6 @@ public class SupplierFormController {
             }
     }
 
-//    public  boolean saveBooksSupplierOrder(String supplierId, String supName, String contactNumber, String email, List<BookSupplierDetailDto> b){
-//
-//    }
 
     private boolean validateSupplier(){
         String supplierId = txtSupplierId.getText();
@@ -355,7 +350,6 @@ public class SupplierFormController {
 
         txtSupplyQuantity.requestFocus();
         try {
-//          BookDto dto = bookDAO.search(ISBN);
             BookDto dto = placeBooksSupplierOrderBO.searchBook(ISBN);
 
             if (dto != null){

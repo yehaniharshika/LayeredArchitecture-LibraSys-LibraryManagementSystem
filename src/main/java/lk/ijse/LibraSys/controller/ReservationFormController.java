@@ -91,12 +91,7 @@ public class ReservationFormController {
 
     @FXML
     private TextField txtReturnDate;
-//    BookDAO bookDAO = new BookDAOImpl();
-//    MemberDAO memberDAO= new MemberDAOImpl();
-//    ReservationDAO reservationDAO= new ReservationDAOImpl();
 
-//    BookBO bookBO = new BookBOImpl();
-//    MemberBO memberBO =  new MemberBOImpl();
     ReservationBo reservationBo = (ReservationBo) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.RESERVATION);
 
     public void initialize(){
@@ -421,7 +416,6 @@ public class ReservationFormController {
             }
 
         } catch (SQLException e) {
-//            throw new RuntimeException(e);
             e.printStackTrace();
         }
     }

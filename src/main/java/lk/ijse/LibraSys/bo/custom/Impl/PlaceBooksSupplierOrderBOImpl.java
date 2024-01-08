@@ -22,12 +22,9 @@ import java.util.List;
 
 public class PlaceBooksSupplierOrderBOImpl implements PlaceBooksSupplierOrderBO {
 
-//    SupplierDAO supplierDAO = new SupplierDAOImpl();
     SupplierDAO supplierDAO = (SupplierDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.SUPPLIER);
-
     BookDAO bookDAO = (BookDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOK);
     BooksSupplierDetailsDAO booksSupplierDetailsDAO = (BooksSupplierDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOKS_SUPPLIER_DETAILS);
-    //BookSupplierDetailDto bookSupplierDetailDto = new BookSupplierDetailDto();
 
     @Override
     public  boolean placeBooksOrder(PlaceBooksSupplierOrderDto palceBooksSupplierOrderDto) throws SQLException {

@@ -70,7 +70,7 @@ public class AuthorFormController {
     @FXML
     private TextField txtText;
 
-//  AuthorDAO authorDAO = new AuthorDAOImpl(); //property Injection
+
 
     //AuthorBO authorBO = new AuthorBOImpl();
     AuthorBO authorBO = (AuthorBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.AUTHOR);
@@ -125,7 +125,6 @@ public class AuthorFormController {
         ObservableList<AuthorTm> obList = FXCollections.observableArrayList();
 
         try {
-//          List<AuthorDto> authorList = authorDAO.getAll();
             List<AuthorDto> authorList = authorBO.getAllAuthors();
 
 
@@ -165,7 +164,6 @@ public class AuthorFormController {
         String authorId = txtAuthorId.getText();
 
         try {
-//          boolean isDeleted = authorDAO.delete(authorId);
             boolean isDeleted = authorBO.deleteAuthor(authorId);
 
             if(isDeleted){
@@ -254,7 +252,6 @@ public class AuthorFormController {
         var dto = new AuthorDto(authorId,authorName,text,nationality,currentlyBooksWrittenQty);
 
         try {
-//          boolean isUpdated = authorDAO.update(dto);
             boolean isUpdated = authorBO.updateAuthor(dto);
 
             if(isUpdated){

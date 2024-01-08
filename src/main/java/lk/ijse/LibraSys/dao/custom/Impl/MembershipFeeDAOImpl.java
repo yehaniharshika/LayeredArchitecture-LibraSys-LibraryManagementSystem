@@ -21,10 +21,7 @@ public class MembershipFeeDAOImpl implements MembershipFeeDAO {
     @Override
     public String generateNextId() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT fee_id FROM membershipFee ORDER BY fee_id DESC LIMIT 1");
-       /* Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT fee_id FROM membershipFee ORDER BY fee_id DESC LIMIT 1");
 
-        ResultSet resultSet = pstm.executeQuery();*/
         if (resultSet.next()){
             return splitFeeId(resultSet.getString(1));
         }
@@ -54,9 +51,6 @@ public class MembershipFeeDAOImpl implements MembershipFeeDAO {
     @Override
     public String getTotalAmount() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT SUM(amount)  FROM membershipFee");
-//        Connection connection = DbConnection.getInstance().getConnection();
-//        PreparedStatement pstm = connection.prepareStatement("SELECT SUM(amount)  FROM membershipFee");
-//        ResultSet resultSet = pstm.executeQuery();
 
         String amount = null;
         if (resultSet.next()){
@@ -74,22 +68,7 @@ public class MembershipFeeDAOImpl implements MembershipFeeDAO {
                 entity.getDate(),
                 entity.getStatus()
         );
-       /* Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "INSERT INTO membershipFee VALUES(?,?,?,?,?)";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-
-
-        pstm.setString(1, dto.getId());
-        pstm.setString(2, dto.getName());
-        pstm.setString(3, String.valueOf(dto.getAmount()));
-        pstm.setString(4, String.valueOf(dto.getDate()));
-        pstm.setString(5, dto.getStatus());
-
-        boolean isSaved = pstm.executeUpdate() > 0;
-
-
-        return isSaved;*/
     }
 
     @Override
@@ -101,31 +80,12 @@ public class MembershipFeeDAOImpl implements MembershipFeeDAO {
                 entity.getStatus(),
                 entity.getId()
         );
-//        Connection connection = DbConnection.getInstance().getConnection();
-//
-//        String sql = "UPDATE membershipFee SET name = ?, amount = ? ,date = ?, status = ?  WHERE fee_id =?";
-//        PreparedStatement pstm = connection.prepareStatement(sql);
-//
-//        pstm.setString(1, dto.getName());
-//        pstm.setString(2, String.valueOf(dto.getAmount()));
-//        pstm.setString(3, String.valueOf(dto.getDate()));
-//        pstm.setString(4, dto.getStatus());
-//        pstm.setString(5, dto.getId());
-//
-//        return pstm.executeUpdate() > 0 ;
 
     }
 
     @Override
     public MembershipFee search(String id) throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM membershipFee WHERE fee_id = ?",id);
-        /*Connection connection = DbConnection.getInstance().getConnection();
-        String sql ="SELECT * FROM membershipFee WHERE fee_id = ?";
-
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1,id);
-
-        ResultSet resultSet = pstm.executeQuery();*/
 
         MembershipFee entity = null ;
 
@@ -146,24 +106,12 @@ public class MembershipFeeDAOImpl implements MembershipFeeDAO {
     @Override
     public boolean delete(String id) throws SQLException {
         return SQLUtil.execute("DELETE FROM membershipFee WHERE fee_id = ?",id);
-        /*Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql ="DELETE FROM membershipFee WHERE fee_id = ?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-
-        pstm.setString(1,id);
-
-        return pstm.executeUpdate() > 0 ;*/
     }
 
     @Override
     public ArrayList<MembershipFee> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM membershipFee");
-       /* Connection connection = DbConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM membershipFee";
-
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        ResultSet resultSet =pstm.executeQuery();*/
 
         ArrayList<MembershipFee> feeList = new ArrayList<>();
 
@@ -181,6 +129,5 @@ public class MembershipFeeDAOImpl implements MembershipFeeDAO {
         }
         return  feeList;
     }
-
 
 }

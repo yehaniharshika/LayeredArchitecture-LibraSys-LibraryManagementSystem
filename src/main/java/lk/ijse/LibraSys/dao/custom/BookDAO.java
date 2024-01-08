@@ -14,19 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface BookDAO extends CrudDAO<Book> {
-//    String getBookCount() throws SQLException;
-//
-//    String generateNextBookISBN() throws SQLException;
-//
-//    boolean saveBook(BookDto dto) throws SQLException;
-//
-//    boolean updateBook(BookDto dto) throws SQLException;
-//
-//    boolean deleteBook(String ISBN) throws SQLException;
-//
-//    BookDto searchBook(String ISBN) throws SQLException;
-//
-//    List<BookDto> getAllBooks() throws SQLException;
 
     //transaction ekata
     boolean updateBooks(List<SupplierCartTm> supplierCartTmList) throws SQLException;

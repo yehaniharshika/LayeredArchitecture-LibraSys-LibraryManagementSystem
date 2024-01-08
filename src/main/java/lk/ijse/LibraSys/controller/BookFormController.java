@@ -72,17 +72,7 @@ public class BookFormController {
 
     @FXML
     private AnchorPane Root;
-    /*private BookRackDAOImpl bookRackModel = new BookRackDAOImpl();
-    private BookDAOImpl bookModel = new BookDAOImpl();
 
-    private AuthorDAOImpl authorModel = new AuthorDAOImpl();
-    */
-//  BookRackDAO bookRackDAO = new BookRackDAOImpl();
-//  AuthorDAO authorDAO =  new AuthorDAOImpl();
-//  BookDAO bookDAO = new BookDAOImpl();
-
-//    BookRackBO bookRackBO =  new BookRackBOImpl();
-//    AuthorBO authorBO = new AuthorBOImpl();
     BookBO bookBO = (BookBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.BOOK);
 
 
@@ -134,12 +124,10 @@ public class BookFormController {
         colRackCode.setCellValueFactory(new PropertyValueFactory<>("rackCode"));
     }
 
-
     private void loadAllBooks() {
         ObservableList<BookTm> obList = FXCollections.observableArrayList();
 
         try {
-//          List<BookDto> bookList = bookDAO.getAll();
             List<BookDto> bookList = bookBO.getAllBooks();
 
 
@@ -180,7 +168,6 @@ public class BookFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-//          List<BookRackDto> codeList  = bookRackDAO.getAll();
             List<BookRackDto> codeList  = bookBO.getAllBookRack();
 
 
@@ -242,7 +229,6 @@ public class BookFormController {
         String ISBN = txtISBN.getText();
         
         try {
-//          BookDto dto = bookDAO.search(ISBN);
             BookDto dto = bookBO.searchBook(ISBN);
 
 
@@ -282,7 +268,7 @@ public class BookFormController {
                     setCellValueFactory();
                     generateNextBookISBN();
                     bookBO.updateQtyBooks(rackCode, Integer.parseInt(String.valueOf(qtyOnHand)));
-                    //bookRackModel.updatenameOfBooks(rackCode, bookName);
+
                 }else{
                     new Alert(Alert.AlertType.ERROR,"ohh,Book not Saved!!!").show();
                 }
@@ -332,7 +318,6 @@ public class BookFormController {
         var dto = new BookDto(ISBN,bookName,category,qtyOnHand,rackCode,authorId);
 
         try {
-//          boolean isUpdated = bookDAO.update(dto);
             boolean isUpdated = bookBO.updateBook(dto);
 
             if (isUpdated){
@@ -369,7 +354,6 @@ public class BookFormController {
         String authorId = cmbAuthorId.getValue();
 
         try {
-//          AuthorDto authorDto = authorDAO.search(authorId);
             AuthorDto authorDto = bookBO.searchAuthor(authorId);
 
             if (authorDto != null){

@@ -14,18 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface MembershipFeeDAO extends CrudDAO<MembershipFee> {
-
     String getTotalAmount() throws SQLException;
-//    String generateNextMembershipFeeId() throws SQLException;
-//
-//    boolean saveMembershipFee(MembershipFeeDto dto) throws SQLException;
-//
-//    boolean updateMembershipfee(MembershipFeeDto dto) throws SQLException;
-//
-//    MembershipFeeDto searchMembershipFee(String id) throws SQLException;
-//
-//    boolean deleteMembershipFee(String id) throws SQLException;
-//
-//    List<MembershipFeeDto> getAllMemberShipFee() throws SQLException;
 
 }

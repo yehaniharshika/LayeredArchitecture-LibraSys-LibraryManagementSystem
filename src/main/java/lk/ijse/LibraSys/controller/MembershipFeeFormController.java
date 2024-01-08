@@ -83,7 +83,6 @@ public class MembershipFeeFormController {
     @FXML
     private TextField txtStatus;
 
-//  private MembershipFeeDAO membershipFeeDAO = new MembershipFeeDAOImpl();
     MembershipFeeBO membershipFeeBO = (MembershipFeeBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.MEMBERSHIP_FEE);
 
     public  void initialize() {
@@ -216,7 +215,6 @@ public class MembershipFeeFormController {
         String id =txtId.getText();
 
        try {
-//         boolean isDeleted = membershipFeeDAO.delete(id);
            boolean isDeleted = membershipFeeBO.deleteMembershipFee(id);
 
            if(isDeleted){
@@ -345,14 +343,4 @@ public class MembershipFeeFormController {
         }
     }
 
-    /*@FXML
-    void btnBackOnAction(ActionEvent event) throws IOException {
-        AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/dashboard_Form.fxml"));
-        Scene scene = new Scene(anchorPane);
-        Stage stage = (Stage) root.getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("Dashboard Form");
-        stage.centerOnScreen();
-        stage.show();
-    }*/
 }

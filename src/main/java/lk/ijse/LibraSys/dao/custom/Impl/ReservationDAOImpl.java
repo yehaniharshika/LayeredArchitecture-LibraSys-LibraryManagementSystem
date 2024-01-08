@@ -41,19 +41,6 @@ public class ReservationDAOImpl implements ReservationDAO {
                 entity.getMid(),
                 entity.getISBN()
         );
-      /*  Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("INSERT INTO reservation VALUES (?,?,?,?,?,?,?,?)");
-        pstm.setString(1, dto.getReservationId());
-        pstm.setString(2,dto.getBorrowedDate());
-        pstm.setString(3,dto.getDueDate());
-        pstm.setString(4,dto.getBookReturnDate());
-        pstm.setString(5,dto.getFineStatus());
-        pstm.setString(6, String.valueOf(dto.getFineAmount()));
-        pstm.setString(7,dto.getMid());
-        pstm.setString(8,dto.getISBN());
-
-        boolean isAdd = pstm.executeUpdate() > 0;
-        return isAdd;*/
     }
 
     @Override
@@ -68,44 +55,18 @@ public class ReservationDAOImpl implements ReservationDAO {
                 entity.getISBN(),
                 entity.getReservationId()
         );
-        /*Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("UPDATE  reservation SET borrowedDate=?,dueDate=?,bookReturnDate=?,fineStatus=?,fineAmount=?,mid=?,ISBN=? WHERE reservationId=?");
-        pstm.setString(1, dto.getBorrowedDate());
-        pstm.setString(2,dto.getDueDate());
-        pstm.setString(3,dto.getBookReturnDate());
-        pstm.setString(4,dto.getFineStatus());
-        pstm.setString(5, String.valueOf(dto.getFineAmount()));
-        pstm.setString(6,dto.getMid());
-        pstm.setString(7,dto.getISBN());
-        pstm.setString(8,dto.getReservationId());
-
-        boolean isUpdated = pstm.executeUpdate() > 0;
-
-        return isUpdated;*/
     }
 
     @Override
     public  boolean delete(String reservationId) throws SQLException {
         return SQLUtil.execute("DELETE FROM reservation WHERE reservationId=?",reservationId);
-        /*Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("DELETE FROM reservation WHERE reservationId=?");
 
-        pstm.setString(1,reservationId);
-
-        boolean isDeleted = pstm.executeUpdate() > 0;
-
-        return isDeleted;*/
     }
 
     @Override
     public Reservation search(String reservationId) throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM reservation WHERE reservationId=?",reservationId);
-       /* Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM reservation WHERE reservationId=?");
-        pstm.setString(1,reservationId);
 
-        ResultSet resultSet = pstm.executeQuery();
-*/
         Reservation entity= null;
         if(resultSet.next()){
             entity = new Reservation(
@@ -125,9 +86,6 @@ public class ReservationDAOImpl implements ReservationDAO {
     @Override
     public  String generateNextId() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT reservationId FROM reservation ORDER BY reservationId DESC LIMIT 1");
-        /*Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT reservationId FROM reservation ORDER BY reservationId DESC LIMIT 1");
-        ResultSet resultSet = pstm.executeQuery();*/
 
         if(resultSet.next()){
             return  splitReservationId(resultSet.getString(1));
@@ -150,11 +108,9 @@ public class ReservationDAOImpl implements ReservationDAO {
     @Override
     public ArrayList<Reservation> getAll() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM  reservation");
-       /* Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM  reservation");
-*/
+
         List<Reservation> reservationList = new ArrayList<>();
-//        ResultSet resultSet = pstm.executeQuery();
+
         while (resultSet.next()){
             reservationList.add(new Reservation(
                  resultSet.getString(1),

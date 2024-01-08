@@ -23,19 +23,6 @@ public class SignupDAOImpl implements SignupDAO {
                 dto.getPw()
         );
 
-   /*   Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("INSERT INTO librarian VALUES(?,?,?,?,?,?,?)");
-        pstm.setString(1, dto.getSNumber());
-        pstm.setString(2, dto.getFirstName());
-        pstm.setString(3, dto.getLastName());
-        pstm.setString(4, dto.getNic());
-        pstm.setString(5, dto.getEAddress());
-        pstm.setString(6, dto.getUsername());
-        pstm.setString(7, dto.getPw());
-
-        boolean isRegistered = pstm.executeUpdate() > 0;
-
-        return isRegistered;*/
     }
 
     @Override

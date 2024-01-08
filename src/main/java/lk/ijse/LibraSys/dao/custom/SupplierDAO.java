@@ -13,18 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface SupplierDAO extends CrudDAO<Supplier> {
-//    String generateNextSupplierId() throws SQLException;
-//
-//    String getSupplierCount() throws SQLException;
-
     boolean saveSupplier(String supplierId,String supName,String contactNumber,String email) throws SQLException;
-
-//    boolean updateSupplier(SupplierDto dto) throws SQLException;
-//
-//    boolean deleteSupplier(String supplierId) throws SQLException;
-//
-//    SupplierDto searchSupplier(String supplierId) throws SQLException;
-//
-//    List<SupplierDto> getAllSupplier() throws SQLException;
 
 }

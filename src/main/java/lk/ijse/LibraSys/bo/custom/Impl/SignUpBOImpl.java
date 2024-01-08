@@ -9,7 +9,6 @@ import lk.ijse.LibraSys.dto.SignupDto;
 import java.sql.SQLException;
 
 public class SignUpBOImpl implements SignUpBO {
-    //SignupDAO signupDAO = new SignupDAOImpl();
     SignupDAO signupDAO = (SignupDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.SIGNUP);
 
     @Override

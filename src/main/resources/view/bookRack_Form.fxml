@@ -19,7 +19,7 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <TextField fx:id="txtQuantity" layoutX="43.0" layoutY="206.0" onAction="#txtQuantityOfBooksOnAction" prefHeight="48.0" prefWidth="329.0" promptText="Quantity of books" style="-fx-border-color: #222f3e;">
+      <TextField fx:id="txtQuantity" layoutX="43.0" layoutY="206.0" prefHeight="48.0" prefWidth="329.0" promptText="Quantity of books" style="-fx-border-color: #222f3e;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></TextField>

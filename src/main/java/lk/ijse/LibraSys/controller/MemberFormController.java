@@ -95,8 +95,6 @@ public class MemberFormController {
     @FXML
     private TextField txtTel;
 
-//  private ObservableList<MemberTm> obList = FXCollections.observableArrayList();
-//  MemberDAO memberDAO = new MemberDAOImpl();
 
     MemberBO memberBO = (MemberBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.MEMBER);
     public  void initialize(){
@@ -132,7 +130,7 @@ public class MemberFormController {
 
     private void generateNextMemberId() {
         try {
-//          String mid = memberDAO.generateNextId();
+
             String mid = memberBO.generateNextMemberId();
             txtMid.setText(mid);
         } catch (SQLException e) {
@@ -220,7 +218,6 @@ public class MemberFormController {
         String mid = txtMid.getText();
 
         try {
-//          MemberDto dto = memberDAO.search(mid);
             MemberDto dto = memberBO.searchMember(mid);
 
             if (dto != null){
@@ -412,15 +409,4 @@ public class MemberFormController {
         }
     }
 
-   /* @FXML
-    void btnBackOnAction(ActionEvent event) throws IOException {
-
-        AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/dashboard_Form.fxml"));
-        Scene scene = new Scene(anchorPane);
-        Stage stage = (Stage) pane.getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("Dashboard Form");
-        stage.centerOnScreen();
-        stage.show();
-    }*/
 }

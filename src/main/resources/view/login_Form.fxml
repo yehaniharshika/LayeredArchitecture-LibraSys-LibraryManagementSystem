@@ -10,10 +10,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="780.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.LibraSys.controller.LoginFormController">
+<AnchorPane fx:id="root" prefHeight="1000.0" prefWidth="1900.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.LibraSys.controller.LoginFormController">
    <children>
       <ImageView fitHeight="780.0" fitWidth="1500.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="780.0" fitWidth="1500.0">
+      <ImageView fitHeight="1000.0" fitWidth="1900.0">
          <image>
             <Image url="@../assets/login.jpg" />
          </image>
@@ -21,33 +21,33 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <AnchorPane layoutX="948.0" layoutY="134.0" prefHeight="512.0" prefWidth="437.0" style="-fx-background-color: #ffffff; -fx-background-radius: 2;">
+      <AnchorPane layoutX="1154.0" layoutY="244.0" prefHeight="512.0" prefWidth="527.0" style="-fx-background-color: #ffffff; -fx-background-radius: 2;">
          <children>
-            <TextField fx:id="txtUserName" layoutX="65.0" layoutY="129.0" prefHeight="42.0" prefWidth="313.0" promptText="User Name" style="-fx-background-color: #1B97B0;">
+            <TextField fx:id="txtUserName" layoutX="79.0" layoutY="129.0" prefHeight="50.0" prefWidth="369.0" promptText="User Name" style="-fx-background-color: #1B97B0;">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtServiceNumber" layoutX="64.0" layoutY="68.0" prefHeight="42.0" prefWidth="313.0" promptText="Service Number" style="-fx-background-color: #1B97B0;">
+            <TextField fx:id="txtServiceNumber" layoutX="79.0" layoutY="67.0" prefHeight="50.0" prefWidth="369.0" promptText="Service Number" style="-fx-background-color: #1B97B0;">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtPassword" layoutX="65.0" layoutY="190.0" prefHeight="42.0" prefWidth="313.0" promptText="Password" style="-fx-background-color: #1B97B0;">
+            <TextField fx:id="txtPassword" layoutX="79.0" layoutY="191.0" prefHeight="50.0" prefWidth="369.0" promptText="Password" style="-fx-background-color: #1B97B0;">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </TextField>
-            <JFXButton layoutX="110.0" layoutY="304.0" onAction="#btnLoginOnAction" prefHeight="49.0" prefWidth="218.0" style="-fx-background-color: #2d3436; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #f5f6fa;" text="LOGIN" textFill="#fcfafa">
+            <JFXButton layoutX="155.0" layoutY="308.0" onAction="#btnLoginOnAction" prefHeight="49.0" prefWidth="218.0" style="-fx-background-color: #2d3436; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #f5f6fa;" text="LOGIN" textFill="#fcfafa">
                <font>
                   <Font name="Gidugu" size="20.0" />
                </font>
@@ -55,18 +55,18 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <Label layoutX="55.0" layoutY="367.0" prefHeight="22.0" prefWidth="176.0" text="Don't have an account?" textFill="#636e72">
+            <Label layoutX="98.0" layoutY="367.0" prefHeight="22.0" prefWidth="192.0" text="Don't have an account?" textFill="#636e72">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Hyperlink layoutX="231.0" layoutY="367.0" onAction="#hyperSignUpOnAction" prefHeight="22.0" prefWidth="106.0" text="Sign up here">
+            <Hyperlink layoutX="290.0" layoutY="367.0" onAction="#hyperSignUpOnAction" prefHeight="24.0" prefWidth="114.0" text="Sign up here">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="System Bold" size="14.0" />
                </font></Hyperlink>
-            <Label layoutX="58.0" layoutY="397.0" prefHeight="33.0" prefWidth="346.0" text="There is no friend as loyal as a book !!!!" textFill="#b51616">
+            <Label layoutX="77.0" layoutY="407.0" prefHeight="33.0" prefWidth="346.0" text="There is no friend as loyal as a book !!!!" textFill="#b51616">
                <font>
-                  <Font name="MathJax_Main-Bold" size="17.0" />
+                  <Font name="MathJax_Main-Bold" size="18.0" />
                </font>
             </Label>
          </children>

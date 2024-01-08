@@ -35,22 +35,26 @@ public class SupplierDAOImpl implements SupplierDAO {
 
     private String splitSupplierId(String currentId) {
             if(currentId != null) {
-                String[] strings = currentId.split("SP0");
+                String[] strings = currentId.split("SP00");
                 int id = Integer.parseInt(strings[1]);
                 id++;
                 String ID = String.valueOf(id);
                 int length = ID.length();
                 if (length < 2){
-                    return "SP00"+id;
+                    return "SP000"+id;
                 }else {
                     if (length < 3){
-                        return "SP0"+id;
+                        return "SP00"+id;
                     }else {
-                        return "SP"+id;
+                        if (length < 4){
+                            return "SP0"+id;
+                        }else {
+                            return "SP"+id;
+                        }
                     }
                 }
             }
-            return "SP001";
+            return "SP0001";
         }
 
 

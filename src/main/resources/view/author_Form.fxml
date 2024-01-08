@@ -11,51 +11,51 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Anchor" prefHeight="765.0" prefWidth="1196.0" style="-fx-background-color: #c8d6e5; -fx-background-radius: 8;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.LibraSys.controller.AuthorFormController">
+<AnchorPane fx:id="Anchor" prefHeight="985.0" prefWidth="1536.0" style="-fx-background-color: #c8d6e5; -fx-background-radius: 8;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.LibraSys.controller.AuthorFormController">
    <children>
-      <JFXButton fx:id="btnSave" layoutX="43.0" layoutY="477.0" onAction="#btnSaveOnAction" prefHeight="41.0" prefWidth="132.0" style="-fx-background-color: #2d3436; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #f5f6fa;" text="   SAVE" textFill="#f5f3f3">
+      <JFXButton fx:id="btnSave" layoutX="43.0" layoutY="575.0" onAction="#btnSaveOnAction" prefHeight="49.0" prefWidth="157.0" style="-fx-background-color: #2d3436; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #f5f6fa;" text="   SAVE" textFill="#f5f3f3">
          <font>
-            <Font name="KacstOne Bold" size="12.0" />
+            <Font name="KacstOne Bold" size="15.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton layoutX="43.0" layoutY="585.0" onAction="#btnClearOnAction" prefHeight="41.0" prefWidth="132.0" style="-fx-background-color: #6D214F; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #f5f6fa;" text="   CLEAR" textFill="#f5f3f3">
+      <JFXButton layoutX="43.0" layoutY="703.0" onAction="#btnClearOnAction" prefHeight="49.0" prefWidth="157.0" style="-fx-background-color: #6D214F; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #f5f6fa;" text="   CLEAR" textFill="#f5f3f3">
          <font>
-            <Font name="KacstOne Bold" size="13.0" />
+            <Font name="KacstOne Bold" size="15.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnUpdate" layoutX="43.0" layoutY="531.0" onAction="#btnUpdateOnAction" prefHeight="41.0" prefWidth="132.0" style="-fx-background-color: #2d3436; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #f5f6fa;" text="      UPDATE" textFill="#f5f3f3">
+      <JFXButton fx:id="btnUpdate" layoutX="43.0" layoutY="640.0" onAction="#btnUpdateOnAction" prefHeight="49.0" prefWidth="157.0" style="-fx-background-color: #2d3436; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #f5f6fa;" text="      UPDATE" textFill="#f5f3f3">
          <font>
-            <Font name="KacstOne Bold" size="13.0" />
+            <Font name="KacstOne Bold" size="15.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnDelete" layoutX="43.0" layoutY="641.0" onAction="#btnDeleteOnAction" prefHeight="41.0" prefWidth="132.0" style="-fx-background-color: #6D214F; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #f5f6fa;" text="     DELETE" textFill="#f5f3f3">
+      <JFXButton fx:id="btnDelete" layoutX="43.0" layoutY="770.0" onAction="#btnDeleteOnAction" prefHeight="49.0" prefWidth="157.0" style="-fx-background-color: #6D214F; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #f5f6fa;" text="     DELETE" textFill="#f5f3f3">
          <font>
-            <Font name="KacstOne Bold" size="13.0" />
+            <Font name="KacstOne Bold" size="15.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <TextField fx:id="txtCurrentlyBooksWrittenQty" layoutX="41.0" layoutY="409.0" prefHeight="42.0" prefWidth="356.0" promptText="Number Of Books currently written" style="-fx-border-color: #2d3436;">
+      <TextField fx:id="txtCurrentlyBooksWrittenQty" layoutX="40.0" layoutY="462.0" prefHeight="49.0" prefWidth="372.0" promptText="Number Of Books currently written" style="-fx-border-color: #2d3436;">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <TableView fx:id="tblAuthor" layoutX="423.0" layoutY="182.0" prefHeight="566.0" prefWidth="759.0" style="-fx-background-color: #1B97B0;">
+      <TableView fx:id="tblAuthor" layoutX="453.0" layoutY="182.0" prefHeight="785.0" prefWidth="1066.0" style="-fx-background-color: #1B97B0;">
         <columns>
-          <TableColumn fx:id="colAuthorId" prefWidth="87.5" text="Author ID" />
-          <TableColumn fx:id="colAuthorName" prefWidth="201.5" text="Author Name" />
-            <TableColumn fx:id="colText" prefWidth="143.5" text="Mr/Mrs/Miss/Thero" />
-            <TableColumn fx:id="colNationality" prefWidth="115.5" text="Nationality" />
-            <TableColumn fx:id="colCurrentlyBooksWrittenQty" prefWidth="210.0" text="Currently books written Qty" />
+          <TableColumn fx:id="colAuthorId" prefWidth="116.0" text="Author ID" />
+          <TableColumn fx:id="colAuthorName" prefWidth="296.0" text="Author Name" />
+            <TableColumn fx:id="colText" prefWidth="177.0" text="Mr/Mrs/Miss/Thero" />
+            <TableColumn fx:id="colNationality" minWidth="0.0" prefWidth="163.0" text="Nationality" />
+            <TableColumn fx:id="colCurrentlyBooksWrittenQty" prefWidth="313.0" text="Currently books written Qty" />
         </columns>
       </TableView>
       <ImageView fitHeight="28.0" fitWidth="29.0" layoutX="238.0" layoutY="626.0" pickOnBounds="true" preserveRatio="true" />
@@ -63,60 +63,60 @@
       <ImageView fitHeight="28.0" fitWidth="29.0" layoutX="14.0" layoutY="585.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="28.0" fitWidth="29.0" layoutX="193.0" layoutY="633.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="28.0" fitWidth="29.0" layoutX="164.0" layoutY="688.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="62.0" layoutY="486.0">
+      <ImageView fitHeight="28.0" fitWidth="30.0" layoutX="67.0" layoutY="585.0">
          <image>
             <Image url="@../icon/Save.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="62.0" layoutY="594.0">
+      <ImageView fitHeight="28.0" fitWidth="30.0" layoutX="67.0" layoutY="716.0">
          <image>
             <Image url="@../icon/Clear.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="62.0" layoutY="650.0">
+      <ImageView fitHeight="33.0" fitWidth="30.0" layoutX="67.0" layoutY="778.0">
          <image>
             <Image url="@../icon/Delete.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="28.0" fitWidth="30.0" layoutX="59.0" layoutY="538.0">
+      <ImageView fitHeight="28.0" fitWidth="30.0" layoutX="67.0" layoutY="651.0">
          <image>
             <Image url="@../icon/Update.png" />
          </image>
       </ImageView>
-      <Label layoutX="344.0" layoutY="24.0" prefHeight="89.0" prefWidth="530.0" style="-fx-border-color: #222f3e; -fx-background-color: #1B97B0;" text="                        AUTHORS  MANAGEMENT" textFill="#171717">
+      <Label layoutX="501.0" layoutY="24.0" prefHeight="89.0" prefWidth="592.0" style="-fx-border-color: #222f3e; -fx-background-color: #1B97B0;" text="                        AUTHORS  MANAGEMENT" textFill="#171717">
          <font>
-            <Font name="System Bold" size="21.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <ImageView fitHeight="71.0" fitWidth="88.0" layoutX="414.0" layoutY="33.0">
+      <ImageView fitHeight="71.0" fitWidth="88.0" layoutX="567.0" layoutY="33.0">
          <image>
             <Image url="@../icon/Author .png" />
          </image>
       </ImageView>
-      <TextField fx:id="txtNationality" layoutX="41.0" layoutY="353.0" prefHeight="42.0" prefWidth="356.0" promptText="Nationality" style="-fx-border-color: #2d3436;">
+      <TextField fx:id="txtNationality" layoutX="40.0" layoutY="393.0" prefHeight="49.0" prefWidth="372.0" promptText="Nationality" style="-fx-border-color: #2d3436;">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtAuthorName" layoutX="41.0" layoutY="238.0" prefHeight="42.0" prefWidth="356.0" promptText="Author Name" style="-fx-border-color: #2d3436;">
+      <TextField fx:id="txtAuthorName" layoutX="40.0" layoutY="251.0" prefHeight="49.0" prefWidth="372.0" promptText="Author Name" style="-fx-border-color: #2d3436;">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtAuthorId" layoutX="41.0" layoutY="182.0" onAction="#txtAuthorIdOnAction" prefHeight="42.0" prefWidth="356.0" promptText="Author ID" style="-fx-border-color: #2d3436;">
+      <TextField fx:id="txtAuthorId" layoutX="40.0" layoutY="182.0" onAction="#txtAuthorIdOnAction" prefHeight="49.0" prefWidth="372.0" promptText="Author ID" style="-fx-border-color: #2d3436;">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtText" layoutX="41.0" layoutY="295.0" prefHeight="42.0" prefWidth="356.0" promptText="Mr/Mrs/Miss" style="-fx-border-color: #2d3436;">
+      <TextField fx:id="txtText" layoutX="40.0" layoutY="322.0" prefHeight="49.0" prefWidth="372.0" promptText="Mr/Mrs/Miss/Thero" style="-fx-border-color: #2d3436;">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
       <ImageView fitHeight="33.0" fitWidth="39.0" layoutX="267.0" layoutY="486.0" pickOnBounds="true" preserveRatio="true" />
-      <Label layoutX="14.0" layoutY="12.0" prefHeight="25.0" prefWidth="254.0" text="Reading completes Human!!!!" textFill="#921b64">
+      <Label layoutX="14.0" layoutY="12.0" prefHeight="27.0" prefWidth="356.0" text="Reading completes Human!!!!" textFill="#921b64">
          <font>
-            <Font name="MathJax_Main-Bold" size="17.0" />
+            <Font name="MathJax_Main-Bold" size="21.0" />
          </font>
       </Label>
    </children>

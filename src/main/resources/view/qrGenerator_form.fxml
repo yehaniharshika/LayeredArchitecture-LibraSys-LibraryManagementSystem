@@ -9,18 +9,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="520.0" prefWidth="1165.0" style="-fx-background-color: #95a5a6; -fx-border-color: #222f3e;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.LibraSys.controller.QrGeneratorFormController">
+<AnchorPane fx:id="root" prefHeight="652.0" prefWidth="1512.0" style="-fx-background-color: #95a5a6; -fx-border-color: #222f3e;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.LibraSys.controller.QrGeneratorFormController">
    <children>
       <Label layoutX="290.0" layoutY="33.0" prefHeight="89.0" prefWidth="509.0" style="-fx-border-color: #222f3e; -fx-background-color: #1B97B0;" text="               QUICK READ CODES GENERATOR" textFill="#171717">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="txtText" layoutX="41.0" layoutY="183.0" onAction="#onAction" onKeyReleased="#onKeyReleased" prefHeight="44.0" prefWidth="375.0" promptText="enter member ID &amp; name here" style="-fx-border-color: #222f3e;">
+      <TextField fx:id="txtText" layoutX="41.0" layoutY="185.0" onAction="#onAction" onKeyReleased="#onKeyReleased" prefHeight="52.0" prefWidth="418.0" promptText="enter member ID &amp; name here" style="-fx-border-color: #222f3e;">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="15.0" />
          </font></TextField>
-      <Button fx:id="btnGenerate" layoutX="41.0" layoutY="413.0" mnemonicParsing="false" onAction="#btnGenerateOnAction" prefHeight="38.0" prefWidth="126.0" style="-fx-background-color: lightblue; -fx-border-color: #222f3e; -fx-background-radius: 5; -fx-border-radius: 5;" text="GENERATE">
+      <Button fx:id="btnGenerate" layoutX="48.0" layoutY="535.0" mnemonicParsing="false" onAction="#btnGenerateOnAction" prefHeight="44.0" prefWidth="146.0" style="-fx-background-color: lightblue; -fx-border-color: #222f3e; -fx-background-radius: 5; -fx-border-radius: 5;" text="GENERATE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -28,7 +28,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="btnClear" layoutX="290.0" layoutY="413.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="38.0" prefWidth="126.0" style="-fx-background-color: red; -fx-border-color: #222f3e; -fx-background-radius: 5; -fx-border-radius: 5;" text="CLEAR">
+      <Button fx:id="btnClear" layoutX="314.0" layoutY="535.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="44.0" prefWidth="135.0" style="-fx-background-color: red; -fx-border-color: #222f3e; -fx-background-radius: 5; -fx-border-radius: 5;" text="CLEAR">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -41,7 +41,7 @@
             <Image url="@../icon/qrGenerator.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="pic" fitHeight="349.0" fitWidth="393.0" layoutX="713.0" layoutY="141.0">
+      <ImageView fx:id="pic" fitHeight="349.0" fitWidth="393.0" layoutX="883.0" layoutY="174.0">
          <image>
             <Image url="@../icon/qrGeneratePic.png" />
          </image>

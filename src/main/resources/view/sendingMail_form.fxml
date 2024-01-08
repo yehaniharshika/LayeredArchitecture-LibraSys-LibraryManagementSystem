@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor" prefHeight="520.0" prefWidth="1165.0" style="-fx-background-color: #95a5a6; -fx-border-color: #222f3e;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.LibraSys.controller.SendingMailFormController">
+<AnchorPane fx:id="anchor" prefHeight="652.0" prefWidth="1512.0" style="-fx-background-color: #95a5a6; -fx-border-color: #222f3e;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.LibraSys.controller.SendingMailFormController">
    <children>
-      <Label layoutX="335.0" layoutY="32.0" prefHeight="89.0" prefWidth="480.0" style="-fx-border-color: #222f3e; -fx-background-color: #1B97B0;" text="                SENDING EMAIL MESSAGE " textFill="#171717">
+      <Label layoutX="452.0" layoutY="32.0" prefHeight="89.0" prefWidth="585.0" style="-fx-border-color: #222f3e; -fx-background-color: #1B97B0;" text="                   SENDING EMAIL MESSAGE  " textFill="#171717">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
@@ -47,55 +47,55 @@
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></TextArea>
-      <JFXButton layoutX="773.0" layoutY="456.0" onAction="#btnMailSendOnAction" prefHeight="44.0" prefWidth="176.0" style="-fx-background-color: #6D214F; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #f5f6fa;" text="SEND" textFill="#f8f8f8">
+      <JFXButton layoutX="1196.0" layoutY="572.0" onAction="#btnMailSendOnAction" prefHeight="52.0" prefWidth="176.0" style="-fx-background-color: #6D214F; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #f5f6fa;" text="SEND" textFill="#f8f8f8">
          <font>
-            <Font name="KacstOne Bold" size="12.0" />
+            <Font name="KacstOne Bold" size="14.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Label fx:id="lblStatus" layoutX="433.0" layoutY="456.0" prefHeight="44.0" prefWidth="250.0" textFill="#c23616">
+      <Label fx:id="lblStatus" layoutX="852.0" layoutY="576.0" prefHeight="44.0" prefWidth="311.0" textFill="#c23616">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="System Bold" size="18.0" />
          </font></Label>
-      <ImageView fitHeight="26.0" fitWidth="30.0" layoutX="794.0" layoutY="465.0">
+      <ImageView fitHeight="26.0" fitWidth="30.0" layoutX="1227.0" layoutY="585.0">
          <image>
             <Image url="@../icon/sendEmail.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="290.0" fitWidth="218.0" layoutX="861.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="63.0" fitWidth="74.0" layoutX="366.0" layoutY="45.0">
+      <ImageView fitHeight="63.0" fitWidth="74.0" layoutX="501.0" layoutY="45.0">
          <image>
             <Image url="@../icon/mailSending.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="290.0" fitWidth="276.0" layoutX="871.0" layoutY="61.0">
+      <ImageView fitHeight="290.0" fitWidth="276.0" layoutX="1058.0" layoutY="88.0">
          <image>
             <Image url="@../icon/girlReadingBook.png" />
          </image>
       </ImageView>
-      <Label layoutX="861.0" layoutY="343.0" prefHeight="26.0" prefWidth="286.0" text="Books,,,,,they allow you to move " textFill="#00010c">
+      <Label layoutX="1040.0" layoutY="378.0" prefHeight="26.0" prefWidth="332.0" text="Books,,,,,they allow you to move " textFill="#00010c">
          <font>
-            <Font name="MathJax_Main-Bold" size="17.0" />
+            <Font name="MathJax_Main-Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="861.0" layoutY="365.0" prefHeight="20.0" prefWidth="286.0" text="around the sacs without moving " textFill="#0c0b0c">
+      <Label layoutX="1041.0" layoutY="405.0" prefHeight="23.0" prefWidth="403.0" text="around the sacs without moving " textFill="#0c0b0c">
          <font>
-            <Font name="MathJax_Main-Bold" size="17.0" />
+            <Font name="MathJax_Main-Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="861.0" layoutY="387.0" prefHeight="22.0" prefWidth="286.0" text="your feet.............." textFill="#050505">
+      <Label layoutX="1040.0" layoutY="431.0" prefHeight="22.0" prefWidth="286.0" text="your feet.............." textFill="#050505">
          <font>
-            <Font name="MathJax_Main-Bold" size="17.0" />
+            <Font name="MathJax_Main-Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="861.0" layoutY="409.0" prefHeight="22.0" prefWidth="286.0" text="Reading completes Human!!!!" textFill="#921b64">
+      <Label layoutX="1040.0" layoutY="463.0" prefHeight="27.0" prefWidth="346.0" text="Reading completes Human!!!!" textFill="#921b64">
          <font>
-            <Font name="MathJax_Main-Bold" size="17.0" />
+            <Font name="MathJax_Main-Bold" size="22.0" />
          </font>
       </Label>
-      <ImageView fitHeight="199.0" fitWidth="188.0" layoutX="700.0" layoutY="157.0">
+      <ImageView fitHeight="199.0" fitWidth="188.0" layoutX="883.0" layoutY="179.0">
          <image>
             <Image url="@../icon/boyReadingBook.png" />
          </image>

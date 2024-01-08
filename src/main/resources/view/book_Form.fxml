@@ -12,131 +12,131 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Root" prefHeight="765.0" prefWidth="1196.0" style="-fx-background-color: #c8d6e5; -fx-background-radius: 8;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.LibraSys.controller.BookFormController">
+<AnchorPane fx:id="Root" prefHeight="985.0" prefWidth="1536.0" style="-fx-background-color: #c8d6e5; -fx-background-radius: 8;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.LibraSys.controller.BookFormController">
    <children>
-      <JFXButton layoutX="984.0" layoutY="463.0" onAction="#btnSaveOnAction" prefHeight="41.0" prefWidth="140.0" style="-fx-background-color: #2d3436; -fx-background-radius: 8; -fx-border-color: #f5f6fa; -fx-border-radius: 8;" text="      SAVE" textFill="#f5f3f3">
+      <JFXButton layoutX="1334.0" layoutY="468.0" onAction="#btnSaveOnAction" prefHeight="50.0" prefWidth="165.0" style="-fx-background-color: #2d3436; -fx-background-radius: 8; -fx-border-color: #f5f6fa; -fx-border-radius: 8;" text="      SAVE" textFill="#f5f3f3">
          <font>
-            <Font name="KacstOne Bold" size="12.0" />
+            <Font name="KacstOne Bold" size="15.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton layoutX="984.0" layoutY="519.0" onAction="#btnUpdateOnAction" prefHeight="41.0" prefWidth="140.0" style="-fx-background-color: #2d3436; -fx-background-radius: 8; -fx-border-color: #f5f6fa; -fx-border-radius: 8;" text="         UPDATE" textFill="#f5f3f3">
+      <JFXButton layoutX="1334.0" layoutY="540.0" onAction="#btnUpdateOnAction" prefHeight="50.0" prefWidth="165.0" style="-fx-background-color: #2d3436; -fx-background-radius: 8; -fx-border-color: #f5f6fa; -fx-border-radius: 8;" text="         UPDATE" textFill="#f5f3f3">
          <font>
-            <Font name="KacstOne Bold" size="12.0" />
+            <Font name="KacstOne Bold" size="15.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton layoutX="984.0" layoutY="575.0" onAction="#btnClearOnAction" prefHeight="41.0" prefWidth="140.0" style="-fx-background-color: #6D214F; -fx-background-radius: 8; -fx-border-color: #f5f6fa; -fx-border-radius: 8;" text="      CLEAR" textFill="#f5f3f3">
+      <JFXButton layoutX="1334.0" layoutY="610.0" onAction="#btnClearOnAction" prefHeight="50.0" prefWidth="165.0" style="-fx-background-color: #6D214F; -fx-background-radius: 8; -fx-border-color: #f5f6fa; -fx-border-radius: 8;" text="      CLEAR" textFill="#f5f3f3">
          <font>
-            <Font name="KacstOne Bold" size="12.0" />
+            <Font name="KacstOne Bold" size="15.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton layoutX="984.0" layoutY="633.0" onAction="#btnDeleteOnAction" prefHeight="41.0" prefWidth="140.0" style="-fx-background-color: #6D214F; -fx-background-radius: 8; -fx-border-color: #f5f6fa; -fx-border-radius: 8;" text="         DELETE" textFill="#f5f3f3">
+      <JFXButton layoutX="1334.0" layoutY="682.0" onAction="#btnDeleteOnAction" prefHeight="50.0" prefWidth="165.0" style="-fx-background-color: #6D214F; -fx-background-radius: 8; -fx-border-color: #f5f6fa; -fx-border-radius: 8;" text="         DELETE" textFill="#f5f3f3">
          <font>
-            <Font name="KacstOne Bold" size="12.0" />
+            <Font name="KacstOne Bold" size="15.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <TextField fx:id="txtCategory" layoutX="768.0" layoutY="336.0" prefHeight="41.0" prefWidth="356.0" promptText="category" style="-fx-border-color: #2d3436;">
+      <TextField fx:id="txtCategory" layoutX="889.0" layoutY="353.0" prefHeight="50.0" prefWidth="356.0" promptText="Category" style="-fx-border-color: #2d3436;">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <TextField fx:id="txtISBN" layoutX="768.0" layoutY="168.0" onAction="#txtISBNOnAction" prefHeight="41.0" prefWidth="356.0" promptText="ISBN" style="-fx-border-color: #2d3436;">
+      <TextField fx:id="txtISBN" layoutX="889.0" layoutY="159.0" onAction="#txtISBNOnAction" prefHeight="50.0" prefWidth="356.0" promptText="ISBN" style="-fx-border-color: #2d3436;">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="14.0" />
          </font></TextField>
-      <JFXComboBox fx:id="cmbRackCode" layoutX="186.0" layoutY="159.0" onAction="#cmbRackCodeOnAction" prefHeight="29.0" prefWidth="213.0" />
+      <JFXComboBox fx:id="cmbRackCode" layoutX="207.0" layoutY="159.0" onAction="#cmbRackCodeOnAction" prefHeight="29.0" prefWidth="213.0" />
       <Label layoutX="65.0" layoutY="153.0" prefHeight="41.0" prefWidth="109.0" text="Rack Code :">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="65.0" layoutY="222.0" prefHeight="41.0" prefWidth="124.0" text="CategoryType : ">
+      <Label layoutX="65.0" layoutY="222.0" prefHeight="41.0" prefWidth="140.0" text="Category Type : ">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Label>
       <Label layoutX="66.0" layoutY="362.0" prefHeight="41.0" prefWidth="124.0" text="Author name :">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lblCategoryType" layoutX="196.0" layoutY="222.0" prefHeight="41.0" prefWidth="178.0" textFill="#2814bf">
+      <Label fx:id="lblCategoryType" layoutX="204.0" layoutY="222.0" prefHeight="41.0" prefWidth="178.0" textFill="#2814bf">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <TableView fx:id="tblBook" layoutX="29.0" layoutY="428.0" prefHeight="326.0" prefWidth="904.0" style="-fx-background-color: #1B97B0;">
+      <TableView fx:id="tblBook" layoutX="57.0" layoutY="433.0" prefHeight="533.0" prefWidth="1237.0" style="-fx-background-color: #1B97B0;">
         <columns>
-          <TableColumn fx:id="colISBN" prefWidth="111.5" text="ISBN" />
-          <TableColumn fx:id="colBookName" prefWidth="220.5" text="Book Name" />
-            <TableColumn fx:id="colQtyOnHand" prefWidth="121.0" text="QtyOnHand" />
-            <TableColumn fx:id="colCategory" prefWidth="167.5" text="Category" />
-            <TableColumn fx:id="colAuthorId" prefWidth="138.5" text="Author ID" />
-            <TableColumn fx:id="colRackCode" prefWidth="144.0" text="Rack Code" />
+          <TableColumn fx:id="colISBN" prefWidth="130.0" text="ISBN" />
+          <TableColumn fx:id="colBookName" prefWidth="281.0" text="Book Name" />
+            <TableColumn fx:id="colQtyOnHand" prefWidth="167.0" text="QtyOnHand" />
+            <TableColumn fx:id="colCategory" prefWidth="235.0" text="Category" />
+            <TableColumn fx:id="colAuthorId" prefWidth="216.0" text="Author ID" />
+            <TableColumn fx:id="colRackCode" prefWidth="207.0" text="Rack Code" />
         </columns>
       </TableView>
-      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="1013.0" layoutY="528.0">
+      <ImageView fitHeight="29.0" fitWidth="31.0" layoutX="1362.0" layoutY="551.0">
          <image>
             <Image url="@../icon/Update.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="1013.0" layoutY="584.0">
+      <ImageView fitHeight="29.0" fitWidth="31.0" layoutX="1362.0" layoutY="621.0">
          <image>
             <Image url="@../icon/Clear.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="1013.0" layoutY="475.0">
+      <ImageView fitHeight="24.0" fitWidth="31.0" layoutX="1362.0" layoutY="481.0">
          <image>
             <Image url="@../icon/Save.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="1013.0" layoutY="642.0">
+      <ImageView fitHeight="29.0" fitWidth="31.0" layoutX="1362.0" layoutY="693.0">
          <image>
             <Image url="@../icon/Delete.png" />
          </image>
       </ImageView>
-      <Label layoutX="343.0" layoutY="33.0" prefHeight="89.0" prefWidth="503.0" style="-fx-border-color: #222f3e; -fx-background-color: #1B97B0;" text="                           BOOK  MANAGEMENT" textFill="#171717">
+      <Label layoutX="481.0" layoutY="33.0" prefHeight="89.0" prefWidth="565.0" style="-fx-border-color: #222f3e; -fx-background-color: #1B97B0;" text="                           BOOK  MANAGEMENT" textFill="#171717">
          <font>
-            <Font name="System Bold" size="21.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="12.0" prefHeight="33.0" prefWidth="254.0" text="Reading completes Human!!!!" textFill="#921b64">
+      <Label layoutX="14.0" layoutY="12.0" prefHeight="33.0" prefWidth="328.0" text="Reading completes Human!!!!" textFill="#921b64">
          <font>
-            <Font name="MathJax_Main-Bold" size="17.0" />
+            <Font name="MathJax_Main-Bold" size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="txtBookName" layoutX="768.0" layoutY="222.0" prefHeight="41.0" prefWidth="356.0" promptText="Book Name" style="-fx-border-color: #2d3436;">
+      <TextField fx:id="txtBookName" layoutX="889.0" layoutY="222.0" prefHeight="50.0" prefWidth="356.0" promptText="Book Name" style="-fx-border-color: #2d3436;">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtQtyOnHand" layoutX="768.0" layoutY="274.0" prefHeight="41.0" prefWidth="356.0" promptText="Qty On Hand" style="-fx-border-color: #2d3436;">
+      <TextField fx:id="txtQtyOnHand" layoutX="889.0" layoutY="286.0" prefHeight="50.0" prefWidth="356.0" promptText="Qty On Hand" style="-fx-border-color: #2d3436;">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <JFXComboBox fx:id="cmbAuthorId" layoutX="186.0" layoutY="294.0" onAction="#cmbAuthorIdOnAction" prefHeight="33.0" prefWidth="213.0" />
+      <JFXComboBox fx:id="cmbAuthorId" layoutX="204.0" layoutY="299.0" onAction="#cmbAuthorIdOnAction" prefHeight="33.0" prefWidth="213.0" />
       <Label layoutX="66.0" layoutY="295.0" prefHeight="41.0" prefWidth="101.0" text="Author ID :">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lblAuthorName" layoutX="186.0" layoutY="362.0" prefHeight="41.0" prefWidth="254.0" textFill="#2814bf">
+      <Label fx:id="lblAuthorName" layoutX="195.0" layoutY="362.0" prefHeight="41.0" prefWidth="245.0" textFill="#2814bf">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <ImageView fitHeight="79.0" fitWidth="109.0" layoutX="408.0" layoutY="38.0">
+      <ImageView fitHeight="79.0" fitWidth="109.0" layoutX="560.0" layoutY="38.0">
          <image>
             <Image url="@../icon/Book.png" />
          </image>

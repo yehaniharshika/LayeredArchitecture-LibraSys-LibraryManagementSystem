@@ -83,15 +83,6 @@ public class BookBOImpl implements BookBO {
         return bookDtos;
     }
 
-    @Override
-    public boolean updateBooks(List<SupplierCartTm> supplierCartTmList) throws SQLException {
-        return bookDAO.updateBooks(supplierCartTmList);
-    }
-
-    @Override
-    public boolean updateQty(String ISBN, int qtyOnHand) throws SQLException {
-        return bookDAO.updateQty(ISBN,qtyOnHand);
-    }
 
     @Override
     public List<AuthorDto> getAllAuthors() throws SQLException {

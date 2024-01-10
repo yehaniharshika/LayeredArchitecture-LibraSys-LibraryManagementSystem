@@ -285,7 +285,6 @@ public class SupplierFormController {
 
                 var placeBooksSupplierOrderDto = new PlaceBooksSupplierOrderDto(supplierId,supName,contactNumber,email,supplierDate,supplierCartTmList);
                 try {
-//                    boolean isSuccess = placebookSupplierDAO.placeBooksOrder(placeBooksSupplierOrderDto);
                     boolean isSuccess = placeBooksSupplierOrderBO.placeBooksOrder(placeBooksSupplierOrderDto);
                     System.out.println("isSuccess : " + isSuccess);
                     if (isSuccess){

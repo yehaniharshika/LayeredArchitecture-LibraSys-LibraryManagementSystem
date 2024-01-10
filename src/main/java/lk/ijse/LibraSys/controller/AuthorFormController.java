@@ -70,12 +70,7 @@ public class AuthorFormController {
     @FXML
     private TextField txtText;
 
-
-
-    //AuthorBO authorBO = new AuthorBOImpl();
     AuthorBO authorBO = (AuthorBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.AUTHOR);
-
-
 
     public void initialize(){
         loadAllAuthors();
@@ -121,7 +116,6 @@ public class AuthorFormController {
     }
 
     private void loadAllAuthors() {
-        //tblAuthor.getItems().clear();
         ObservableList<AuthorTm> obList = FXCollections.observableArrayList();
 
         try {

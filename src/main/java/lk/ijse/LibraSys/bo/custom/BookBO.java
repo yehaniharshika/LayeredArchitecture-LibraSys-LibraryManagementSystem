@@ -23,11 +23,6 @@ public interface BookBO  extends SuperBO {
 
     List<BookDto> getAllBooks() throws SQLException;
 
-    //transaction ekata
-    boolean updateBooks(List<SupplierCartTm> supplierCartTmList) throws SQLException;
-
-    boolean updateQty(String ISBN,int qtyOnHand) throws SQLException;
-
     List<AuthorDto> getAllAuthors() throws SQLException;
 
     List<BookRackDto> getAllBookRack() throws SQLException;

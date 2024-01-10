@@ -43,7 +43,6 @@ public class SignupFormController {
     @FXML
     private TextField txtUserName;
 
-    //SignupDAOImpl signupModel = new SignupDAOImpl();
     SignUpBO signUpBO = (SignUpBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.SIGNUP);
     @FXML
     void btnCreateAccountOnAction(ActionEvent event) {

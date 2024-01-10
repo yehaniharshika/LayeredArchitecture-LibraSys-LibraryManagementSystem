@@ -151,7 +151,6 @@ public class MemberFormController {
     }
 
     private void loadAllMember() {
-        //var model =new MemberModel();
         ObservableList<MemberTm> obList = FXCollections.observableArrayList();
 
         try {

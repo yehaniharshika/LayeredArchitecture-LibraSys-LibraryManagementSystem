@@ -32,7 +32,6 @@ public class LoginFormController {
 
     LoginBO loginBO = (LoginBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.LOGIN);
 
-
     @FXML
     void btnLoginOnAction(ActionEvent event) {
         String sNumber = txtServiceNumber.getText();
@@ -40,25 +39,28 @@ public class LoginFormController {
         String pw = txtPassword.getText();
 
         try {
-            boolean dto = loginBO.checkCredentials(sNumber,username,pw);
-
-            if(dto){
-                Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/dashboard_Form.fxml"));
-
-                Scene scene = new Scene(rootNode);
-
-                Stage primaryStage = (Stage) this.root.getScene().getWindow();
-                primaryStage.setScene(scene);
-
-                primaryStage.setTitle("Dashboard");
-                primaryStage.centerOnScreen();
-                primaryStage.show();
+            if (sNumber.isEmpty() || username.isEmpty() || pw.isEmpty()) {
+                new Alert(Alert.AlertType.ERROR, "Please enter your service number,username and password !!!!").show();
             } else {
-                new Alert(Alert.AlertType.ERROR,"Credentials are wrong!!!!!").show();
+                boolean dto = loginBO.checkCredentials(sNumber, username, pw);
+
+                if (dto) {
+                    Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/dashboard_Form.fxml"));
+
+                    Scene scene = new Scene(rootNode);
+
+                    Stage primaryStage = (Stage) this.root.getScene().getWindow();
+                    primaryStage.setScene(scene);
+
+                    primaryStage.setTitle("Dashboard");
+                    primaryStage.centerOnScreen();
+                    primaryStage.show();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Credentials are wrong!!!!!").show();
+                }
             }
         } catch (SQLException | IOException e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 

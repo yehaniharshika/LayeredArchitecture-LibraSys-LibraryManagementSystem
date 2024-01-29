@@ -230,42 +230,47 @@ public class MembershipFeeFormController {
 
     }
 
-
     @FXML
-    void btnSaveOnAction(ActionEvent event){
+    void btnSaveOnAction(ActionEvent event) {
         boolean isValidate = validateMembershipFee();
-        if (isValidate){
-            String id =txtId.getText();
+
+        if (isValidate) {
+            String id = txtId.getText();
             String name = txtName.getText();
             double amount = Double.parseDouble(txtAmount.getText());
-            LocalDate date = LocalDate.parse(lblPaidDate.getText());
-            String status = txtStatus.getText();
+            String paidDateText = lblPaidDate.getText();
 
-            var dto = new MembershipFeeDto(id,name,amount,date,status);
+            if (!paidDateText.isEmpty()) {
+                LocalDate date = LocalDate.parse(paidDateText);
+                String status = txtStatus.getText();
 
-            try {
-                boolean isSaved = membershipFeeBO.saveMembershipFee(dto);
+                var dto = new MembershipFeeDto(id, name, amount, date, status);
 
-                if(isSaved){
-                    new Alert(Alert.AlertType.CONFIRMATION,"success!!").show();
-                    clearFields();
-                    setDate();
-                    setTotalAmount();
-                    loadAllMembershipFee();
-                    setCellValueFactory();
-                    generateNextMembershipFeeId();
+                try {
+                    boolean isSaved = membershipFeeBO.saveMembershipFee(dto);
 
-                }else {
-                    new Alert(Alert.AlertType.ERROR,"paid not success!!!").show();
+                    if (isSaved) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "Success!!").show();
+                        clearFields();
+                        setDate();
+                        setTotalAmount();
+                        loadAllMembershipFee();
+                        setCellValueFactory();
+                        generateNextMembershipFeeId();
+
+                    } else {
+                        new Alert(Alert.AlertType.ERROR, "Paid not success!!!").show();
+                    }
+
+                } catch (SQLException e) {
+                    new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
                 }
-
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Paid date is empty!").show();
             }
         }
-
-
     }
+
 
     private boolean validateMembershipFee(){
         String fee_id = txtId.getText();
